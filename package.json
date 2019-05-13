@@ -1,0 +1,28 @@
+{
+  "name": "ghrden01-mvp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaborszekely/ghrden01-mvp.git"
+  },
+  "keywords": [],
+  "author": "Gabor Szekely <gabor_szekely@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaborszekely/ghrden01-mvp/issues"
+  },
+  "homepage": "https://github.com/gaborszekely/ghrden01-mvp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.5",
+    "pg": "^7.10.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^5.8.4"
+  }
+}

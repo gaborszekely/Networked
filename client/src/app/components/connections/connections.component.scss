@@ -1,0 +1,14 @@
+.connections-wrapper {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 40px;
+}
+
+.empty-contact-list {
+  margin-top: 60px;
+  background-color: #fef3cd;
+  border: 1px solid #fdedba;
+  padding: 3px;
+  width: 50vw;
+}

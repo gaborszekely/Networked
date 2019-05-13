@@ -1,0 +1,26 @@
+.input-field,
+.input-textarea {
+  width: 30vw;
+}
+
+.form-title-wrapper {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    padding: 0;
+    margin: 0 0 0 15px;
+  }
+}
+
+.form-buttons {
+  margin-top: 50px;
+}
+
+.alert-component {
+  width: 10%;
+}
+
+.add-another {
+  margin-top: 80px;
+}

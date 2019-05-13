@@ -1,0 +1,82 @@
+.user-image {
+  border-radius: 50%;
+  clip-path: circle();
+  height: 150px;
+}
+
+.user-info {
+  margin-top: 50px;
+}
+
+.user-info-label {
+  font-weight: bold;
+}
+
+.card-section {
+  margin-bottom: 30px;
+}
+
+.edit-icon {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.link-icon {
+  margin-right: 5px;
+}
+
+.clr-input-container.clr-form-control.ng-star-inserted {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.main-wrapper {
+  width: 50%;
+}
+
+.notes {
+  // width: 40%;
+}
+
+.note-date {
+  position: relative;
+  color: #999;
+  font-size: 0.7em;
+  font-style: italic;
+
+  .trash-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.user-info-title {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  align-items: flex-end;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.add-note-icon {
+  cursor: pointer;
+}
+
+.user-info-title-add-note {
+  text-align: right;
+}
+
+.input-textarea {
+  width: 100%;
+}

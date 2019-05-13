@@ -1,0 +1,110 @@
+<div>
+  <div *ngIf="showSuccess" class="alert alert-success" style="width: 70vw" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Success! Contact has been added.</span>
+      </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="toggleSuccess()">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+  <div *ngIf="!showSuccess" class="form-title-wrapper">
+    <clr-icon shape="assign-user" size="36"></clr-icon>
+    <h1>Make a New Connection</h1>
+  </div>
+  <div *ngIf="showSuccess" class="add-another">
+    <button type="button" class="btn btn-icon btn-primary" (click)="toggleSuccess()">
+      <clr-icon shape="plus"></clr-icon>
+      Add Another
+    </button>
+  </div>
+  <form *ngIf="!showSuccess" clrForm [formGroup]="addContactForm" (ngSubmit)="onSubmit()" clrLayout="horizontal">
+    <clr-input-container class="input-container">
+      <label for="firstName">First Name</label>
+      <input clrInput type="text" formControlName="first_name" id="firstName" required class="input-field" />
+      <clr-control-error>This field is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container  class="input-container">
+      <label for="lastName">Last Name</label>
+      <input clrInput type="text" formControlName="last_name" id="lastName" required class="input-field" />
+      <clr-control-error>This field is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label for="location">Location</label>
+      <input clrInput type="text" formControlName="location" id="location" class="input-field" />
+    </clr-input-container>
+    <clr-input-container  class="input-container">
+      <label for="email">Email</label>
+      <input clrInput type="text" formControlName="email" id="email" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="phone">Phone</label>
+      <input clrInput type="text" formControlName="phone" id="phone" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="jobTitle">Job Title</label>
+      <input clrInput type="text" formControlName="job_title" id="jobTitle" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="company">Company</label>
+      <input clrInput type="text" formControlName="company" id="company" required class="input-field" />
+      <clr-control-error>This field is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label for="companyUrl">Company Url</label>
+      <input clrInput type="text" formControlName="company_url" id="companyUrl" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="linkedin">LinkedIn</label>
+      <input clrInput type="text" formControlName="linkedin" id="linkedin" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="github">Github Username</label>
+      <input clrInput type="text" formControlName="github" id="github" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="facebook">Facebook Username</label>
+      <input clrInput type="text" formControlName="facebook" id="facebook" class="input-field" />
+    </clr-input-container>
+    <clr-input-container>
+      <label for="labels">Labels</label>
+      <input clrInput type="text" formControlName="labels" id="labels" class="input-field" />
+    </clr-input-container>
+    <div class="form-buttons">
+      <button class="btn btn-primary" type="submit">
+        Add To List
+      </button>
+      <button class="btn" type="button" (click)="resetForm()">
+        Reset Form
+      </button>
+    </div>
+  </form>
+  <!-- <clr-wizard #wizardlg [(clrWizardOpen)]="lgOpen" clrWizardSize="lg">
+    <clr-wizard-title>Large-Sized Wizard</clr-wizard-title>
+
+    <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+    <clr-wizard-page>
+        <ng-template clrPageTitle>Page 1</ng-template>
+        ...
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageTitle>Page 2</ng-template>
+        ...
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageTitle>Page 3</ng-template>
+        ...
+    </clr-wizard-page>
+</clr-wizard> -->
+
+</div>
