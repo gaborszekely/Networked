@@ -1,5 +1,6 @@
-export interface Contact {
-  _id?: string;
+import { Document } from 'mongoose';
+
+export interface Contact extends Document {
   user_id?: string;
   first_name: string;
   last_name: string;
