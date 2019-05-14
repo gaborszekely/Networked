@@ -15,8 +15,7 @@ export class ContactsService {
   }
 
   async findOne(id: string): Promise<Contact> {
-    const contact = await this.contactModel.findOne({ _id: id });
-    return contact;
+    return await this.contactModel.findOne({ _id: id });
   }
 
   async create(contact: Contact): Promise<Contact> {

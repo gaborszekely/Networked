@@ -13,6 +13,8 @@ export class LoginPageComponent implements OnInit {
     password: ""
   };
   submitted = false;
+  error = "";
+  success = null;
 
   constructor(private readonly loginService: LoginService) {}
 
@@ -28,10 +30,14 @@ export class LoginPageComponent implements OnInit {
         username,
         password
       );
+      console.log(res);
       if (res.status === 200) {
         this.loginService.setJsonToken(res);
+        this.success = true;
         // set loggedIn = true in state management or something similar
       } else {
+        this.error = "Could not log in user. Please try again!";
+        this.success = false;
       }
     } catch (err) {}
   }

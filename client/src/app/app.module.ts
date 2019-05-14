@@ -1,13 +1,13 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ClarityModule } from "@clr/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { ClarityModule } from "@clr/angular";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ConnectionsComponent } from "./components/connections/connections.component";
 import { ConnectionComponent } from "./components/connection/connection.component";
@@ -18,6 +18,7 @@ import { ContactComponent } from "./components/contact/contact.component";
 import { AddContactComponent } from "./components/add-contact/add-contact.component";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import { NotesComponent } from "./components/notes/notes.component";
+import { AuthInterceptor } from "./interceptors/CustomHttpInterceptor";
 
 const appRoutes: Routes = [
   { path: "add", component: AddContactComponent },
@@ -55,7 +56,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

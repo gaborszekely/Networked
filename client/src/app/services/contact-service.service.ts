@@ -11,8 +11,7 @@ const httpOptions = {
 
 const githubOptions = {
   headers: new HttpHeaders({
-    // "Content-Type": "application/json",
-    Authorization: "token 72a210f377ab87898f42aab379b13b9d9179efab"
+    "Content-Type": "application/json"
   })
 };
 

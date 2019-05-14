@@ -14,14 +14,14 @@ const httpOptions = {
   providedIn: "root"
 })
 export class LoginService {
-  baseUrl: string = "";
+  baseUrl: string = "http://localhost:3000";
   constructor(private readonly http: HttpClient) {}
 
-  loginUser(username: string, password: string): Promise<ILoginResponse> {
+  loginUser(email: string, password: string): Promise<ILoginResponse> {
     return this.http
       .post<ILoginResponse>(
         `${this.baseUrl}/user/login`,
-        { username, password },
+        { email, password },
         httpOptions
       )
       .toPromise();

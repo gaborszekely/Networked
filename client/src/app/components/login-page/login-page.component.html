@@ -18,10 +18,13 @@
         <label>Remember me</label>
         <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="form.rememberMe"/>
       </clr-checkbox-wrapper>
-      <div *ngIf="error" class="error active">
-        Invalid user name or password
+      <div *ngIf="success == false" class="error active">
+        {{ error }}
       </div>
-      <button type="submit" class="btn btn-primary">NEXT</button>
+      <div *ngIf="success == true" class="success active">
+        Successfully logged in!
+      </div>
+      <button type="submit" class="btn btn-primary">Log In</button>
       <a href="javascript://" class="signup">Sign up for an account</a>
     </div>
   </form>

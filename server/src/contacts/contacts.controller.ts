@@ -31,7 +31,7 @@ export class ContactsController {
   }
 
   @Post()
-  create(@Body() createContactDto: CreateContactDto): Promise<Contact> {
+  create(@Body() createContactDto: any): Promise<Contact> {
     return this.contactsService.create(createContactDto);
   }
 
