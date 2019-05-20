@@ -49,8 +49,17 @@ export class LoginService {
     return moment(expiresAt);
   }
 
-  public isLoggedIn() {
+  public isLoggedIn() /*: Observable<any>*/ {
     return moment().isBefore(this.getExpiration());
+    // const loggedIn: Observable<boolean> = new Observable(observer => {
+    //   const { next, error } = observer;
+    //   try {
+    //     next(moment().isBefore(this.getExpiration()));
+    //   } catch (err) {
+    //     error(err);
+    //   }
+    // });
+    // return loggedIn;
   }
 
   isLoggedOut() {

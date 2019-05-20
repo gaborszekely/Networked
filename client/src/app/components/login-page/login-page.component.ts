@@ -21,16 +21,13 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {}
 
   async onSubmit() {
-    // setTimeout(() => {
-    //   this.submitted = true;
-    // }, 300);
     try {
       const { username, password } = this.form;
       const res: ILoginResponse = await this.loginService.loginUser(
         username,
         password
       );
-      console.log(res);
+
       if (res.status === 200) {
         this.loginService.setJsonToken(res);
         this.success = true;
@@ -39,6 +36,8 @@ export class LoginPageComponent implements OnInit {
         this.error = "Could not log in user. Please try again!";
         this.success = false;
       }
-    } catch (err) {}
+    } catch (err) {
+      this.error = "Could not log in user. Please try again!";
+    }
   }
 }
