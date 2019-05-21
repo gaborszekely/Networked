@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { fadeAnimation } from "../../animations/fade-animation";
+import { Observable } from "rxjs";
+import { Contact } from "src/app/models/Contact";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.state";
+import * as ContactsActions from "../../actions/contacts.actions";
 
 @Component({
   selector: "app-content-area",
@@ -8,7 +13,17 @@ import { fadeAnimation } from "../../animations/fade-animation";
   animations: [fadeAnimation]
 })
 export class ContentAreaComponent implements OnInit {
-  constructor() {}
+  contacts$: Observable<Contact[]>;
 
-  ngOnInit() {}
+  constructor(private store: Store<AppState>) {
+    this.contacts$ = store.select("contacts");
+  }
+
+  ngOnInit() {
+    this.contacts$.subscribe(contacts => {
+      if (contacts.length === 0) {
+        this.store.dispatch(new ContactsActions.LoadContacts());
+      }
+    });
+  }
 }
