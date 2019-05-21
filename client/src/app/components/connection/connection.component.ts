@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { Contact } from "src/app/models/Contact";
 import { ContactServiceService } from "src/app/services/contact-service.service";
-import { ContactStoreService } from "src/app/services/contact-store.service";
 
 @Component({
   selector: "app-connection",
@@ -16,10 +15,7 @@ export class ConnectionComponent implements OnInit {
   imageUrl: string;
   defaultAvatarUrl = "assets/avatar.jpg";
 
-  constructor(
-    private contactService: ContactServiceService,
-    private contactStore: ContactStoreService
-  ) {}
+  constructor(private contactService: ContactServiceService) {}
 
   ngOnInit() {
     this.contactService.getGithub(this.contact.github).then(
@@ -27,7 +23,7 @@ export class ConnectionComponent implements OnInit {
         this.imageUrl =
           user && user.avatar_url ? user.avatar_url : this.defaultAvatarUrl;
       },
-      err => {
+      () => {
         this.imageUrl = this.defaultAvatarUrl;
       }
     );

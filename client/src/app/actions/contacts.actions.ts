@@ -6,6 +6,7 @@ export const ADD_CONTACT = "[CONTACTS] Add";
 export const DELETE_CONTACT = "[CONTACTS] Remove";
 export const LOAD_CONTACTS = "[CONTACTS] Load";
 export const SET_CONTACTS = "[CONTACTS] Set";
+export const CLEAR_CONTACTS = "[CONTACTS] Clear";
 
 export class AddContact implements Action {
   readonly type = ADD_CONTACT;
@@ -17,6 +18,10 @@ export class DeleteContact implements Action {
   constructor(public payload: string) {}
 }
 
+export class ClearContacts implements Action {
+  readonly type = CLEAR_CONTACTS;
+}
+
 export class LoadContacts implements Action {
   readonly type = LOAD_CONTACTS;
 }
@@ -26,4 +31,9 @@ export class SetContacts implements Action {
   constructor(public payload: Contact[]) {}
 }
 
-export type Actions = AddContact | DeleteContact | LoadContacts | SetContacts;
+export type Actions =
+  | AddContact
+  | DeleteContact
+  | LoadContacts
+  | SetContacts
+  | ClearContacts;

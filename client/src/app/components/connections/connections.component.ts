@@ -36,6 +36,8 @@ export class ConnectionsComponent implements OnInit {
   success = false;
   // contacts: any;
   contacts$: Observable<Contact[]>;
+  contacts: number = 0;
+  length = 0;
 
   constructor(private store: Store<AppState>) {
     this.contacts$ = store.select("contacts");
@@ -49,7 +51,12 @@ export class ConnectionsComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.store.dispatch(new ContactsActions.LoadContacts());
+    this.contacts$.subscribe(contacts => {
+      this.length = contacts.length;
+      if (this.length === 0) {
+        this.store.dispatch(new ContactsActions.LoadContacts());
+      }
+    });
   }
 
   deleteContact(contact: Contact) {
@@ -68,8 +75,6 @@ export class ConnectionsComponent implements OnInit {
   }
 
   isEmpty() {
-    return this.contacts$.subscribe(contacts => {
-      return contacts.length === 0;
-    });
+    return this.length === 0;
   }
 }

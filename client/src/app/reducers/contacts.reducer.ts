@@ -4,7 +4,12 @@ import * as ContactActions from "../actions/contacts.actions";
 
 const initialState: Contact[] = [];
 
-const { ADD_CONTACT, DELETE_CONTACT, SET_CONTACTS } = ContactActions;
+const {
+  ADD_CONTACT,
+  DELETE_CONTACT,
+  SET_CONTACTS,
+  CLEAR_CONTACTS
+} = ContactActions;
 
 export function contactsReducer(
   state: Contact[] = initialState,
@@ -21,6 +26,10 @@ export function contactsReducer(
 
     case DELETE_CONTACT: {
       return state.filter(i => i._id !== action.payload);
+    }
+
+    case CLEAR_CONTACTS: {
+      return [];
     }
 
     default: {
