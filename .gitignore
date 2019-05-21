@@ -1,8 +1,6 @@
 ### node etc ###
 config.ts
 
-client/src/config
-
 # Logs
 logs
 *.log
@@ -30,6 +28,7 @@ dist/
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 bower_components/
+config/
 
 # Floobits
 .floo
