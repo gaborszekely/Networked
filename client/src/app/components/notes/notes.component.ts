@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ContactStoreService } from "src/app/services/contact-store.service";
 import { UserNote } from "src/app/models/UserNote";
-import { ContactServiceService } from "src/app/services/contact-service.service";
+import { ContactService } from "src/app/services/contact.service";
 
 @Component({
   selector: "app-notes",
@@ -13,7 +13,7 @@ export class NotesComponent implements OnInit {
 
   constructor(
     private contactStore: ContactStoreService,
-    private contactService: ContactServiceService
+    private contactService: ContactService
   ) {}
 
   ngOnInit() {
