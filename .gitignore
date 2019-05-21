@@ -1,6 +1,8 @@
 ### node etc ###
 config.ts
 
+/client/src/config
+
 # Logs
 logs
 *.log

@@ -15,12 +15,12 @@
   <h1>My Contacts</h1>
   <div class="connections-wrapper">
     <app-connection
-        *ngFor="let contact of contactStore.contacts$ | async"
+        *ngFor="let contact of contacts$ | async"
         [contact]="contact"
         (deleteContact)="deleteContact($event)"
         [@fadeInOut]
       >
     </app-connection>
   </div>
-  <div *ngIf="contactStore.isEmpty()" class="empty-contact-list">Your list is empty! Please add some contacts.</div>
+  <div *ngIf="isEmpty()" class="empty-contact-list">Your list is empty! Please add some contacts.</div>
 </div>

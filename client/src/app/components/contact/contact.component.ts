@@ -4,6 +4,9 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Contact } from "src/app/models/Contact";
 import { ContactServiceService } from "src/app/services/contact-service.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../../app/app.state";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-contact",
@@ -16,16 +19,21 @@ export class ContactComponent implements OnInit {
   editFirst = false;
   noteModal = false;
   noteContent: string;
+  contacts$: Observable<Contact[]>;
 
   constructor(
     private contactStore: ContactStoreService,
     private contactService: ContactServiceService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private store: Store<AppState>
+  ) {
+    this.contacts$ = store.select("contacts");
+  }
 
   ngOnInit() {
     const userId = this.route.snapshot.params.id;
-    this.contactStore.contacts$.subscribe(
+    // this.contactStore.contacts$.subscribe(
+    this.contacts$.subscribe(
       contacts => {
         const contact = contacts.filter(i => i._id === userId)[0];
         this.contact = contact;
