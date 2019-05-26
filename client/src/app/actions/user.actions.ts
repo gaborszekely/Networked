@@ -1,17 +1,31 @@
 import { Action } from "@ngrx/store";
 import { Contact } from "../models/Contact";
+import { User } from "../models/User";
+import { IJwtPayload } from "../interfaces/JwtPayload";
 
 export const SET_USER_LOGIN = "[USER] Login";
-export const SET_USER_INFO = "[USER] Info";
+export const SET_USER = "[USER] Set User";
+export const SET_USER_INFO = "[USER] Set Info";
+export const LOAD_USER_INFO = "[USER] Load Info";
 
 export class SetLogin implements Action {
   readonly type = SET_USER_LOGIN;
   constructor(public payload: boolean) {}
 }
 
-export class SetUserInfo implements Action {
-  readonly type = SET_USER_INFO;
-  constructor(public payload: Contact) {}
+export class SetUser implements Action {
+  readonly type = SET_USER;
+  constructor(public payload: IJwtPayload) {}
 }
 
-export type Actions = SetLogin | SetUserInfo;
+export class LoadUserInfo implements Action {
+  readonly type = LOAD_USER_INFO;
+  constructor(public payload: string) {}
+}
+
+export class SetUserInfo implements Action {
+  readonly type = SET_USER_INFO;
+  constructor(public payload: User) {}
+}
+
+export type Actions = SetLogin | SetUser | SetUserInfo | LoadUserInfo;

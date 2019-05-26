@@ -6,11 +6,23 @@ import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
 import { Observable } from "rxjs";
 import { Contact } from "../../models/Contact";
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: "app-notes",
   templateUrl: "./notes.component.html",
-  styleUrls: ["./notes.component.scss"]
+  styleUrls: ["./notes.component.scss"],
+  animations: [
+    trigger("fadeInOut", [
+      state(
+        "void",
+        style({
+          opacity: 0
+        })
+      ),
+      transition("void <=> *", animate(200))
+    ])
+  ]
 })
 export class NotesComponent implements OnInit {
   notesByUser: UserNote[];
@@ -29,12 +41,10 @@ export class NotesComponent implements OnInit {
     this.contacts$.subscribe(contacts => {
       this.notesByUser = contacts.reduce((acc, contact) => {
         contact.notes.forEach(async note => {
-          const { notes, ...user } = contact;
-          const githubInfo = await this.contactService.getGithub(user.github);
+          const githubInfo = await this.contactService.getGithub(contact.github);
           const github_avatar = githubInfo.avatar_url;
-          acc.push({ user, note, github_avatar });
+          acc.push({ user: contact, note, github_avatar });
         });
-
         return acc;
       }, []);
     });

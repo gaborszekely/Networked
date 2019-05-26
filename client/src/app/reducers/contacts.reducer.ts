@@ -29,7 +29,6 @@ export function contactsReducer(
       return state.filter(i => i._id !== action.payload);
 
     case UPDATE_CONTACT:
-      console.log(action.payload);
       return state.map(contact =>
         contact._id === action.payload._id ? action.payload : contact
       );

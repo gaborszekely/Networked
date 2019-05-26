@@ -1,35 +1,13 @@
 <div>
   <h1>Notes</h1>
-  <div class="card user-note" *ngFor="let userNote of notesByUser">
-    <div class="card-header">
-      Note for {{userNote.user.first_name}} {{ userNote.user.last_name }}
-    </div>
-    <div class="card-block">
-      <div class="card-media-block">
-        <img src="{{userNote.github_avatar}}" class="card-media-image">
-        <div class="card-media-description">
-          <span class="card-media-title">
-            {{ userNote.user.job_title}}
-          </span>
-          <span class="card-media-text">
-            {{ userNote.user.company }}
-          </span>
-        </div>
-      </div>
-      <div class="card-text">
-        {{ userNote.note.note }}
-      </div>
-    </div>
-    <div class="card-footer">
-      <button class="btn btn-sm btn-outline">View User</button>
-      <button class="btn btn-sm btn-link">Edit Note</button>
-      <button class="btn btn-sm btn-link">Set Reminder</button>
-      <button class="btn btn-sm btn-link" style="color: red">Delete Note</button>
-    </div>
-  </div>
+  <app-note
+    *ngFor="let userNote of notesByUser"
+    [userNote]="userNote"
+    [@fadeInOut]
+  ></app-note>
 
 
-<!--    <div *ngFor="let userNote of notesByUser" class="user-note">
+  <!-- <div *ngFor="let userNote of notesByUser" class="user-note">
       <h3>Note for {{userNote.user.first_name}} {{ userNote.user.last_name }}</h3>
       <span>{{ userNote.note.date.toString() }}</span>
       <p>{{ userNote.note.note }}</p>
