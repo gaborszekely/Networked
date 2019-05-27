@@ -1,31 +1,37 @@
 import { Action } from "@ngrx/store";
 import * as UserActions from "../actions/user.actions";
+import { User } from "../models/User";
 import { Contact } from "../models/Contact";
 
-const { SET_USER_LOGIN, SET_USER_INFO } = UserActions;
+const { SET_USER, SET_USER_LOGIN, SET_USER_INFO } = UserActions;
 
-interface State {
+interface IState {
   loggedIn: boolean;
-  user: Contact | {};
+  user: User | {};
+  userInfo: Contact | {};
 }
 
-const initialState: State = {
+const initialState: IState = {
   loggedIn: false,
-  user: {}
+  user: {},
+  userInfo: {}
 };
 
-export function userReducer(state = initialState, action: UserActions.Actions) {
+export function userReducer(
+  state: IState = initialState,
+  action: UserActions.Actions
+) {
   switch (action.type) {
-    case SET_USER_INFO: {
+    case SET_USER:
       return { ...state, user: action.payload };
-    }
 
-    case SET_USER_LOGIN: {
+    case SET_USER_INFO:
+      return { ...state, userInfo: action.payload };
+
+    case SET_USER_LOGIN:
       return { ...state, loggedIn: action.payload };
-    }
 
-    default: {
+    default:
       return state;
-    }
   }
 }

@@ -28,6 +28,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get(':id')
+  getUserById(@Param('id') id) {
+    return this.userService.find(id);
+  }
+
   @Post('login')
   loginUser(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);

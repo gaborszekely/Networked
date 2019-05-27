@@ -5,6 +5,7 @@ import { User } from './interfaces/user.interface';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcryptjs';
 import { LoginUser } from './interfaces/login-user.interface';
+import { JwtResponse } from './interfaces/jwt-response.interface';
 
 @Injectable()
 export class AuthService {
@@ -40,15 +41,17 @@ export class AuthService {
         throw new UnauthorizedException();
       }
 
-      const payload: JwtPayload = { email: user.email };
+      const payload: JwtPayload = { id: user._id, email: user.email };
       const accessToken = this.signToken(payload);
 
-      return {
+      const jwtResponse: JwtResponse = {
         status: 200,
         expires_in: 3600,
         access_token: accessToken,
-        email: payload.email,
+        payload,
       };
+
+      return jwtResponse;
     } catch (err) {
       return { status: 500 };
     }
