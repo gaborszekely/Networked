@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ClrWizard } from "@clr/angular";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
-import { ContactServiceService } from "src/app/services/contact-service.service";
+import { ContactService } from "src/app/services/contact.service";
 import { ContactStoreService } from "src/app/services/contact-store.service";
 
 @Component({
@@ -37,7 +37,7 @@ export class AddContactComponent implements OnInit {
   });
 
   constructor(
-    private contactService: ContactServiceService,
+    private contactService: ContactService,
     private contactStore: ContactStoreService
   ) {}
 

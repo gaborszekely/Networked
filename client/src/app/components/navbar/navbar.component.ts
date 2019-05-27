@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.state";
+import * as ContactsActions from "../../actions/contacts.actions";
 
 @Component({
   selector: "app-navbar",
@@ -8,11 +12,17 @@ import { Component, OnInit } from "@angular/core";
 export class NavbarComponent implements OnInit {
   confirmed = false;
 
-  constructor() {}
+  constructor(private router: Router, public store: Store<AppState>) {}
 
   ngOnInit() {}
 
   confirm() {
     this.confirmed = true;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.store.dispatch(new ContactsActions.ClearContacts());
+    this.router.navigateByUrl("login");
   }
 }

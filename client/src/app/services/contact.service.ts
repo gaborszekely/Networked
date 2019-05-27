@@ -9,16 +9,10 @@ const httpOptions = {
   })
 };
 
-const githubOptions = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json"
-  })
-};
-
 @Injectable({
   providedIn: "root"
 })
-export class ContactServiceService {
+export class ContactService {
   clientEndpoint: string = "http://localhost:3000";
 
   constructor(private http: HttpClient) {}
@@ -39,10 +33,10 @@ export class ContactServiceService {
     );
   }
 
-  updateContact(id: string, contact: any): Observable<Contact> {
+  updateContact(id: string, update: any): Observable<Contact> {
     return this.http.put<Contact>(
       `${this.clientEndpoint}/contacts/${id}`,
-      contact,
+      update,
       httpOptions
     );
   }
@@ -53,7 +47,7 @@ export class ContactServiceService {
 
   getGithub(user: string): Promise<any> {
     return this.http
-      .get<any>(`https://api.github.com/users/${user}`, githubOptions)
+      .get<any>(`https://api.github.com/users/${user}`, httpOptions)
       .toPromise();
   }
 }

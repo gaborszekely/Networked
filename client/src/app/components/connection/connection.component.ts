@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { Contact } from "src/app/models/Contact";
-import { ContactServiceService } from "src/app/services/contact-service.service";
-import { ContactStoreService } from "src/app/services/contact-store.service";
+import { ContactService } from "src/app/services/contact.service";
 
 @Component({
   selector: "app-connection",
@@ -13,24 +12,16 @@ export class ConnectionComponent implements OnInit {
   @Input() contact: Contact;
   @Output() deleteContact: EventEmitter<Contact> = new EventEmitter();
 
-  imageUrl: string;
-  defaultAvatarUrl = "assets/avatar.jpg";
+  imageUrl = "assets/avatar.jpg";
 
-  constructor(
-    private contactService: ContactServiceService,
-    private contactStore: ContactStoreService
-  ) {}
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
-    this.contactService.getGithub(this.contact.github).then(
-      user => {
-        this.imageUrl =
-          user && user.avatar_url ? user.avatar_url : this.defaultAvatarUrl;
-      },
-      err => {
-        this.imageUrl = this.defaultAvatarUrl;
+    this.contactService.getGithub(this.contact.github).then(user => {
+      if (user && user.avatar_url) {
+        this.imageUrl = user.avatar_url;
       }
-    );
+    });
   }
 
   onDelete(contact: Contact) {

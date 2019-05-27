@@ -3,7 +3,12 @@ import { ContactStoreService } from "src/app/services/contact-store.service";
 import { ActivatedRoute } from "@angular/router";
 
 import { Contact } from "src/app/models/Contact";
-import { ContactServiceService } from "src/app/services/contact-service.service";
+import { ContactService } from "src/app/services/contact.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../../app/app.state";
+import { Observable } from "rxjs";
+import { Note } from "src/app/models/Note";
+import * as ContactsActions from "../../actions/contacts.actions";
 
 @Component({
   selector: "app-contact",
@@ -16,16 +21,21 @@ export class ContactComponent implements OnInit {
   editFirst = false;
   noteModal = false;
   noteContent: string;
+  contacts$: Observable<Contact[]>;
 
   constructor(
     private contactStore: ContactStoreService,
-    private contactService: ContactServiceService,
-    private route: ActivatedRoute
-  ) {}
+    private contactService: ContactService,
+    private route: ActivatedRoute,
+    private store: Store<AppState>
+  ) {
+    this.contacts$ = store.select("contacts");
+  }
 
   ngOnInit() {
     const userId = this.route.snapshot.params.id;
-    this.contactStore.contacts$.subscribe(
+    // this.contactStore.contacts$.subscribe(
+    this.contacts$.subscribe(
       contacts => {
         const contact = contacts.filter(i => i._id === userId)[0];
         this.contact = contact;
@@ -49,7 +59,7 @@ export class ContactComponent implements OnInit {
   }
 
   toggleField(field: string) {
-    console.log("Editiing " + field);
+    console.log("Editing " + field);
     switch (field) {
       case "first_name":
         this.editFirst = !this.editFirst;
@@ -63,17 +73,17 @@ export class ContactComponent implements OnInit {
   }
 
   addNewNote() {
-    const newNoteBody = [
-      ...this.contact.notes,
-      { date: new Date(), note: this.noteContent }
-    ];
-
-    console.log(newNoteBody);
+    const note: Note = {
+      date: new Date().toString(),
+      note: this.noteContent
+    };
 
     this.contactService
-      .updateContact(this.contact._id, { notes: newNoteBody })
+      .updateContact(this.contact._id, { notes: [...this.contact.notes, note] })
       .subscribe(newContact => {
-        this.contactStore.updateContact(newContact);
+        console.log(newContact);
+        // this.contactStore.updateContact(newContact);
+        this.store.dispatch(new ContactsActions.UpdateContact(newContact));
         this.noteModal = false;
         this.noteContent = "";
       });
@@ -84,8 +94,9 @@ export class ContactComponent implements OnInit {
       .updateContact(this.contact._id, {
         notes: this.contact.notes.filter(i => i._id !== id)
       })
-      .subscribe(newContact => {
-        this.contactStore.updateContact(newContact);
+      .subscribe(contact => {
+        // this.contactStore.updateContact(contact);
+        this.store.dispatch(new ContactsActions.UpdateContact(contact));
       });
   }
 }

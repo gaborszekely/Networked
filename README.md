@@ -59,6 +59,7 @@ npm run build
 ## Running The Tests
 
 To run unit tests with Karma:
+
 ```
 npm run test
 ```
@@ -68,6 +69,7 @@ npm run test
 End-to-end testing consisted of using Jasmine and Karma to test interactivity between dynamic page elements including modals, button clicks and tabs.
 
 Example:
+
 ```
 When user clicks the "Login" tab, the ngRouter should switch main view layer to login page.
 ```
@@ -78,21 +80,21 @@ This application utilizes TSLint for linting to make sure the code conforms to t
 
 ## Built With
 
-* [Angular 7](https://angularjs.org) - Front-end framework used
-* [RxJS Obervables and Angular Services](https://angular.io/guide/observables) - Cusstom State Management solution
-* [Node.js](https://nodejs.org/en/) - Server-side runtime
-* [Nest.js](https://nestjs.com/) - Server-side framework used
-* [MongoDB](https://www.mongodb.com/) - Data persistence
-* [Mongoose](https://mongoosejs.com/) - ORM
-* [SCSS](https://sass-lang.com/) - CSS preprocessor
+- [Angular 7](https://angularjs.org) - Front-end framework used
+- [RxJS Obervables and Angular Services](https://angular.io/guide/observables) - Cusstom State Management solution
+- [Node.js](https://nodejs.org/en/) - Server-side runtime
+- [Nest.js](https://nestjs.com/) - Server-side framework used
+- [MongoDB](https://www.mongodb.com/) - Data persistence
+- [Mongoose](https://mongoosejs.com/) - ORM
+- [SCSS](https://sass-lang.com/) - CSS preprocessor
 
 ## Versioning
 
-This application uses [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+This application uses [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Gabor Szekely** - *Project lead* - [gaborszekely](https://github.com/gaborszekely)
+- **Gabor Szekely** - _Project lead_ - [gaborszekely](https://github.com/gaborszekely)
 
 ## License
 

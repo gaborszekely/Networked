@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ContactStoreService } from "src/app/services/contact-store.service";
 import { UserNote } from "src/app/models/UserNote";
-import { ContactServiceService } from "src/app/services/contact-service.service";
+import { ContactService } from "src/app/services/contact.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.state";
+import { Observable } from "rxjs";
+import { Contact } from "../../models/Contact";
 
 @Component({
   selector: "app-notes",
@@ -10,14 +14,19 @@ import { ContactServiceService } from "src/app/services/contact-service.service"
 })
 export class NotesComponent implements OnInit {
   notesByUser: UserNote[];
+  contacts$: Observable<Contact[]>;
 
   constructor(
-    private contactStore: ContactStoreService,
-    private contactService: ContactServiceService
-  ) {}
+    // private contactStore: ContactStoreService,
+    private contactService: ContactService,
+    private store: Store<AppState>
+  ) {
+    this.contacts$ = store.select("contacts");
+  }
 
   ngOnInit() {
-    this.contactStore.contacts$.subscribe(contacts => {
+    // this.contactStore.contacts$.subscribe(contacts => {
+    this.contacts$.subscribe(contacts => {
       this.notesByUser = contacts.reduce((acc, contact) => {
         contact.notes.forEach(async note => {
           const { notes, ...user } = contact;
@@ -25,10 +34,9 @@ export class NotesComponent implements OnInit {
           const github_avatar = githubInfo.avatar_url;
           acc.push({ user, note, github_avatar });
         });
+
         return acc;
       }, []);
-
-      console.log(this.notesByUser);
     });
   }
 }

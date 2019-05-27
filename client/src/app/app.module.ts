@@ -5,8 +5,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ClarityModule } from "@clr/angular";
+import { EffectsModule } from "@ngrx/effects";
 
 import { AppRoutingModule } from "./app-routing.module";
+
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ConnectionsComponent } from "./components/connections/connections.component";
@@ -18,7 +20,12 @@ import { ContactComponent } from "./components/contact/contact.component";
 import { AddContactComponent } from "./components/add-contact/add-contact.component";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import { NotesComponent } from "./components/notes/notes.component";
+
 import { AuthInterceptor } from "./interceptors/CustomHttpInterceptor";
+import { ContactsEffects } from "./effects/contacts.effects";
+import { contactsReducer } from "./reducers/contacts.reducer";
+import { StoreModule } from "@ngrx/store";
+import { userReducer } from "./reducers/user.reducer";
 
 const appRoutes: Routes = [
   { path: "add", component: AddContactComponent },
@@ -44,9 +51,14 @@ const appRoutes: Routes = [
     NotesComponent
   ],
   imports: [
+    StoreModule.forRoot({
+      contacts: contactsReducer,
+      user: userReducer
+    }),
+    EffectsModule.forRoot([ContactsEffects]),
     RouterModule.forRoot(
       appRoutes
-      // { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- for debugging
     ),
     BrowserModule,
     HttpClientModule,
