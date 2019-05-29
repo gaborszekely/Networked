@@ -1,10 +1,49 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ClarityModule } from "@clr/angular";
+import { RouterModule } from "@angular/router";
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { EffectsModule } from "@ngrx/effects";
+// import { StoreModule } from "@ngrx/store";
+
+/* COMPONENTS */
+import { ConnectionsComponent } from "./components/connections/connections.component";
+import { ConnectionComponent } from "./components/connection/connection.component";
+import { AuthInterceptor } from "src/app/core/interceptors/CustomHttpInterceptor";
+import { ContactsRoutingModule } from "./contacts-routing.module";
+import { StoreModule } from "@ngrx/store";
+import { contactsReducer } from "src/app/reducers/contacts.reducer";
+import { userReducer } from "src/app/reducers/user.reducer";
+import { NoteComponent } from "./components/note/note.component";
+import { NotesComponent } from "./components/notes/notes.component";
+import { ContactComponent } from "./components/contact/contact.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConnectionsComponent,
+    ConnectionComponent,
+    NoteComponent,
+    NotesComponent,
+    ContactComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ClarityModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // StoreModule.forFeature("contacts", {
+    //   contacts: contactsReducer,
+    //   user: userReducer
+    // }),
+    EffectsModule,
+    RouterModule,
+    ContactsRoutingModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
-export class ContactsModule { }
+export class ContactsModule {}

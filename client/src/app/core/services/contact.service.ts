@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Contact } from "../models/Contact";
+import { CoreModule } from "../core.module";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -10,7 +11,7 @@ const httpOptions = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: CoreModule
 })
 export class ContactService {
   clientEndpoint: string = "http://localhost:3000";

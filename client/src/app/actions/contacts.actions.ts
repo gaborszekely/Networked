@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
-import { Contact } from "../models/Contact";
-import { Note } from "../models/Note";
+import { Contact } from "../core/models/Contact";
+import { Note } from "../core/models/Note";
 
 export const ADD_CONTACT = "[CONTACTS] Add";
 export const DELETE_CONTACT = "[CONTACTS] Remove";

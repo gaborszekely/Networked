@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Contact } from "../models/Contact";
+import { CoreModule } from "../core.module";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: CoreModule
 })
 export class ContactStoreService {
   private readonly _contacts = new BehaviorSubject<Contact[]>([]);

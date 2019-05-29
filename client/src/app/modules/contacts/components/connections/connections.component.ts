@@ -9,11 +9,11 @@ import {
 
 // import { ContactServiceService } from "src/app/services/contact-service.service";
 // import { ContactStoreService } from "src/app/services/contact-store.service";
-import { Contact } from "../../models/Contact";
+import { Contact } from "../../../../core/models/Contact";
 import { Store } from "@ngrx/store";
-import { AppState } from "../../app.state";
+import { AppState } from "../../../../app.state";
 import { Observable } from "rxjs";
-import * as ContactsActions from "../../actions/contacts.actions";
+import * as ContactsActions from "../../../../actions/contacts.actions";
 
 @Component({
   selector: "app-connections",
@@ -43,13 +43,6 @@ export class ConnectionsComponent implements OnInit {
     this.contacts$ = store.select("contacts");
   }
 
-  // constructor(
-  //   private contactService: ContactServiceService,
-  //   private contactStore: ContactStoreService
-  // ) {
-  //   this.contacts = this.contactStore.contacts;
-  // }
-
   ngOnInit() {
     this.contacts$.subscribe(contacts => {
       this.length = contacts.length;
@@ -60,12 +53,6 @@ export class ConnectionsComponent implements OnInit {
   }
 
   deleteContact(contact: Contact) {
-    // this.contactService.deleteContact(contact._id).subscribe(() => {
-    //   this.contactStore.removeContact(contact._id);
-    //   this.toggleSuccess(
-    //     `Removed ${contact.first_name} from contact list successfully.`
-    //   );
-    // });
     this.store.dispatch(new ContactsActions.DeleteContact(contact._id));
   }
 

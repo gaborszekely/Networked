@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ILoginResponse } from "../interfaces/LoginResponse";
 import * as moment from "moment";
+import { CoreModule } from "../core.module";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,7 +12,7 @@ const httpOptions = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: CoreModule
 })
 export class LoginService {
   baseUrl: string = "http://localhost:3000";

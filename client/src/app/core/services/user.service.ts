@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../models/User";
 import { Observable } from "rxjs";
+import { CoreModule } from "../core.module";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: CoreModule
 })
 export class UserService {
   baseUrl: string = "http://localhost:3000";

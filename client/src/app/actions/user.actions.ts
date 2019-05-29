@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
-import { Contact } from "../models/Contact";
-import { User } from "../models/User";
-import { IJwtPayload } from "../interfaces/JwtPayload";
+import { Contact } from "../core/models/Contact";
+import { User } from "../core/models/User";
+import { IJwtPayload } from "../core/interfaces/JwtPayload";
 
 export const SET_USER_LOGIN = "[USER] Login";
 export const SET_USER = "[USER] Set User";

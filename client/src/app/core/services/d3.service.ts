@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import * as d3 from "d3";
+import { CoreModule } from "../core.module";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: CoreModule
 })
 export class D3Service {
   constructor() {}

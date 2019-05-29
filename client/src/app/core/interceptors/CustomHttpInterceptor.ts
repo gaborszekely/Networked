@@ -7,7 +7,7 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { githubToken } from "../../config/githubToken";
+import { githubToken } from "../../../config/githubToken";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

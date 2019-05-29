@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { LoginService } from "src/app/services/login.service";
-import { ILoginResponse } from "src/app/interfaces/LoginResponse";
+import { LoginService } from "src/app/core/services/login.service";
+import { ILoginResponse } from "src/app/core/interfaces/LoginResponse";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../app/app.state";
 import * as UserActions from "../../actions/user.actions";
