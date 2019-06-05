@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: "login", component: LoginPageComponent },
   {
     path: "contacts",
+    // loadChildren: "./modules/contacts/contacts.module#ContactsModule"
     loadChildren: () =>
       import("./modules/contacts/contacts.module").then(
         mod => mod.ContactsModule
