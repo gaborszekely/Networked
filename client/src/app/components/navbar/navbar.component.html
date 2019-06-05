@@ -1,23 +1,41 @@
 <div>
-  <div *ngIf="!confirmed" class="alert alert-app-level" style="display: flex; align-items: center; justify-content: center">
-      <clr-icon shape="info-circle" size="24"></clr-icon>
-      Please confirm your email address.
-      <button class="btn btn-inverse btn-sm" style="margin-left: 10px" (click)="confirm()">Confirm</button>
+  <div
+    *ngIf="!confirmed"
+    class="alert alert-app-level"
+    style="display: flex; align-items: center; justify-content: center"
+  >
+    <clr-icon shape="info-circle" size="24"></clr-icon>
+    Please confirm your email address.
+    <button
+      class="btn btn-inverse btn-sm"
+      style="margin-left: 10px"
+      (click)="confirm()"
+    >
+      Confirm
+    </button>
   </div>
   <header class="header header-6">
     <div class="branding">
-      <a  routerLink="/" class="nav-link">
+      <a routerLink="/" class="nav-link">
         <clr-icon shape="users" class="is-inverse is-solid"></clr-icon>
         <span class="title large">Networked</span>
       </a>
     </div>
     <div class="header-nav">
-      <a routerLink="/" class="active nav-link"><span class="nav-text">Dashboard</span></a>
-      <a href="..." class="nav-link"><span class="nav-text">Explore Connections</span></a>
+      <a routerLink="/" class="active nav-link"
+        ><span class="nav-text">Dashboard</span></a
+      >
+      <a href="..." class="nav-link"
+        ><span class="nav-text">Explore Connections</span></a
+      >
     </div>
     <form class="search">
       <label for="search_input">
-        <input id="search_input" type="text" placeholder="Search for keywords...">
+        <input
+          id="search_input"
+          type="text"
+          placeholder="Search for keywords..."
+        />
       </label>
     </form>
     <div class="header-actions">
@@ -29,8 +47,8 @@
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a routerLink="/about" clrDropdownItem>About</a>
           <a routerLink="/preferences" clrDropdownItem>Preferences</a>
-          <a routerLink="/login" clrDropdownItem>Sign In</a>
-          <a (click)="logout()" clrDropdownItem>Sign Out</a>
+          <a *ngIf="!loggedIn" routerLink="/login" clrDropdownItem>Sign In</a>
+          <a *ngIf="loggedIn" (click)="logout()" clrDropdownItem>Sign Out</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

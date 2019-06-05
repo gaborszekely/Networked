@@ -4,6 +4,9 @@ import { Observable } from "rxjs";
 import { ILoginResponse } from "../interfaces/LoginResponse";
 import * as moment from "moment";
 import { CoreModule } from "../core.module";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.state";
+import * as UserActions from "../../actions/user.actions";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +19,10 @@ const httpOptions = {
 })
 export class LoginService {
   baseUrl: string = "http://localhost:3000";
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private readonly store: Store<AppState>
+  ) {}
 
   loginUser(email: string, password: string): Promise<ILoginResponse> {
     return this.http
@@ -45,7 +51,7 @@ export class LoginService {
   }
 
   getExpiration() {
-    const expiration = localStorage.getItem("expires_at");
+    const expiration = localStorage.getItem("expires_in");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
@@ -65,5 +71,11 @@ export class LoginService {
 
   isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  onPageReload() {
+    if (this.isLoggedIn()) {
+      this.store.dispatch(new UserActions.SetLogin(true));
+    }
   }
 }
