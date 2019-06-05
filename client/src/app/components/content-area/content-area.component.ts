@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { fadeAnimation } from "../../animations/fade-animation";
+import { fadeAnimation } from "../../core/animations/fade-animation";
 import { Observable } from "rxjs";
 import { Contact } from "src/app/core/models/Contact";
 import { Store } from "@ngrx/store";

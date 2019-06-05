@@ -13,13 +13,9 @@ import { ContactsModule } from "./modules/contacts/contacts.module";
 /* COMPONENTS */
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { AddConnectionComponent } from "./components/add-connection/add-connection.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ContentAreaComponent } from "./components/content-area/content-area.component";
-import { AddContactComponent } from "./components/add-contact/add-contact.component";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
-import { AccountComponent } from "./components/account/account.component";
-import { FaqComponent } from "./components/faq/faq.component";
 
 /* REDUCERS */
 import { contactsReducer } from "./reducers/contacts.reducer";
@@ -32,18 +28,15 @@ import { UserEffects } from "./effects/user.effects";
 /* OTHER */
 import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
 import { CoreModule } from "./core/core.module";
+import { UserModule } from "./modules/user/user.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AddConnectionComponent,
-    AddContactComponent,
     SidenavComponent,
     ContentAreaComponent,
-    LoginPageComponent,
-    AccountComponent,
-    FaqComponent
+    LoginPageComponent
   ],
   imports: [
     StoreModule.forRoot({
@@ -59,6 +52,7 @@ import { CoreModule } from "./core/core.module";
     FormsModule,
     ReactiveFormsModule,
     ContactsModule,
+    UserModule,
     CoreModule
   ],
   providers: [

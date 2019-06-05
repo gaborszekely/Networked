@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ContactStoreService } from "src/app/core/services/contact-store.service";
 import { UserNote } from "src/app/core/models/UserNote";
 import { ContactService } from "src/app/core/services/contact.service";
 import { Store } from "@ngrx/store";
@@ -35,7 +34,6 @@ export class NotesComponent implements OnInit {
   contacts$: Observable<Contact[]>;
 
   constructor(
-    // private contactStore: ContactStoreService,
     private contactService: ContactService,
     private store: Store<AppState>
   ) {
@@ -43,7 +41,6 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.contactStore.contacts$.subscribe(contacts => {
     this.contacts$.subscribe(contacts => {
       this.notesByUser = contacts.reduce((acc, contact) => {
         contact.notes.forEach(async note => {

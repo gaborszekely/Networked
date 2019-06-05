@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AddContactComponent } from "./components/add-contact/add-contact.component";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
-import { AccountComponent } from "./components/account/account.component";
-import { FaqComponent } from "./components/faq/faq.component";
 
 const routes: Routes = [
-  { path: "add", component: AddContactComponent },
   { path: "login", component: LoginPageComponent },
-  { path: "account", component: AccountComponent },
-  { path: "faq", component: FaqComponent }
+  {
+    path: "contacts",
+    loadChildren: () =>
+      import("./modules/contacts/contacts.module").then(
+        mod => mod.ContactsModule
+      )
+  }
   // { path: "**", component: PageNotFoundComponent }
 ];
 

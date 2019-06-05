@@ -19,14 +19,17 @@ import { userReducer } from "src/app/reducers/user.reducer";
 import { NoteComponent } from "./components/note/note.component";
 import { NotesComponent } from "./components/notes/notes.component";
 import { ContactComponent } from "./components/contact/contact.component";
-
+import { AddContactComponent } from "./components/add-contact/add-contact.component";
+import { ContactsHomeComponent } from "./components/contacts-home/contacts-home.component";
 @NgModule({
   declarations: [
     ConnectionsComponent,
     ConnectionComponent,
     NoteComponent,
     NotesComponent,
-    ContactComponent
+    ContactComponent,
+    AddContactComponent,
+    ContactsHomeComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,6 @@ import { ContactComponent } from "./components/contact/contact.component";
     //   user: userReducer
     // }),
     EffectsModule,
-    RouterModule,
     ContactsRoutingModule
   ],
   providers: [

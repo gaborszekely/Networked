@@ -15,4 +15,9 @@ export class UserService {
   getUser(id: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/user/${id}`);
   }
+
+  getFromStorage() {
+    const access_token = localStorage.getItem("access_token");
+    return { loggedIn: !!access_token, access_token };
+  }
 }
