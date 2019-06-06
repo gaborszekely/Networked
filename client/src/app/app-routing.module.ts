@@ -6,11 +6,17 @@ const routes: Routes = [
   { path: "login", component: LoginPageComponent },
   {
     path: "contacts",
-    // loadChildren: "./modules/contacts/contacts.module#ContactsModule"
-    loadChildren: () =>
-      import("./modules/contacts/contacts.module").then(
-        mod => mod.ContactsModule
-      )
+    loadChildren: "./modules/contacts/contacts.module#ContactsModule"
+    // loadChildren: () =>
+    //   import("./modules/contacts/contacts.module").then(
+    //     mod => mod.ContactsModule
+    //   )
+  },
+  {
+    path: "events",
+    loadChildren: "./modules/events/events.module#EventsModule"
+    // loadChildren: () =>
+    //   import("./modules/events/events.module").then(mod => mod.EventsModule)
   }
   // { path: "**", component: PageNotFoundComponent }
 ];

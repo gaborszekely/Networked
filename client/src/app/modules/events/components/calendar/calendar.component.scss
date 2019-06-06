@@ -1,0 +1,22 @@
+.calendar__wrapper {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 75vmin;
+  height: 75vmin;
+  border: 1px solid #ccc;
+}
+
+.calendar-day,
+.calendar-day-title {
+  border: 1px solid #ccc;
+}
+
+.calendar-day,
+.calendar-day-title {
+  height: 100%;
+  width: 100%;
+}
+
+.calendar-day-title {
+  background-color: #f3f3f3;
+}

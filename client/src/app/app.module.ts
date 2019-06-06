@@ -9,6 +9,9 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { AppRoutingModule } from "./app-routing.module";
 import { ContactsModule } from "./modules/contacts/contacts.module";
+import { CoreModule } from "./core/core.module";
+import { UserModule } from "./modules/user/user.module";
+import { EventsModule } from "./modules/events/events.module";
 
 /* COMPONENTS */
 import { AppComponent } from "./app.component";
@@ -27,8 +30,6 @@ import { UserEffects } from "./effects/user.effects";
 
 /* OTHER */
 import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
-import { CoreModule } from "./core/core.module";
-import { UserModule } from "./modules/user/user.module";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,6 @@ import { UserModule } from "./modules/user/user.module";
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ContactsModule,
     UserModule,
     CoreModule
   ],
