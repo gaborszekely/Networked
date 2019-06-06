@@ -5,8 +5,9 @@
   <div
     *ngFor="let day of days"
     class="calendar-day"
-    [ngClass]="getDayClass(day.month)"
+    [ngClass]="getDayClass(day.date)"
   >
-    <p>{{ getDate(day.year, day.month, day.date) | date }}</p>
+    <!-- <p>{{ day.month + 1 }}/{{ day.date }}/{{ day.year }}</p> -->
+    <p>{{ day.date | date }}</p>
   </div>
 </div>

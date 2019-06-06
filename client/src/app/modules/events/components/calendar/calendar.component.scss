@@ -18,5 +18,12 @@
 }
 
 .calendar-day-title {
+  background-color: #666;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.non-current-month {
   background-color: #f3f3f3;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
-import * as ContactsActions from "../../actions/contacts.actions";
+import * as ContactsActions from "../../../../actions/contacts.actions";
 import { Observable } from "rxjs";
 
 @Component({

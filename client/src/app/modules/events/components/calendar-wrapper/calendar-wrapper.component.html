@@ -1,7 +1,10 @@
 <div>
-  <h1>My Events</h1>
-  <app-calendar-date-picker
-    (setMonth)="setMonth($event)"
-  ></app-calendar-date-picker>
+  <div class="calendar-title__wrapper">
+    <h1>My Events</h1>
+    <app-calendar-date-picker
+      (setMonth)="setMonth($event)"
+    ></app-calendar-date-picker>
+  </div>
+  {{ calendarMonths[month] }}
   <app-calendar [month]="month" [year]="year"></app-calendar>
 </div>
