@@ -1,9 +1,13 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginPageComponent } from "./components/login-page/login-page.component";
+import { LoginPageComponent } from "./modules/user/components/login-page/login-page.component";
 
 const routes: Routes = [
-  { path: "login", component: LoginPageComponent },
+  {
+    path: "login",
+    redirectTo: "user/login",
+    pathMatch: "full"
+  },
   {
     path: "contacts",
     loadChildren: "./modules/contacts/contacts.module#ContactsModule"
@@ -17,6 +21,10 @@ const routes: Routes = [
     loadChildren: "./modules/events/events.module#EventsModule"
     // loadChildren: () =>
     //   import("./modules/events/events.module").then(mod => mod.EventsModule)
+  },
+  {
+    path: "user",
+    loadChildren: "./modules/user/user.module#UserModule"
   }
   // { path: "**", component: PageNotFoundComponent }
 ];

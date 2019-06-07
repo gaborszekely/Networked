@@ -1,4 +1,8 @@
 <div>
-  <button type="button" (click)="emitMonthChange(-1)">{{ "<" }}</button>
-  <button type="button" (click)="emitMonthChange(1)">{{ ">" }}</button>
+  <button type="button" class="btn btn-icon" (click)="emitMonthChange(-1)">
+    <clr-icon shape="caret left"></clr-icon>
+  </button>
+  <button type="button" class="btn btn-icon" (click)="emitMonthChange(1)">
+    <clr-icon shape="caret right"></clr-icon>
+  </button>
 </div>
