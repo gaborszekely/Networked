@@ -81,7 +81,8 @@ This application utilizes TSLint for linting to make sure the code conforms to t
 ## Built With
 
 - [Angular 7](https://angularjs.org) - Front-end framework used
-- [RxJS Obervables and Angular Services](https://angular.io/guide/observables) - Cusstom State Management solution
+- [NgRx](https://ngrx.io/) - State management solution
+- [RxJS](http://reactivex.io/) - Reactive programming
 - [Node.js](https://nodejs.org/en/) - Server-side runtime
 - [Nest.js](https://nestjs.com/) - Server-side framework used
 - [MongoDB](https://www.mongodb.com/) - Data persistence
