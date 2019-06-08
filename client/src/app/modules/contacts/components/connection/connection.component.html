@@ -1,20 +1,29 @@
-
 <div class="card">
   <div class="card-img" class="user-image-wrapper">
-    <img src="{{ imageUrl }}" class="user-image">
+    <img src="{{ imageUrl }}" class="user-image" />
   </div>
   <div class="card-block">
     <div class="card-title">
       {{ contact.first_name }} {{ contact.last_name }}
     </div>
     <div class="card-text">
-      {{ contact.job_title }} at {{ contact.company }}
+      <div>{{ contact.job_title }}</div>
+      <span class="label label-light-blue">{{ contact.company }}</span>
     </div>
   </div>
   <div class="card-footer">
-    <a [routerLink]="['/contacts/list', contact._id]" routerLinkActive="active" class="btn btn-sm btn-outline">See More</a>
-    
-    <a class="btn btn-sm btn-link" style="color: red" (click)="onDelete(contact)">
+    <a
+      [routerLink]="['/contacts/list', contact._id]"
+      routerLinkActive="active"
+      class="btn btn-sm btn-outline"
+      >See More</a
+    >
+
+    <a
+      class="btn btn-sm btn-link"
+      style="color: red"
+      (click)="onDelete(contact)"
+    >
       <!-- <clr-icon shape="trash" size="16"></clr-icon> -->
       Delete
     </a>

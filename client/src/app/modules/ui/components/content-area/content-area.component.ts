@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { fadeAnimation } from "../../core/animations/fade-animation";
+import { fadeAnimation } from "../../../../core/animations/fade-animation";
 import { Observable } from "rxjs";
 import { Contact } from "src/app/core/models/Contact";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
-import * as ContactsActions from "../../actions/contacts.actions";
+import * as ContactsActions from "../../../../actions/contacts.actions";
 
 @Component({
   selector: "app-content-area",

@@ -7,18 +7,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ClarityModule } from "@clr/angular";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
-import { AppRoutingModule } from "./app-routing.module";
-import { ContactsModule } from "./modules/contacts/contacts.module";
 import { CoreModule } from "./core/core.module";
-import { UserModule } from "./modules/user/user.module";
-import { EventsModule } from "./modules/events/events.module";
+import { AppRoutingModule } from "./app-routing.module";
+import { UiModule } from "./modules/ui/ui.module";
 
 /* COMPONENTS */
 import { AppComponent } from "./app.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { SidenavComponent } from "./components/sidenav/sidenav.component";
-import { ContentAreaComponent } from "./components/content-area/content-area.component";
-import { LoginPageComponent } from "./components/login-page/login-page.component";
 
 /* REDUCERS */
 import { contactsReducer } from "./reducers/contacts.reducer";
@@ -32,13 +26,7 @@ import { UserEffects } from "./effects/user.effects";
 import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    SidenavComponent,
-    ContentAreaComponent,
-    LoginPageComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     StoreModule.forRoot({
       contacts: contactsReducer,
@@ -52,8 +40,8 @@ import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    UserModule,
-    CoreModule
+    CoreModule,
+    UiModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

@@ -1,0 +1,21 @@
+.content__container {
+  display: grid;
+  grid-template-columns: auto, 1fr;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+
+.main__container {
+  width: calc(100% - 0px);
+}
+
+// .main-container {
+//   height: 100%;
+//   min-height: 100vh;
+//   display: initial;
+// }
+
+// .content-container {
+//   flex-grow:
+//   height: 100%;
+// }

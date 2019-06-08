@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { LoginService } from "src/app/core/services/login.service";
 import { ILoginResponse } from "src/app/core/interfaces/LoginResponse";
 import { Store } from "@ngrx/store";
-import { AppState } from "../../../app/app.state";
-import * as UserActions from "../../actions/user.actions";
+import { AppState } from "src/app/app.state";
+import * as UserActions from "src/app/actions/user.actions";
 import { Router } from "@angular/router";
 
 @Component({

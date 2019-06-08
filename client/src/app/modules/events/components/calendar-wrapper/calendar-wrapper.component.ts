@@ -8,6 +8,20 @@ import { Component, OnInit } from "@angular/core";
 export class CalendarWrapperComponent implements OnInit {
   month: number = new Date().getMonth();
   year: number = new Date().getFullYear();
+  calendarMonths: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   constructor() {}
 

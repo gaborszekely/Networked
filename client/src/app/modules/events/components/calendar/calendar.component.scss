@@ -1,22 +1,41 @@
-.calendar__wrapper {
+.calendar__wrapper,
+.calendar-title__wrapper {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 75vmin;
-  height: 75vmin;
+}
+
+.calendar__wrapper {
+  height: 50vmin;
+  border: 1px solid #ccc;
+}
+
+.calendar-day {
   border: 1px solid #ccc;
 }
 
 .calendar-day,
-.calendar-day-title {
-  border: 1px solid #ccc;
-}
-
-.calendar-day,
-.calendar-day-title {
+.calendar-title {
   height: 100%;
   width: 100%;
 }
 
-.calendar-day-title {
-  background-color: #f3f3f3;
+.calendar-title {
+  border: 1px solid #666;
+  background-color: #666;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+.non-current-month {
+  background-color: #eee;
+}
+
+.calendar-day-number {
+  width: 100%;
+  // text-align: right;
+  padding-left: 1em;
+  padding-top: 1em;
 }
