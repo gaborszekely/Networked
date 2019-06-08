@@ -1,13 +1,7 @@
 <div class="main-container">
   <app-navbar></app-navbar>
   <div class="content-container">
-    <div class="content-area">
-      <app-content-area></app-content-area>
-    </div>
-    <nav class="sidenav">
-      <app-sidenav></app-sidenav>
-    </nav>
+    <app-content-area class="content-area"></app-content-area>
+    <nav app-sidenav class="sidenav"></nav>
   </div>
 </div>
-
-<router-outlet></router-outlet>

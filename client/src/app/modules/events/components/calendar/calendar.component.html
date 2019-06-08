@@ -9,7 +9,19 @@
     class="calendar-day"
     [ngClass]="getDayClass(day.date)"
   >
-    <!-- <p>{{ day.month + 1 }}/{{ day.date }}/{{ day.year }}</p> -->
-    <p>{{ day.date | date }}</p>
+    <clr-tooltip class="calendar-day-number">
+      <div clrTooltipTrigger>{{ day.date | date: "d" }}</div>
+      <clr-tooltip-content clrPosition="top-right" clrSize="sm" *clrIfOpen>
+        <span>{{ day.date | date }}</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+    <!-- <div
+      role="tooltip"
+      aria-haspopup="true"
+      class="calendar-day-number tooltip tooltip-sm tooltip-bottom-right"
+    >
+      
+      <span class="tooltip-content"></span>
+    </div> -->
   </div>
 </div>

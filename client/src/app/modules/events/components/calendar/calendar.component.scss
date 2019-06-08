@@ -30,5 +30,12 @@
 }
 
 .non-current-month {
-  background-color: #f3f3f3;
+  background-color: #eee;
+}
+
+.calendar-day-number {
+  width: 100%;
+  // text-align: right;
+  padding-left: 1em;
+  padding-top: 1em;
 }
