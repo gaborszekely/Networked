@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CalendarEvent } from "src/app/core/models/CalendarEvent";
 
 @Component({
   selector: "app-calendar-wrapper",
@@ -6,8 +7,20 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./calendar-wrapper.component.scss"]
 })
 export class CalendarWrapperComponent implements OnInit {
-  month: number = new Date().getMonth();
-  year: number = new Date().getFullYear();
+  month = new Date().getMonth();
+  year = new Date().getFullYear();
+  events: CalendarEvent[] = [
+    {
+      title: "Test Event 1",
+      description: "Description for test event 1",
+      date: new Date(2019, 5, 11)
+    },
+    {
+      title: "Test Event 2",
+      description: "Description for test event 2",
+      date: new Date(2019, 5, 12)
+    }
+  ];
   calendarMonths: string[] = [
     "January",
     "February",
@@ -38,5 +51,10 @@ export class CalendarWrapperComponent implements OnInit {
     } else {
       this.month = newMonth;
     }
+  }
+
+  addNewEvent(event: CalendarEvent) {
+    this.events = [...this.events, event];
+    console.log(this.events);
   }
 }

@@ -1,27 +1,38 @@
-<div class="calendar-title__wrapper">
-  <div *ngFor="let day of calendarDays" class="calendar-title">
-    {{ day }}
+<ng-container *ngIf="days$ | async as calendar">
+  <div class="calendar-title__wrapper">
+    <div *ngFor="let day of calendarDays" class="calendar-title">
+      {{ day }}
+    </div>
   </div>
-</div>
-<div class="calendar__wrapper">
-  <div
-    *ngFor="let day of days"
-    class="calendar-day"
-    [ngClass]="getDayClass(day.date)"
-  >
-    <clr-tooltip class="calendar-day-number">
-      <div clrTooltipTrigger>{{ day.date | date: "d" }}</div>
-      <clr-tooltip-content clrPosition="top-right" clrSize="sm" *clrIfOpen>
-        <span>{{ day.date | date }}</span>
-      </clr-tooltip-content>
-    </clr-tooltip>
-    <!-- <div
-      role="tooltip"
-      aria-haspopup="true"
-      class="calendar-day-number tooltip tooltip-sm tooltip-bottom-right"
+  <div class="calendar__wrapper">
+    <div
+      *ngFor="let day of calendar.events"
+      class="calendar-day"
+      [ngClass]="getNonCurrentMonthClass(day.date, calendar.month)"
     >
-      
-      <span class="tooltip-content"></span>
-    </div> -->
+      <div class="calendar">
+        <div class="calendar-day-title__wrapper">
+          <clr-tooltip class="calendar-day-title-number">
+            <div
+              clrTooltipTrigger
+              [ngClass]="getCurrentDateClass(day.date)"
+              class="calendar-day-number"
+            >
+              <span>{{ day.date | date: "d" }}</span>
+            </div>
+            <clr-tooltip-content
+              clrPosition="top-right"
+              clrSize="sm"
+              *clrIfOpen
+            >
+              <span>{{ day.date | date }}</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </div>
+        <div class="calendar-day-content__wrapper">
+          <span *ngFor="let event of day.events">{{ event.title }}</span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</ng-container>
