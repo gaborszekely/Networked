@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CalendarEvent } from "src/app/core/models/CalendarEvent";
+import { CalendarService } from "../../services/calendar.service";
 
 @Component({
   selector: "app-calendar-wrapper",
@@ -36,7 +37,15 @@ export class CalendarWrapperComponent implements OnInit {
     "December"
   ];
 
-  constructor() {}
+  constructor(private calendarService: CalendarService) {}
+
+  get month$() {
+    return this.calendarService.month$;
+  }
+
+  get year$() {
+    return this.calendarService.year$;
+  }
 
   ngOnInit() {}
 

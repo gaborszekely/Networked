@@ -8,12 +8,14 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { CalendarWrapperComponent } from "./components/calendar-wrapper/calendar-wrapper.component";
 import { CalendarDatePickerComponent } from "./components/calendar-date-picker/calendar-date-picker.component";
 import { CalendarService } from "./services/calendar.service";
+import { MonthPipe } from "./pipes/month.pipe";
 
 @NgModule({
   declarations: [
     CalendarComponent,
     CalendarWrapperComponent,
-    CalendarDatePickerComponent
+    CalendarDatePickerComponent,
+    MonthPipe
   ],
   imports: [
     CommonModule,
