@@ -1,15 +1,15 @@
-<div *ngIf="dates$ | async as dates">
+<div *ngIf="calendar$ | async as calendar">
   <button
     type="button"
     class="btn btn-icon"
-    (click)="emitMonthChange(-1, dates)"
+    (click)="emitMonthChange(-1, calendar.year, calendar.month)"
   >
     <clr-icon shape="caret left"></clr-icon>
   </button>
   <button
     type="button"
     class="btn btn-icon"
-    (click)="emitMonthChange(1, dates)"
+    (click)="emitMonthChange(1, calendar.year, calendar.month)"
   >
     <clr-icon shape="caret right"></clr-icon>
   </button>
@@ -59,7 +59,11 @@
       <button type="button" class="btn btn-outline" (click)="cancelForm()">
         Cancel
       </button>
-      <button type="button" class="btn btn-primary" (click)="submitForm()">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="submitForm(calendar.events)"
+      >
         Ok
       </button>
     </div>

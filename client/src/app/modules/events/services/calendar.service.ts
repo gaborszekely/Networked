@@ -92,7 +92,8 @@ export class CalendarService {
         return {
           year,
           month,
-          events: newDays
+          events,
+          days: newDays
         };
       })
     );
@@ -104,5 +105,9 @@ export class CalendarService {
 
   public setYear(value: number) {
     this.year.next(value);
+  }
+
+  public setEvents(events: CalendarEvent[]) {
+    this.events.next(events);
   }
 }

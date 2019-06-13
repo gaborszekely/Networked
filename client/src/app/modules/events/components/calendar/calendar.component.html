@@ -6,7 +6,7 @@
   </div>
   <div class="calendar__wrapper">
     <div
-      *ngFor="let day of calendar.events"
+      *ngFor="let day of calendar.days"
       class="calendar-day"
       [ngClass]="getNonCurrentMonthClass(day.date, calendar.month)"
     >

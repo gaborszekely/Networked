@@ -38,13 +38,13 @@ export class CalendarDatePickerComponent implements OnInit {
     return new Date(this.addEventForm.get("date").value);
   }
 
-  get dates$() {
-    return this.calendarService.dates$;
+  get calendar$() {
+    return this.calendarService.calendar$;
   }
 
   ngOnInit() {}
 
-  emitMonthChange(change, [year, month]) {
+  emitMonthChange(change, year, month) {
     const newMonth = month + change;
     if (newMonth === 12) {
       this.calendarService.setMonth(0);
@@ -57,6 +57,10 @@ export class CalendarDatePickerComponent implements OnInit {
     }
   }
 
+  addNewEvent(event: CalendarEvent, events: CalendarEvent[]) {
+    this.calendarService.setEvents([...events, event]);
+  }
+
   toggleForm() {
     this.showAddEvent = !this.showAddEvent;
   }
@@ -66,7 +70,7 @@ export class CalendarDatePickerComponent implements OnInit {
     this.toggleForm();
   }
 
-  submitForm() {
+  submitForm(events: CalendarEvent[]) {
     const newEvent: CalendarEvent = {
       title: this.title,
       description: this.description,
@@ -74,6 +78,7 @@ export class CalendarDatePickerComponent implements OnInit {
     };
 
     // this.addEvent.emit(newEvent);
+    this.addNewEvent(newEvent, events);
     this.cancelForm();
   }
 }

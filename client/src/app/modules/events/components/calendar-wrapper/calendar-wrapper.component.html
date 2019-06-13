@@ -2,10 +2,6 @@
   <div class="calendar-title__wrapper">
     <h1>{{ month$ | async | month }} {{ year$ | async }}</h1>
     <app-calendar-date-picker></app-calendar-date-picker>
-    <!-- <app-calendar-date-picker
-      (setMonth)="setMonth($event)"
-      (addEvent)="addNewEvent($event)"
-    ></app-calendar-date-picker> -->
   </div>
   <app-calendar></app-calendar>
 </div>
