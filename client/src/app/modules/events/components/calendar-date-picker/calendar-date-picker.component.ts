@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { Validators, FormBuilder } from "@angular/forms";
 import { CalendarEvent } from "src/app/core/models/CalendarEvent";
 import { CalendarService } from "../../services/calendar.service";
@@ -7,12 +13,10 @@ import { tap } from "rxjs/operators";
 @Component({
   selector: "app-calendar-date-picker",
   templateUrl: "./calendar-date-picker.component.html",
-  styleUrls: ["./calendar-date-picker.component.scss"]
+  styleUrls: ["./calendar-date-picker.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarDatePickerComponent implements OnInit {
-  // @Output() setMonth: EventEmitter<number> = new EventEmitter();
-  // @Output() addEvent: EventEmitter<CalendarEvent> = new EventEmitter();
-
   showAddEvent = false;
   addEventModalOpen = false;
   addEventForm = this.fb.group({

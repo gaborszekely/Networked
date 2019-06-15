@@ -1,7 +1,40 @@
-<div>
-  <div class="calendar-title__wrapper">
-    <h1>{{ month$ | async | month }} {{ year$ | async }}</h1>
-    <app-calendar-date-picker></app-calendar-date-picker>
-  </div>
-  <app-calendar></app-calendar>
-</div>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>Events</button>
+    <clr-tab-content *clrIfActive>
+      <app-events-list></app-events-list>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Calendar</button>
+    <clr-tab-content *clrIfActive>
+      <div class="calendar-title__wrapper">
+        <h1>{{ month$ | async | month }} {{ year$ | async }}</h1>
+        <app-calendar-date-picker></app-calendar-date-picker>
+      </div>
+      <app-calendar></app-calendar>
+    </clr-tab-content>
+  </clr-tab>
+
+  <!-- <clr-tab>
+    <button clrTabLink>Cloud</button>
+    <clr-tab-content *clrIfActive>
+      ...
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink [clrTabLinkInOverflow]="inOverflow">Settings</button>
+    <clr-tab-content *clrIfActive>
+      ...
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink [clrTabLinkInOverflow]="inOverflow">Alerts</button>
+    <clr-tab-content *clrIfActive>
+      ...
+    </clr-tab-content>
+  </clr-tab> -->
+</clr-tabs>

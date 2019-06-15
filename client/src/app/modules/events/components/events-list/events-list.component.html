@@ -1,0 +1,8 @@
+<div *ngIf="events$ | async as events" class="events__wrapper">
+  <h1>My Events</h1>
+  <div *ngFor="let event of events" class="events-box__wrapper">
+    <h3>{{ event.title }}</h3>
+    <span>{{ event.date | date }}</span>
+    <p>{{ event.description }}</p>
+  </div>
+</div>

@@ -30,7 +30,9 @@
           </clr-tooltip>
         </div>
         <div class="calendar-day-content__wrapper">
-          <span *ngFor="let event of day.events">{{ event.title }}</span>
+          <div *ngFor="let event of day.events" class="calendar-event">
+            {{ event.title }}
+          </div>
         </div>
       </div>
     </div>

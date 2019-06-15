@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { CalendarEvent } from "src/app/core/models/CalendarEvent";
 import { CalendarDate } from "src/app/core/models/CalendarDate";
 import {
@@ -13,7 +19,8 @@ import { CalendarService } from "../../services/calendar.service";
 @Component({
   selector: "app-calendar",
   templateUrl: "./calendar.component.html",
-  styleUrls: ["./calendar.component.scss"]
+  styleUrls: ["./calendar.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
   currentDate = new Date().getDate();

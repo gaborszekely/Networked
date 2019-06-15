@@ -1,4 +1,4 @@
-<div *ngIf="calendar$ | async as calendar">
+<div *ngIf="calendar$ | async as calendar; else loading">
   <button
     type="button"
     class="btn btn-icon"
@@ -69,3 +69,6 @@
     </div>
   </clr-modal>
 </div>
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

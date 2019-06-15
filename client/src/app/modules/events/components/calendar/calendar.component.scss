@@ -55,6 +55,7 @@
 
 .calendar-day-content__wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -70,4 +71,15 @@
 
 .calendar-day-number {
   position: relative;
+}
+
+.calendar-event {
+  width: 100%;
+  background-color: #347ab8;
+  font-size: 0.9em;
+  padding: 0.5em;
+  padding-left: 1em;
+  margin-top: 0.5em;
+  border-radius: 2px;
+  color: #fff;
 }

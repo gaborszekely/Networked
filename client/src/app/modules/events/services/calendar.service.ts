@@ -8,18 +8,22 @@ import {
   calculateDate,
   isSameDate
 } from "src/helpers/calendarHelpers";
-import { Subject, Observable, BehaviorSubject, combineLatest } from "rxjs";
+import { Subject, Observable, BehaviorSubject, combineLatest, of } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { CalendarEvent } from "src/app/core/models/CalendarEvent";
+import * as EventsActions from "../store/events.actions";
+import * as fromEvents from "../store/events.reducer";
+import { Store } from "@ngrx/store";
+import { IEvent } from "../store/events.reducer";
 
 const events: CalendarEvent[] = [
   {
-    title: "Test Event 1",
+    title: "DenverScript Meetup",
     description: "Description for test event 1",
     date: new Date(2019, 5, 11)
   },
   {
-    title: "Test Event 2",
+    title: "AngularJS Meetup",
     description: "Description for test event 2",
     date: new Date(2019, 5, 12)
   }
@@ -34,11 +38,23 @@ export class CalendarService {
   year$: Observable<number> = this.year.asObservable();
   month$: Observable<number> = this.month.asObservable();
   dates$: Observable<number[]> = combineLatest(this.year$, this.month$);
-  events$: Observable<CalendarEvent[]> = this.events.asObservable();
+  // events$: Observable<CalendarEvent[]> = this.events.asObservable();
   calendar$: Observable<any>;
+  events$: Observable<IEvent[]> = of([]);
 
-  constructor() {
+  constructor(private store: Store<fromEvents.State>) {
+    this.events$ = store.select((state: any) => {
+      const events = state.events.ids.map(
+        (id: string) => state.events.entities[id]
+      );
+      return events.map(event => ({
+        ...event,
+        date: new Date(event.date)
+      }));
+    });
+    store.dispatch(EventsActions.fetchEvents());
     this.generateCalendar();
+    // this.events$.subscribe(events => console.log("Our events: ", events));
   }
 
   generateCalendar() {
