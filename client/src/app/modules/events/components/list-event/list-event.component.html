@@ -1,0 +1,12 @@
+<div class="events-box__wrapper">
+  <h3>{{ event.title }}</h3>
+  <span>{{ event.date | date }}</span>
+  <p>{{ event.description }}</p>
+  <button (click)="toggleEdit()" class="btn btn-primary btn-sm">Edit</button>
+  <button
+    (click)="deleteEvent(event)"
+    class="btn btn-primary btn-danger btn-sm"
+  >
+    Delete
+  </button>
+</div>

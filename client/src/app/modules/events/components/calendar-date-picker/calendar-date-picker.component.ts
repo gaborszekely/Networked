@@ -9,6 +9,9 @@ import { Validators, FormBuilder } from "@angular/forms";
 import { CalendarEvent } from "src/app/core/models/CalendarEvent";
 import { CalendarService } from "../../services/calendar.service";
 import { tap } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { State, IEvent } from "../../store/events.reducer";
+import * as EventsActions from "../../store/events.actions";
 
 @Component({
   selector: "app-calendar-date-picker",
@@ -22,12 +25,14 @@ export class CalendarDatePickerComponent implements OnInit {
   addEventForm = this.fb.group({
     title: ["", Validators.required],
     date: [new Date().toString(), Validators.required],
-    description: ["", Validators.required]
+    description: ["", Validators.required],
+    tags: ["", Validators.required]
   });
 
   constructor(
     private fb: FormBuilder,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private store: Store<State>
   ) {}
 
   get title() {
@@ -40,6 +45,13 @@ export class CalendarDatePickerComponent implements OnInit {
 
   get date() {
     return new Date(this.addEventForm.get("date").value);
+  }
+
+  get tags() {
+    return this.addEventForm
+      .get("tags")
+      .value.split(",")
+      .map((tag: string) => tag.trim());
   }
 
   get calendar$() {
@@ -61,8 +73,9 @@ export class CalendarDatePickerComponent implements OnInit {
     }
   }
 
-  addNewEvent(event: CalendarEvent, events: CalendarEvent[]) {
-    this.calendarService.setEvents([...events, event]);
+  addNewEvent(event: IEvent) {
+    // this.calendarService.setEvents([...events, event]);
+    this.store.dispatch(EventsActions.addEventAPI({ event }));
   }
 
   toggleForm() {
@@ -74,15 +87,15 @@ export class CalendarDatePickerComponent implements OnInit {
     this.toggleForm();
   }
 
-  submitForm(events: CalendarEvent[]) {
-    const newEvent: CalendarEvent = {
+  submitForm() {
+    const newEvent: IEvent = {
       title: this.title,
       description: this.description,
-      date: this.date
+      date: this.date,
+      tags: this.tags
     };
 
-    // this.addEvent.emit(newEvent);
-    this.addNewEvent(newEvent, events);
+    this.addNewEvent(newEvent);
     this.cancelForm();
   }
 }

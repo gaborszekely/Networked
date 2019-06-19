@@ -12,6 +12,7 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { CalendarWrapperComponent } from "./components/calendar-wrapper/calendar-wrapper.component";
 import { CalendarDatePickerComponent } from "./components/calendar-date-picker/calendar-date-picker.component";
 import { EventsListComponent } from "./components/events-list/events-list.component";
+import { ListEventComponent } from "./components/list-event/list-event.component";
 
 /* SERVICES */
 import { CalendarService } from "./services/calendar.service";
@@ -24,7 +25,6 @@ import { MonthPipe } from "./pipes/month.pipe";
 
 import { EventsEffects } from "./store/events.effects";
 import { eventsReducer } from "./store/events.reducer";
-import { eventsReducers } from "./store";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { eventsReducers } from "./store";
     CalendarWrapperComponent,
     CalendarDatePickerComponent,
     MonthPipe,
-    EventsListComponent
+    EventsListComponent,
+    ListEventComponent
   ],
   imports: [
     CommonModule,

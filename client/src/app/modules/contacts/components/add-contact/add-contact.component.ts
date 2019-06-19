@@ -11,9 +11,9 @@ import { ContactStoreService } from "src/app/core/services/contact-store.service
   styleUrls: ["./add-contact.component.scss"]
 })
 export class AddContactComponent implements OnInit {
-  @ViewChild("wizardmd") wizardMedium: ClrWizard;
-  @ViewChild("wizardlg") wizardLarge: ClrWizard;
-  @ViewChild("wizardxl") wizardExtraLarge: ClrWizard;
+  @ViewChild("wizardmd", { static: true }) wizardMedium: ClrWizard;
+  @ViewChild("wizardlg", { static: true }) wizardLarge: ClrWizard;
+  @ViewChild("wizardxl", { static: true }) wizardExtraLarge: ClrWizard;
 
   mdOpen: boolean = false;
   lgOpen: boolean = true;

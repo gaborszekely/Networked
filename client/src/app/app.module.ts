@@ -12,6 +12,7 @@ import { environment } from "../environments/environment";
 import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { UiModule } from "./modules/ui/ui.module";
+import { HomeModule } from "./modules/home/home.module";
 
 /* COMPONENTS */
 import { AppComponent } from "./app.component";

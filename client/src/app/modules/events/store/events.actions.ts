@@ -9,6 +9,11 @@ export const loadEvents = createAction(
   props<{ events: IEvent[] }>()
 );
 
+export const addEventAPI = createAction(
+  "[Event/API] Add Event API",
+  props<{ event: IEvent }>()
+);
+
 export const addEvent = createAction(
   "[Event/API] Add Event",
   props<{ event: IEvent }>()
@@ -42,6 +47,11 @@ export const updateEvents = createAction(
 export const mapEvents = createAction(
   "[Event/API] Map Events",
   props<{ entityMap: EntityMap<IEvent> }>()
+);
+
+export const deleteEventAPI = createAction(
+  "[Event/API] Delete Event API",
+  props<{ _id: string }>()
 );
 
 export const deleteEvent = createAction(

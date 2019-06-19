@@ -1,19 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
-import { CalendarDate } from "src/app/core/models/CalendarDate";
-import {
-  isSameDate,
-  getMonthStart,
-  getDaysInMonth,
-  getDay,
-  calculateDate
-} from "src/helpers/calendarHelpers";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { isSameDate } from "src/helpers/calendarHelpers";
 import { CalendarService } from "../../services/calendar.service";
 
 @Component({

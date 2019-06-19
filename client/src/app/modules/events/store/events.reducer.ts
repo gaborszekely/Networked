@@ -4,7 +4,7 @@ import { compareDate } from "src/helpers/datehelpers";
 import * as EventActions from "./events.actions";
 
 export interface IEvent {
-  _id: string;
+  _id?: string;
   title: string;
   date: Date;
   description: string;
