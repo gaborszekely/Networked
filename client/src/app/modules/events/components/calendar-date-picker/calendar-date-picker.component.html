@@ -1,8 +1,80 @@
-<div>
-  <button type="button" class="btn btn-icon" (click)="emitMonthChange(-1)">
+<div *ngIf="calendar$ | async as calendar; else loading">
+  <button
+    type="button"
+    class="btn btn-icon"
+    (click)="emitMonthChange(-1, calendar.year, calendar.month)"
+  >
     <clr-icon shape="caret left"></clr-icon>
   </button>
-  <button type="button" class="btn btn-icon" (click)="emitMonthChange(1)">
+  <button
+    type="button"
+    class="btn btn-icon"
+    (click)="emitMonthChange(1, calendar.year, calendar.month)"
+  >
     <clr-icon shape="caret right"></clr-icon>
   </button>
+  <button
+    type="button"
+    class="btn btn-primary btn-icon"
+    (click)="showAddEvent = !showAddEvent"
+  >
+    <clr-icon shape="plus"></clr-icon>
+  </button>
+  <clr-modal [(clrModalOpen)]="showAddEvent" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Add New Event</h3>
+    <div class="modal-body">
+      <form clrForm [formGroup]="addEventForm">
+        <clr-input-container>
+          <label for="titleControl">Event Title</label>
+          <input
+            id="titleControl"
+            clrInput
+            type="text"
+            formControlName="title"
+          />
+          <clr-control-helper>Give your event a title</clr-control-helper>
+          <clr-control-error>Please fill out valid title</clr-control-error>
+        </clr-input-container>
+        <clr-date-container>
+          <label for="dateControl">Date</label>
+          <input id="dateControl" type="date" clrDate formControlName="date" />
+          <clr-control-helper>Give your event a date</clr-control-helper>
+          <clr-control-error>Please fill out valid date</clr-control-error>
+        </clr-date-container>
+        <clr-textarea-container>
+          <label for="descriptionControl">Description</label>
+          <textarea
+            id="descriptionControl"
+            clrTextarea
+            formControlName="description"
+          ></textarea>
+          <clr-control-helper>Give your event a description</clr-control-helper>
+          <clr-control-error
+            >Please fill out valid description</clr-control-error
+          >
+        </clr-textarea-container>
+        <clr-input-container>
+          <label for="tagsControl">Event Tags</label>
+          <input id="tagsControl" clrInput type="text" formControlName="tags" />
+          <clr-control-helper>Give your event tags</clr-control-helper>
+          <clr-control-error>Please fill out valid tags</clr-control-error>
+        </clr-input-container>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="cancelForm()">
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="submitForm(calendar.events)"
+      >
+        Ok
+      </button>
+    </div>
+  </clr-modal>
 </div>
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

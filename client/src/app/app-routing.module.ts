@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginPageComponent } from "./modules/user/components/login-page/login-page.component";
+import { PageNotFoundComponent } from "./modules/home/components/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -10,29 +10,33 @@ const routes: Routes = [
   },
   {
     path: "contacts",
-    loadChildren: "./modules/contacts/contacts.module#ContactsModule"
-    // loadChildren: () =>
-    //   import("./modules/contacts/contacts.module").then(
-    //     mod => mod.ContactsModule
-    //   )
+    loadChildren: () =>
+      import("./modules/contacts/contacts.module").then(
+        mod => mod.ContactsModule
+      )
   },
   {
     path: "events",
-    loadChildren: "./modules/events/events.module#EventsModule"
-    // loadChildren: () =>
-    //   import("./modules/events/events.module").then(mod => mod.EventsModule)
+    loadChildren: () =>
+      import("./modules/events/events.module").then(mod => mod.EventsModule)
   },
   {
     path: "user",
-    loadChildren: "./modules/user/user.module#UserModule"
-  }
+    loadChildren: () =>
+      import("./modules/user/user.module").then(mod => mod.UserModule)
+  },
   // { path: "**", component: PageNotFoundComponent }
+  {
+    path: "",
+    loadChildren: () =>
+      import("./modules/home/home.module").then(mod => mod.HomeModule)
+  }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      routes /* { enableTracing: true } // <-- for debugging, */
+      routes /*, { enableTracing: true } // <-- for debugging, */
     )
   ],
   exports: [RouterModule]

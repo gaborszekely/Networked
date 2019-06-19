@@ -2,11 +2,11 @@
 .calendar-title__wrapper {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  width: 75vmin;
+  width: 90%;
 }
 
 .calendar__wrapper {
-  height: 50vmin;
+  height: 60vh;
   border: 1px solid #ccc;
 }
 
@@ -33,9 +33,54 @@
   background-color: #eee;
 }
 
-.calendar-day-number {
-  width: 100%;
+.calendar-day {
+  padding: 1em;
+}
+
+.calendar {
+  position: relative;
+}
+
+.calendar-day-title-number {
   // text-align: right;
+  // padding-left: 1em;
+  // padding-top: 1em;
+}
+
+.calendar-day-title__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-day-content__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.current-day {
+  font-weight: bold;
+  color: red;
+  // background-color: #eee;
+  // padding: 10px;
+  // clip-path: circle();
+}
+
+.calendar-day-number {
+  position: relative;
+}
+
+.calendar-event {
+  width: 100%;
+  background-color: #347ab8;
+  font-size: 0.9em;
+  padding: 0.5em;
   padding-left: 1em;
-  padding-top: 1em;
+  margin-top: 0.5em;
+  border-radius: 2px;
+  color: #fff;
 }

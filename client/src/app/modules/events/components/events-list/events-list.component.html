@@ -1,0 +1,4 @@
+<div *ngIf="events$ | async as events" class="events__wrapper">
+  <h1>My Events</h1>
+  <app-list-event *ngFor="let event of events" [event]="event"></app-list-event>
+</div>

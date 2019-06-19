@@ -18,7 +18,7 @@ import { JwtStrategy } from './passport/jwt.strategy';
       // secretOrPrivateKey: JWT_SECRET,
       secret: JWT_SECRET,
       signOptions: {
-        expiresIn: 3600,
+        expiresIn: '3 days',
       },
     }),
   ],
