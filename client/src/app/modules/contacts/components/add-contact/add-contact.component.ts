@@ -1,39 +1,39 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { ClrWizard } from "@clr/angular";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ClrWizard } from '@clr/angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ContactService } from "src/app/core/services/contact.service";
-import { ContactStoreService } from "src/app/core/services/contact-store.service";
+import { ContactService } from 'src/app/core/services/contact.service';
+import { ContactStoreService } from 'src/app/core/services/contact-store.service';
 
 @Component({
-  selector: "app-add-contact",
-  templateUrl: "./add-contact.component.html",
-  styleUrls: ["./add-contact.component.scss"]
+  selector: 'app-add-contact',
+  templateUrl: './add-contact.component.html',
+  styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit {
-  @ViewChild("wizardmd", { static: true }) wizardMedium: ClrWizard;
-  @ViewChild("wizardlg", { static: true }) wizardLarge: ClrWizard;
-  @ViewChild("wizardxl", { static: true }) wizardExtraLarge: ClrWizard;
+  @ViewChild('wizardmd', { static: true }) wizardMedium: ClrWizard;
+  @ViewChild('wizardlg', { static: true }) wizardLarge: ClrWizard;
+  @ViewChild('wizardxl', { static: true }) wizardExtraLarge: ClrWizard;
 
-  mdOpen: boolean = false;
-  lgOpen: boolean = true;
-  xlOpen: boolean = false;
+  mdOpen = false;
+  lgOpen = true;
+  xlOpen = false;
   showSuccess = false;
   showError = false;
 
   addContactForm = new FormGroup({
-    first_name: new FormControl("", Validators.required),
-    last_name: new FormControl("", Validators.required),
-    email: new FormControl(""),
-    phone: new FormControl(""),
-    job_title: new FormControl(""),
-    location: new FormControl("", Validators.required),
-    company: new FormControl("", Validators.required),
-    company_url: new FormControl(""),
-    linkedin: new FormControl(""),
-    github: new FormControl(""),
-    facebook: new FormControl(""),
-    labels: new FormControl("")
+    first_name: new FormControl('', Validators.required),
+    last_name: new FormControl('', Validators.required),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    job_title: new FormControl(''),
+    location: new FormControl('', Validators.required),
+    company: new FormControl('', Validators.required),
+    company_url: new FormControl(''),
+    linkedin: new FormControl(''),
+    github: new FormControl(''),
+    facebook: new FormControl(''),
+    labels: new FormControl('')
   });
 
   constructor(
@@ -52,7 +52,7 @@ export class AddContactComponent implements OnInit {
       ...this.addContactForm.value,
       labels: this.addContactForm.value.labels
         ? this.addContactForm.value.labels
-            .split(",")
+            .split(',')
             .map((i: string) => i.trim())
         : []
     };

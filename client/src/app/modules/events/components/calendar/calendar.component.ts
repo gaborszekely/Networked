@@ -1,11 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { isSameDate } from "src/helpers/calendarHelpers";
-import { CalendarService } from "../../services/calendar.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CalendarHelpers } from '../../helpers/calendar.helpers';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
-  selector: "app-calendar",
-  templateUrl: "./calendar.component.html",
-  styleUrls: ["./calendar.component.scss"],
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
@@ -13,13 +13,13 @@ export class CalendarComponent implements OnInit {
   currentMonth = new Date().getMonth();
   currentYear = new Date().getFullYear();
   calendarDays: string[] = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
   ];
 
   constructor(private calendarService: CalendarService) {}
@@ -37,15 +37,15 @@ export class CalendarComponent implements OnInit {
   getNonCurrentMonthClass(
     date: Date,
     month: number
-  ): { "non-current-month": boolean } {
+  ): { 'non-current-month': boolean } {
     return {
-      "non-current-month": date.getMonth() !== month
+      'non-current-month': date.getMonth() !== month
     };
   }
 
-  getCurrentDateClass(date: Date): { "current-day": boolean } {
+  getCurrentDateClass(date: Date): { 'current-day': boolean } {
     return {
-      "current-day": isSameDate(date, this.currentDateFormatted)
+      'current-day': CalendarHelpers.isSameDate(date, this.currentDateFormatted)
     };
   }
 }

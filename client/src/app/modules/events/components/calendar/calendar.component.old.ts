@@ -1,18 +1,14 @@
-import { Component, OnInit, Input, OnChanges } from "@angular/core";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
-import { CalendarDate } from "src/app/core/models/CalendarDate";
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { CalendarEvent } from 'src/app/core/models/CalendarEvent';
+import { CalendarDate } from 'src/app/core/models/CalendarDate';
 import {
-  isSameDate,
-  getMonthStart,
-  getDaysInMonth,
-  getDay,
-  calculateDate
-} from "src/helpers/calendarHelpers";
+  CalendarHelpers
+} from '../../helpers/calendar.helpers';
 
 @Component({
-  selector: "app-calendar-old",
-  templateUrl: "./calendar.component.old.html",
-  styleUrls: ["./calendar.component.scss"]
+  selector: 'app-calendar-old',
+  templateUrl: './calendar.component.old.html',
+  styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit, OnChanges {
   @Input() month: number;
@@ -23,13 +19,13 @@ export class CalendarComponent implements OnInit, OnChanges {
   currentYear = new Date().getFullYear();
   days: CalendarDate[];
   calendarDays: string[] = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
   ];
 
   constructor() {}
@@ -39,7 +35,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log("OLD");
+    console.log('OLD');
   }
 
   ngOnChanges() {
@@ -48,15 +44,15 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private generateCalendar(events: CalendarEvent[] = []) {
     const newDays: CalendarDate[] = [];
-    const monthStart = getMonthStart(this.year, this.month);
-    const monthEndDate = getDaysInMonth(this.year, this.month);
-    const monthEndDay = getDay(this.year, this.month, monthEndDate);
+    const monthStart = CalendarHelpers.getMonthStart(this.year, this.month);
+    const monthEndDate = CalendarHelpers.getDaysInMonth(this.year, this.month);
+    const monthEndDay = CalendarHelpers.getDay(this.year, this.month, monthEndDate);
 
     // Fill in days from previous month
     if (monthStart > 0) {
       for (let i = monthStart - 1; i >= 0; i--) {
         const prevMonthDate: CalendarDate = {
-          date: calculateDate("prev", this.year, this.month, i)
+          date: CalendarHelpers.calculateDate('prev', this.year, this.month, i)
         };
         newDays.push(prevMonthDate);
       }
@@ -65,7 +61,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     // Fill in current days
     for (let i = 1; i <= monthEndDate; i++) {
       const monthDate: CalendarDate = {
-        date: calculateDate("current", this.year, this.month, i)
+        date: CalendarHelpers.calculateDate('current', this.year, this.month, i)
       };
       newDays.push(monthDate);
     }
@@ -74,7 +70,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (monthEndDay < 6) {
       for (let i = 1; i <= 6 - monthEndDay; i++) {
         const nextMonthDate: CalendarDate = {
-          date: calculateDate("next", this.year, this.month, i)
+          date: CalendarHelpers.calculateDate('next', this.year, this.month, i)
         };
         newDays.push(nextMonthDate);
       }
@@ -82,7 +78,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     // Attach events to days objects
     events.forEach(event => {
-      const eventDate = newDays.find(day => isSameDate(day.date, event.date));
+      const eventDate = newDays.find(day => CalendarHelpers.isSameDate(day.date, event.date));
       if (eventDate) {
         eventDate.events = eventDate.events
           ? [...eventDate.events, event]
@@ -93,15 +89,15 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.days = newDays;
   }
 
-  getNonCurrentMonthClass(date: Date): { "non-current-month": boolean } {
+  getNonCurrentMonthClass(date: Date): { 'non-current-month': boolean } {
     return {
-      "non-current-month": date.getMonth() !== this.month
+      'non-current-month': date.getMonth() !== this.month
     };
   }
 
-  getCurrentDateClass(date: Date): { "current-day": boolean } {
+  getCurrentDateClass(date: Date): { 'current-day': boolean } {
     return {
-      "current-day": isSameDate(date, this.currentDateFormatted)
+      'current-day': CalendarHelpers.isSameDate(date, this.currentDateFormatted)
     };
   }
 }

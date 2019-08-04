@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/app.state";
-import * as ContactsActions from "../../../../actions/contacts.actions";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import * as ContactsActions from '../../../../actions/contacts.actions';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   confirmed = false;
   user$: Observable<any>;
-  loggedIn: boolean = false;
+  loggedIn = false;
 
   constructor(private router: Router, public store: Store<AppState>) {
     this.user$ = store.select(store => store.user);
@@ -32,6 +32,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.store.dispatch(new ContactsActions.ClearContacts());
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl('login');
   }
 }

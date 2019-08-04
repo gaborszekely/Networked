@@ -1,31 +1,31 @@
-import { Component, OnInit } from "@angular/core";
-import { UserNote } from "src/app/core/models/UserNote";
-import { ContactService } from "src/app/core/services/contact.service";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/app.state";
-import { Observable } from "rxjs";
-import { Contact } from "../../../../core/models/Contact";
+import { Component, OnInit } from '@angular/core';
+import { UserNote } from 'src/app/core/models/UserNote';
+import { ContactService } from 'src/app/core/services/contact.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { Observable } from 'rxjs';
+import { Contact } from '../../../../core/models/Contact';
 import {
   trigger,
   state,
   style,
   transition,
   animate
-} from "@angular/animations";
+} from '@angular/animations';
 
 @Component({
-  selector: "app-notes",
-  templateUrl: "./notes.component.html",
-  styleUrls: ["./notes.component.scss"],
+  selector: 'app-notes',
+  templateUrl: './notes.component.html',
+  styleUrls: ['./notes.component.scss'],
   animations: [
-    trigger("fadeInOut", [
+    trigger('fadeInOut', [
       state(
-        "void",
+        'void',
         style({
           opacity: 0
         })
       ),
-      transition("void <=> *", animate(200))
+      transition('void <=> *', animate(200))
     ])
   ]
 })
@@ -37,7 +37,7 @@ export class NotesComponent implements OnInit {
     private contactService: ContactService,
     private store: Store<AppState>
   ) {
-    this.contacts$ = store.select("contacts");
+    this.contacts$ = store.select('contacts');
   }
 
   ngOnInit() {

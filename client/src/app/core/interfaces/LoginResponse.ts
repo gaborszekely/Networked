@@ -1,4 +1,4 @@
-import { IJwtPayload } from "./JwtPayload";
+import { IJwtPayload } from './JwtPayload';
 
 export interface ILoginResponse {
   status: number;

@@ -1,6 +1,6 @@
-import { Action } from "@ngrx/store";
-import { Contact } from "../core/models/Contact";
-import * as ContactActions from "../actions/contacts.actions";
+import { Action } from '@ngrx/store';
+import { Contact } from '../core/models/Contact';
+import * as ContactActions from '../actions/contacts.actions';
 
 const initialState: Contact[] = [];
 

@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Contact } from "../models/Contact";
-import { CoreModule } from "../core.module";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Contact } from '../models/Contact';
+import { CoreModule } from '../core.module';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
   })
 };
 
@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: CoreModule
 })
 export class ContactService {
-  clientEndpoint: string = "http://localhost:3000";
+  clientEndpoint = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

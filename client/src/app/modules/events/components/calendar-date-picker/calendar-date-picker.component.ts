@@ -4,29 +4,29 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy
-} from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
-import { CalendarService } from "../../services/calendar.service";
-import { tap } from "rxjs/operators";
-import { Store } from "@ngrx/store";
-import { State, IEvent } from "../../store/events.reducer";
-import * as EventsActions from "../../store/events.actions";
+} from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
+import { CalendarEvent } from 'src/app/core/models/CalendarEvent';
+import { CalendarService } from '../../services/calendar.service';
+import { tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { State, IEvent } from '../../store/events.reducer';
+import * as EventsActions from '../../store/events.actions';
 
 @Component({
-  selector: "app-calendar-date-picker",
-  templateUrl: "./calendar-date-picker.component.html",
-  styleUrls: ["./calendar-date-picker.component.scss"],
+  selector: 'app-calendar-date-picker',
+  templateUrl: './calendar-date-picker.component.html',
+  styleUrls: ['./calendar-date-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarDatePickerComponent implements OnInit {
   showAddEvent = false;
   addEventModalOpen = false;
   addEventForm = this.fb.group({
-    title: ["", Validators.required],
+    title: ['', Validators.required],
     date: [new Date().toString(), Validators.required],
-    description: ["", Validators.required],
-    tags: ["", Validators.required]
+    description: ['', Validators.required],
+    tags: ['', Validators.required]
   });
 
   constructor(
@@ -36,21 +36,21 @@ export class CalendarDatePickerComponent implements OnInit {
   ) {}
 
   get title() {
-    return this.addEventForm.get("title").value;
+    return this.addEventForm.get('title').value;
   }
 
   get description() {
-    return this.addEventForm.get("description").value;
+    return this.addEventForm.get('description').value;
   }
 
   get date() {
-    return new Date(this.addEventForm.get("date").value);
+    return new Date(this.addEventForm.get('date').value);
   }
 
   get tags() {
     return this.addEventForm
-      .get("tags")
-      .value.split(",")
+      .get('tags')
+      .value.split(',')
       .map((tag: string) => tag.trim());
   }
 

@@ -1,18 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Contact } from "src/app/core/models/Contact";
-import { ContactService } from "src/app/core/services/contact.service";
+import { Contact } from 'src/app/core/models/Contact';
+import { ContactService } from 'src/app/core/services/contact.service';
 
 @Component({
-  selector: "app-connection",
-  templateUrl: "./connection.component.html",
-  styleUrls: ["./connection.component.scss"]
+  selector: 'app-connection',
+  templateUrl: './connection.component.html',
+  styleUrls: ['./connection.component.scss']
 })
 export class ConnectionComponent implements OnInit {
   @Input() contact: Contact;
   @Output() deleteContact: EventEmitter<Contact> = new EventEmitter();
 
-  imageUrl = "assets/avatar.jpg";
+  imageUrl = 'assets/avatar.jpg';
 
   constructor(private contactService: ContactService) {}
 

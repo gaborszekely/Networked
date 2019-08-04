@@ -1,33 +1,33 @@
-import { Component, OnInit, HostBinding } from "@angular/core";
+import { Component, OnInit, HostBinding } from '@angular/core';
 import {
   trigger,
   state,
   style,
   animate,
   transition
-} from "@angular/animations";
+} from '@angular/animations';
 
 // import { ContactServiceService } from "src/app/services/contact-service.service";
 // import { ContactStoreService } from "src/app/services/contact-store.service";
-import { Contact } from "../../../../core/models/Contact";
-import { Store } from "@ngrx/store";
-import { AppState } from "../../../../app.state";
-import { Observable } from "rxjs";
-import * as ContactsActions from "../../../../actions/contacts.actions";
+import { Contact } from '../../../../core/models/Contact';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../app.state';
+import { Observable } from 'rxjs';
+import * as ContactsActions from '../../../../actions/contacts.actions';
 
 @Component({
-  selector: "app-connections",
-  templateUrl: "./connections.component.html",
-  styleUrls: ["./connections.component.scss"],
+  selector: 'app-connections',
+  templateUrl: './connections.component.html',
+  styleUrls: ['./connections.component.scss'],
   animations: [
-    trigger("fadeInOut", [
+    trigger('fadeInOut', [
       state(
-        "void",
+        'void',
         style({
           opacity: 0
         })
       ),
-      transition("void <=> *", animate(200))
+      transition('void <=> *', animate(200))
     ])
   ]
 })
@@ -36,11 +36,11 @@ export class ConnectionsComponent implements OnInit {
   success = false;
   // contacts: any;
   contacts$: Observable<Contact[]>;
-  contacts: number = 0;
+  contacts = 0;
   length = 0;
 
   constructor(private store: Store<AppState>) {
-    this.contacts$ = store.select("contacts");
+    this.contacts$ = store.select('contacts');
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class ConnectionsComponent implements OnInit {
 
   toggleSuccess(message: string) {
     this.success = !this.success;
-    this.successMessage = this.success ? message : "";
+    this.successMessage = this.success ? message : '';
   }
 
   isEmpty() {
