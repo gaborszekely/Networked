@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { Action } from "@ngrx/store";
-import { Contact } from "../core/models/Contact";
-import { Note } from "../core/models/Note";
+import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
+import { Contact } from '../core/models/Contact';
+import { Note } from '../core/models/Note';
 
-export const ADD_CONTACT = "[CONTACTS] Add";
-export const DELETE_CONTACT = "[CONTACTS] Remove";
-export const LOAD_CONTACTS = "[CONTACTS] Load";
-export const SET_CONTACTS = "[CONTACTS] Set";
-export const CLEAR_CONTACTS = "[CONTACTS] Clear";
-export const UPDATE_CONTACT = "[CONTACTS] Update";
-export const ADD_NOTE = "[CONTACTS] Add Note";
-export const DELETE_NOTE = "[CONTACTS] Delete Note";
+export const ADD_CONTACT = '[CONTACTS] Add';
+export const DELETE_CONTACT = '[CONTACTS] Remove';
+export const LOAD_CONTACTS = '[CONTACTS] Load';
+export const SET_CONTACTS = '[CONTACTS] Set';
+export const CLEAR_CONTACTS = '[CONTACTS] Clear';
+export const UPDATE_CONTACT = '[CONTACTS] Update';
+export const ADD_NOTE = '[CONTACTS] Add Note';
+export const DELETE_NOTE = '[CONTACTS] Delete Note';
 
 export interface IAddNote {
   id: string;

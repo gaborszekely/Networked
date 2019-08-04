@@ -1,5 +1,5 @@
-import { Contact } from "./Contact";
-import { Note } from "./Note";
+import { Contact } from './Contact';
+import { Note } from './Note';
 
 export class UserNote {
   user: Contact;

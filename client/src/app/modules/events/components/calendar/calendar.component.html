@@ -1,4 +1,4 @@
-<ng-container *ngIf="days$ | async as calendar">
+<ng-container *ngIf="calendar$ | async as calendar">
   <div class="calendar-title__wrapper">
     <div *ngFor="let day of calendarDays" class="calendar-title">
       {{ day }}

@@ -1,23 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { ContactStoreService } from "src/app/core/services/contact-store.service";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ContactStoreService } from 'src/app/core/services/contact-store.service';
+import { ActivatedRoute } from '@angular/router';
 
-import { Contact } from "src/app/core/models/Contact";
-import { ContactService } from "src/app/core/services/contact.service";
-import { Store } from "@ngrx/store";
-import { AppState } from "../../../../app.state";
-import { Observable } from "rxjs";
-import { Note } from "src/app/core/models/Note";
-import * as ContactsActions from "../../../../actions/contacts.actions";
+import { Contact } from 'src/app/core/models/Contact';
+import { ContactService } from 'src/app/core/services/contact.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../app.state';
+import { Observable } from 'rxjs';
+import { Note } from 'src/app/core/models/Note';
+import * as ContactsActions from '../../../../actions/contacts.actions';
 
 @Component({
-  selector: "app-contact",
-  templateUrl: "./contact.component.html",
-  styleUrls: ["./contact.component.scss"]
+  selector: 'app-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
   contact: Contact;
-  imageUrl = "assets/avatar.jpg";
+  imageUrl = 'assets/avatar.jpg';
   editFirst = false;
   noteModal = false;
   noteContent: string;
@@ -29,7 +29,7 @@ export class ContactComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.contacts$ = store.select("contacts");
+    this.contacts$ = store.select('contacts');
   }
 
   ngOnInit() {
@@ -47,21 +47,21 @@ export class ContactComponent implements OnInit {
               }
             },
             err => {
-              console.error("Could not fetch Github image");
+              console.error('Could not fetch Github image');
             }
           );
         }
       },
       err => {
-        console.error("Could not fetch contacts from app state");
+        console.error('Could not fetch contacts from app state');
       }
     );
   }
 
   toggleField(field: string) {
-    console.log("Editing " + field);
+    console.log('Editing ' + field);
     switch (field) {
-      case "first_name":
+      case 'first_name':
         this.editFirst = !this.editFirst;
       default:
         return;
@@ -85,7 +85,7 @@ export class ContactComponent implements OnInit {
         // this.contactStore.updateContact(newContact);
         this.store.dispatch(new ContactsActions.UpdateContact(newContact));
         this.noteModal = false;
-        this.noteContent = "";
+        this.noteContent = '';
       });
   }
 

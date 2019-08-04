@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { CalendarService } from "../../services/calendar.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
-  selector: "app-calendar-wrapper",
-  templateUrl: "./calendar-wrapper.component.html",
-  styleUrls: ["./calendar-wrapper.component.scss"],
+  selector: 'app-calendar-wrapper',
+  templateUrl: './calendar-wrapper.component.html',
+  styleUrls: ['./calendar-wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarWrapperComponent {

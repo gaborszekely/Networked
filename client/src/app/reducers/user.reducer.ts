@@ -1,7 +1,7 @@
-import { Action } from "@ngrx/store";
-import * as UserActions from "../actions/user.actions";
-import { User } from "../core/models/User";
-import { Contact } from "../core/models/Contact";
+import { Action } from '@ngrx/store';
+import * as UserActions from '../actions/user.actions';
+import { User } from '../core/models/User';
+import { Contact } from '../core/models/Contact';
 
 const { SET_USER, SET_USER_LOGIN, SET_USER_INFO } = UserActions;
 

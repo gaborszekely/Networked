@@ -1,6 +1,7 @@
-import { CalendarEvent } from "./CalendarEvent";
+import { CalendarEvent } from './CalendarEvent';
 
 export class CalendarDate {
-  date: Date;
-  events?: CalendarEvent[];
+  events: CalendarEvent[] = [];
+
+  constructor(public date: Date) {}
 }

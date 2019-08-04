@@ -1,7 +1,7 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
-import { compareDate } from "src/helpers/datehelpers";
-import * as EventActions from "./events.actions";
+import { Action, createReducer, on } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { compareDate } from 'src/helpers/datehelpers';
+import * as EventActions from './events.actions';
 
 export interface IEvent {
   _id?: string;
@@ -21,7 +21,7 @@ export interface State extends EntityState<IEvent> {
 export const selectEventId = (event: IEvent): string => event._id;
 
 export const sortByDate = (a: IEvent, b: IEvent): number => {
-  return compareDate(new Date(a.date), new Date(b.date), "asc");
+  return compareDate(new Date(a.date), new Date(b.date), 'asc');
 };
 
 export const adapter: EntityAdapter<IEvent> = createEntityAdapter<IEvent>({

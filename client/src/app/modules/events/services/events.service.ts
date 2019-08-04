@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { IEvent } from "../store/events.reducer";
-import { first, take } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IEvent } from '../store/events.reducer';
+import { first, take } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
   })
 };
 
 @Injectable()
 export class EventsService {
-  baseUrl = "http://localhost:3000/events";
+  baseUrl = 'http://localhost:3000/events';
   constructor(private http: HttpClient) {}
 
   loadEvents(): Observable<IEvent[]> {

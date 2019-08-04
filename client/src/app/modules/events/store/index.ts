@@ -3,21 +3,21 @@ import {
   createFeatureSelector,
   ActionReducerMap,
   combineReducers
-} from "@ngrx/store";
-import * as fromEvents from "./events.reducer";
+} from '@ngrx/store';
+import * as fromEvents from './events.reducer';
 
-export interface State {
+export interface EventsState {
   events: fromEvents.State;
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<EventsState> = {
   events: fromEvents.reducer
 };
 
 export const eventsReducers = combineReducers(reducers);
 
 export const selectEventsState = createFeatureSelector<fromEvents.State>(
-  "events"
+  'events'
 );
 
 export const selectEventIds = createSelector(

@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from "../models/User";
-import { Observable } from "rxjs";
-import { CoreModule } from "../core.module";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../models/User';
+import { Observable } from 'rxjs';
+import { CoreModule } from '../core.module';
 
 @Injectable({
   providedIn: CoreModule
 })
 export class UserService {
-  baseUrl: string = "http://localhost:3000";
+  baseUrl = 'http://localhost:3000';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class UserService {
   }
 
   getFromStorage() {
-    const access_token = localStorage.getItem("access_token");
+    const access_token = localStorage.getItem('access_token');
     return { loggedIn: !!access_token, access_token };
   }
 }

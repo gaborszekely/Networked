@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import * as d3 from "d3";
-import { CoreModule } from "../core.module";
+import { Injectable } from '@angular/core';
+import * as d3 from 'd3';
+import { CoreModule } from '../core.module';
 
 @Injectable({
   providedIn: CoreModule

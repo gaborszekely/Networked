@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { IEvent, State } from "../../store/events.reducer";
-import { Store } from "@ngrx/store";
-import * as EventsActions from "../../store/events.actions";
+import { Component, OnInit, Input } from '@angular/core';
+import { IEvent, State } from '../../store/events.reducer';
+import { Store } from '@ngrx/store';
+import * as EventsActions from '../../store/events.actions';
 
 @Component({
-  selector: "app-list-event",
-  templateUrl: "./list-event.component.html",
-  styleUrls: ["./list-event.component.scss"]
+  selector: 'app-list-event',
+  templateUrl: './list-event.component.html',
+  styleUrls: ['./list-event.component.scss']
 })
 export class ListEventComponent implements OnInit {
   @Input() event: IEvent;

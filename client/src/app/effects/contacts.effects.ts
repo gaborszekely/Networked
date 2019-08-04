@@ -1,19 +1,18 @@
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { EMPTY } from "rxjs";
-import { map, mergeMap, catchError } from "rxjs/operators";
-import { ContactService } from "../core/services/contact.service";
-import { LOAD_CONTACTS } from "../actions/contacts.actions";
-import * as ContactsActions from "../actions/contacts.actions";
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { EMPTY } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
+import { ContactService } from '../core/services/contact.service';
+import { LOAD_CONTACTS, SetContacts } from '../actions/contacts.actions';
 
 @Injectable()
 export class ContactsEffects {
   @Effect()
   loadContacts$ = this.actions$.pipe(
     ofType(LOAD_CONTACTS),
-    mergeMap(() =>
+    switchMap(() =>
       this.contactService.getContacts().pipe(
-        map(contacts => new ContactsActions.SetContacts(contacts)),
+        map(contacts => new SetContacts(contacts)),
         catchError(() => EMPTY)
       )
     )
@@ -24,14 +23,3 @@ export class ContactsEffects {
     private contactService: ContactService
   ) {}
 }
-
-/*
-switchMap(() => {
-  return this.http.get<string>('login')
-    .pipe(
-      map((userName) => {
-        return new authActions.SetAuths(userName);
-      })
-    )
-})
-*/

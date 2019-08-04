@@ -1,7 +1,7 @@
-import { EventEmitter } from "@angular/core";
-import { Link } from "./link";
-import { Node } from "./node";
-import * as d3 from "d3";
+import { EventEmitter } from '@angular/core';
+import { Link } from './link';
+import { Node } from './node';
+import * as d3 from 'd3';
 
 const FORCES = {
   LINKS: 1 / 50,
@@ -25,7 +25,7 @@ export class ForceDirectedGraph {
 
   initNodes() {
     if (!this.simulation) {
-      throw new Error("simulation was not initialized yet");
+      throw new Error('simulation was not initialized yet');
     }
 
     this.simulation.nodes(this.nodes);
@@ -33,19 +33,19 @@ export class ForceDirectedGraph {
 
   initLinks() {
     if (!this.simulation) {
-      throw new Error("simulation was not initialized yet");
+      throw new Error('simulation was not initialized yet');
     }
 
     // Initializing the links force simulation
     this.simulation.force(
-      "links",
+      'links',
       d3.forceLink(this.links).strength(FORCES.LINKS)
     );
   }
 
   initSimulation(options) {
     if (!options || !options.width || !options.height) {
-      throw new Error("missing options when initializing simulation");
+      throw new Error('missing options when initializing simulation');
     }
 
     /** Creating the simulation */
@@ -55,10 +55,10 @@ export class ForceDirectedGraph {
       // Creating the force simulation and defining the charges
       this.simulation = d3
         .forceSimulation()
-        .force("charge", d3.forceManyBody().strength(FORCES.CHARGE));
+        .force('charge', d3.forceManyBody().strength(FORCES.CHARGE));
 
       // Connecting the d3 ticker to an angular event emitter
-      this.simulation.on("tick", function() {
+      this.simulation.on('tick', function() {
         ticker.emit(this);
       });
 
@@ -68,7 +68,7 @@ export class ForceDirectedGraph {
 
     /** Updating the central force of the simulation */
     this.simulation.force(
-      "centers",
+      'centers',
       d3.forceCenter(options.width / 2, options.height / 2)
     );
 
