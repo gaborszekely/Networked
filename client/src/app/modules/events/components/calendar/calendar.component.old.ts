@@ -51,27 +51,27 @@ export class CalendarComponent implements OnInit, OnChanges {
     // Fill in days from previous month
     if (monthStart > 0) {
       for (let i = monthStart - 1; i >= 0; i--) {
-        const prevMonthDate: CalendarDate = {
-          date: CalendarHelpers.calculateDate('prev', this.year, this.month, i)
-        };
+        const prevMonthDate = new CalendarDate(
+          CalendarHelpers.calculateDate('prev', this.year, this.month, i)
+        );
         newDays.push(prevMonthDate);
       }
     }
 
     // Fill in current days
     for (let i = 1; i <= monthEndDate; i++) {
-      const monthDate: CalendarDate = {
-        date: CalendarHelpers.calculateDate('current', this.year, this.month, i)
-      };
+      const monthDate = new CalendarDate(
+        CalendarHelpers.calculateDate('current', this.year, this.month, i)
+      );
       newDays.push(monthDate);
     }
 
     // Fill in next month's days
     if (monthEndDay < 6) {
       for (let i = 1; i <= 6 - monthEndDay; i++) {
-        const nextMonthDate: CalendarDate = {
-          date: CalendarHelpers.calculateDate('next', this.year, this.month, i)
-        };
+        const nextMonthDate = new CalendarDate(
+          CalendarHelpers.calculateDate('next', this.year, this.month, i)
+        );
         newDays.push(nextMonthDate);
       }
     }
@@ -80,9 +80,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     events.forEach(event => {
       const eventDate = newDays.find(day => CalendarHelpers.isSameDate(day.date, event.date));
       if (eventDate) {
-        eventDate.events = eventDate.events
-          ? [...eventDate.events, event]
-          : [event];
+        eventDate.events.push(event);
       }
     });
 

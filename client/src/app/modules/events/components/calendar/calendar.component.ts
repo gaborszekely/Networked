@@ -12,20 +12,15 @@ export class CalendarComponent implements OnInit {
   currentDate = new Date().getDate();
   currentMonth = new Date().getMonth();
   currentYear = new Date().getFullYear();
-  calendarDays: string[] = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-  ];
 
   constructor(private calendarService: CalendarService) {}
 
-  get days$() {
+  get calendar$() {
     return this.calendarService.calendar$;
+  }
+
+  get calendarDays() {
+    return this.calendarService.calendarDays;
   }
 
   get currentDateFormatted() {
