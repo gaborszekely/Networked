@@ -36,8 +36,8 @@
           [(ngModel)]="form.rememberMe"
         />
       </clr-checkbox-wrapper>
-      <div *ngIf="success == false" class="error active">
-        {{ error }}
+      <div *ngIf="loginError$ | async" class="error active">
+        Could not login user. Please try again!
       </div>
       <div *ngIf="success == true" class="success active">
         Successfully logged in!

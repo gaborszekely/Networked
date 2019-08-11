@@ -48,6 +48,7 @@
       </label>
     </form>
     <div class="header-actions">
+      <span *ngIf="loggedIn$ | async">Welcome, {{ (user$ | async).email }}</span>
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger>
           <clr-icon shape="info-circle"></clr-icon>

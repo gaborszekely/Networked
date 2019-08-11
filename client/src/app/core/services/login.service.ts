@@ -7,6 +7,7 @@ import { CoreModule } from '../core.module';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import * as UserActions from '../../actions/user.actions';
+import { tap, map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,14 +25,18 @@ export class LoginService {
     private readonly store: Store<AppState>
   ) {}
 
-  loginUser(email: string, password: string): Promise<ILoginResponse> {
+  loginUser(email: string, password: string): Observable<ILoginResponse> {
     return this.http
       .post<ILoginResponse>(
         `${this.baseUrl}/user/login`,
         { email, password },
         httpOptions
-      )
-      .toPromise();
+      ).pipe(map(res => {
+        if(res.status >= 400) {
+          throw new Error();
+        }
+        return res;
+      }));
   }
 
   logoutUser() {

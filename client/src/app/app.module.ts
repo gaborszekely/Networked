@@ -22,9 +22,11 @@ import { reducers } from './app.state';
 import { ContactsEffects } from './effects/contacts.effects';
 import { UserEffects } from './effects/user.effects';
 
+
 /* OTHER */
 import { AuthInterceptor } from './core/interceptors/CustomHttpInterceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { userEffects } from './core/store/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +34,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreModule.forRoot(reducers),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    EffectsModule.forRoot([ContactsEffects /*UserEffects*/]),
+    EffectsModule.forRoot([ContactsEffects, ...userEffects]),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

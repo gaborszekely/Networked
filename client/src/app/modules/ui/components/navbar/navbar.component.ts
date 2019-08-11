@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import * as ContactsActions from '../../../../actions/contacts.actions';
 import { Observable } from 'rxjs';
+import { isLoggedInSelector, userSelector } from 'src/app/core/store/selectors';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +12,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  confirmed = false;
   user$: Observable<any>;
-  loggedIn = false;
+  loggedIn$: Observable<boolean>;
+  confirmed = false;
 
-  constructor(private router: Router, public store: Store<AppState>) {
-    this.user$ = store.select(store => store.user);
+  constructor(private router: Router, private store: Store<AppState>) {
+    this.loggedIn$ = store.select(isLoggedInSelector);
+    this.user$ = store.select(userSelector);
   }
 
-  ngOnInit() {
-    this.user$.subscribe(user => {
-      this.loggedIn = user.loggedIn;
-    });
-  }
+  ngOnInit() {}
 
   confirm() {
     this.confirmed = true;
