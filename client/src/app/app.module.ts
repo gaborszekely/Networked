@@ -5,34 +5,34 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ClarityModule } from "@clr/angular";
-import { StoreModule } from "@ngrx/store";
+// import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { EffectsModule } from "@ngrx/effects";
+// import { EffectsModule } from "@ngrx/effects";
 import { environment } from "../environments/environment";
 import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { UiModule } from "./modules/ui/ui.module";
-import { HomeModule } from "./modules/home/home.module";
+import { UiModule } from "./ui/ui.module";
+import { HomeModule } from "./home/home.module";
 
 /* COMPONENTS */
 import { AppComponent } from "./app.component";
 
 /* NGRX */
-import { reducers } from "./app.state";
-import { ContactsEffects } from "./effects/contacts.effects";
-import { UserEffects } from "./effects/user.effects";
+// import { reducers } from "./core/store/app.state";
+// import { ContactsEffects } from "./core/store/effects/contacts.effects";
+// import { UserEffects } from "./core/store/effects/user.effects";
 
 /* OTHER */
-import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
+// import { AuthInterceptor } from "./core/interceptors/CustomHttpInterceptor";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    StoreModule.forRoot(reducers),
+    // StoreModule.forRoot(reducers),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
-    EffectsModule.forRoot([ContactsEffects /*UserEffects*/]),
+    // EffectsModule.forRoot([ContactsEffects /*UserEffects*/]),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -43,9 +43,9 @@ import { StoreRouterConnectingModule } from "@ngrx/router-store";
     CoreModule,
     UiModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
+  // providers: [
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
