@@ -56,10 +56,15 @@
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a routerLink="/about" clrDropdownItem>About</a>
           <a routerLink="/preferences" clrDropdownItem>Preferences</a>
-          <a *ngIf="!loggedIn" routerLink="/user/login" clrDropdownItem
+          <a
+            *ngIf="(loggedIn$ | async) === false"
+            routerLink="/user/login"
+            clrDropdownItem
             >Sign In</a
           >
-          <a *ngIf="loggedIn" (click)="logout()" clrDropdownItem>Sign Out</a>
+          <a *ngIf="loggedIn$ | async" (click)="logout()" clrDropdownItem
+            >Sign Out</a
+          >
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

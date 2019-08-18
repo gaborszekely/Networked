@@ -29,14 +29,12 @@ export class LoginService {
     private readonly store: Store<AppState>
   ) {}
 
-  loginUser(email: string, password: string): Promise<ILoginResponse> {
-    return this.http
-      .post<ILoginResponse>(
-        `${this.baseUrl}/user/login`,
-        { email, password },
-        httpOptions
-      )
-      .toPromise();
+  loginUser(email: string, password: string): Observable<ILoginResponse> {
+    return this.http.post<ILoginResponse>(
+      `${this.baseUrl}/user/login`,
+      { email, password },
+      httpOptions
+    );
   }
 
   logoutUser() {
@@ -63,16 +61,16 @@ export class LoginService {
     return moment(expiresAt);
   }
 
-  isLoggedIn(): boolean {
+  loginTokenNotExpired(): boolean {
     return moment().isBefore(this.getExpiration());
   }
 
   isLoggedOut(): boolean {
-    return !this.isLoggedIn();
+    return !this.loginTokenNotExpired();
   }
 
   onPageReload(): void {
-    if (this.isLoggedIn()) {
+    if (this.loginTokenNotExpired()) {
       this.store.dispatch(new UserActions.LoginSet(true));
     }
   }

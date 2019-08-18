@@ -1,8 +1,12 @@
 <div class="login-wrapper">
-  <div *ngIf="submitted">
-    <h3>Welcome, Gabor!</h3>
-  </div>
   <form *ngIf="!submitted" class="login" (ngSubmit)="login()">
+    <clr-alert *ngIf="isRedirect$ | async" [clrAlertType]="'warning'">
+      <clr-alert-item>
+        <span class="alert-text">
+          Please log in to access requested page.
+        </span>
+      </clr-alert-item>
+    </clr-alert>
     <section class="title">
       <h1 class="welcome">Login Page</h1>
       <h5 class="hint">Use your account to sign in or create one now</h5>

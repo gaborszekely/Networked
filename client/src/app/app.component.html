@@ -1,1 +1,4 @@
+<div *ngIf="(routerLoadState$ | async) === pageLoadEnum.LOADING">
+  <h1>LOADING...</h1>
+</div>
 <app-layout></app-layout>

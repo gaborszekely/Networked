@@ -31,11 +31,11 @@ export class AuthRouteGuard implements CanActivate {
   ): Observable<boolean | UrlTree> {
     return this.isLoggedIn$.pipe(
       map(loggedIn => {
-        if (loggedIn && this.loginService.isLoggedIn()) {
+        if (loggedIn && this.loginService.loginTokenNotExpired()) {
           return true;
         }
 
-        return this.router.createUrlTree(["/login"]);
+        return this.router.parseUrl("/login?redirect=true");
       })
     );
   }
