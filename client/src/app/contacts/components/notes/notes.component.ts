@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { UserNote } from "src/app/core/models/UserNote";
-import { ContactService } from "src/app/core/services/contact.service";
+import { UserNote } from "@core/models/UserNote";
+import { ContactService } from "@core/services/contact.service";
 import { Store } from "@ngrx/store";
-import { AppState } from "src/app/core/store/app.state";
+import { AppState } from "@core/store/app.state";
 import { Observable } from "rxjs";
-import { Contact } from "../../../core/models/Contact";
+import { Contact } from "@core/models/Contact";
 import {
   trigger,
   state,

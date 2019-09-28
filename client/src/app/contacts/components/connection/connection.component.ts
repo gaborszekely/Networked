@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
-import { Contact } from "src/app/core/models/Contact";
-import { ContactService } from "src/app/core/services/contact.service";
+import { Contact } from "@core/models/Contact";
+import { ContactService } from "@core/services/contact.service";
 
 @Component({
   selector: "app-connection",

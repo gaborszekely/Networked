@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { LoginService } from "src/app/core/services/login.service";
-import { ILoginResponse } from "src/app/core/interfaces/LoginResponse";
+import { LoginService } from "@core/services/login.service";
+import { ILoginResponse } from "@core/interfaces/LoginResponse";
 import { Store } from "@ngrx/store";
-import { AppState } from "src/app/core/store/app.state";
-import * as UserActions from "src/app/core/store/actions/user.actions";
+import { AppState } from "@core/store/app.state";
+import * as UserActions from "@core/store/actions/user.actions";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";

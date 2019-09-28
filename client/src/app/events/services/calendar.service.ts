@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
 import { EventsModule } from "../events.module";
-import { CalendarDate } from "src/app/core/models/CalendarDate";
+import { CalendarDate } from "@core/models/CalendarDate";
 import {
   getMonthStart,
   getDaysInMonth,
   getDay,
   calculateDate,
   isSameDate
-} from "src/helpers/calendarHelpers";
+} from "@helpers/calendarHelpers";
 import { Subject, Observable, BehaviorSubject, combineLatest, of } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
+import { CalendarEvent } from "@core/models/CalendarEvent";
 import * as EventsActions from "../store/actions/events.actions";
 import * as fromEvents from "../store/reducers/events.reducer";
 import { Store } from "@ngrx/store";

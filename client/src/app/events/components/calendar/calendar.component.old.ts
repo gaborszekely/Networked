@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
-import { CalendarDate } from "src/app/core/models/CalendarDate";
+import { CalendarEvent } from "@core/models/CalendarEvent";
+import { CalendarDate } from "@core/models/CalendarDate";
 import {
   isSameDate,
   getMonthStart,
   getDaysInMonth,
   getDay,
   calculateDate
-} from "src/helpers/calendarHelpers";
+} from "@helpers/calendarHelpers";
 
 @Component({
   selector: "app-calendar-old",

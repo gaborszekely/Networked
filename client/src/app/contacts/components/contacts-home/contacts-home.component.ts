@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { fadeAnimation } from "src/app/core/animations/fade-animation";
+import { fadeAnimation } from "@core/animations/fade-animation";
 
 @Component({
   selector: "app-contacts-home",

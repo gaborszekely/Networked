@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ClrWizard } from "@clr/angular";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
-import { ContactService } from "src/app/core/services/contact.service";
-import { ContactStoreService } from "src/app/core/services/contact-store.service";
+import { ContactService } from "@core/services/contact.service";
+import { ContactStoreService } from "@core/services/contact-store.service";
 
 @Component({
   selector: "app-add-contact",

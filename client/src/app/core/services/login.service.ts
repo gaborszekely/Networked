@@ -5,7 +5,7 @@ import { ILoginResponse } from "../interfaces/LoginResponse";
 import * as moment from "moment";
 import { CoreModule } from "../core.module";
 import { Store } from "@ngrx/store";
-import { AppState } from "src/app/core/store/app.state";
+import { AppState } from "@core/store/app.state";
 import * as UserActions from "../store/actions/user.actions";
 
 enum LocalStorageKeys {

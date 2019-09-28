@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AuthInterceptor } from "src/app/core/interceptors/CustomHttpInterceptor";
+import { AuthInterceptor } from "@core/interceptors/CustomHttpInterceptor";
 
 import { ContactsRoutingModule } from "./contacts-routing.module";
 

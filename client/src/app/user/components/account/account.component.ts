@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "../../../core/models/User";
+import { User } from "@core/models/User";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../core/store/app.state";
-import { Contact } from "src/app/core/models/Contact";
-import { ContactService } from "src/app/core/services/contact.service";
-import * as UserActions from "../../../core/store/actions/user.actions";
-import { UserService } from "src/app/core/services/user.service";
+import { Contact } from "@core/models/Contact";
+import { ContactService } from "@core/services/contact.service";
+import * as UserActions from "@core/store/actions/user.actions";
+import { UserService } from "@core/services/user.service";
 import { getUser } from "@core/store/selectors/user.selectors";
 
 @Component({

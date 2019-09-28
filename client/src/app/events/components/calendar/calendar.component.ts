@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { isSameDate } from "src/helpers/calendarHelpers";
+import { isSameDate } from "@helpers/calendarHelpers";
 import { CalendarService } from "../../services/calendar.service";
 
 @Component({

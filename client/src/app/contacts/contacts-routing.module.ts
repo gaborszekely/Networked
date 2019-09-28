@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ConnectionsComponent } from "src/app/contacts/components/connections/connections.component";
+import { ConnectionsComponent } from "@app/contacts/components/connections/connections.component";
 import { NotesComponent } from "./components/notes/notes.component";
 import { ContactComponent } from "./components/contact/contact.component";
 import { AddContactComponent } from "./components/add-contact/add-contact.component";

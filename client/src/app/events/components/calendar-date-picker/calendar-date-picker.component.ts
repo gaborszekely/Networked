@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { Validators, FormBuilder } from "@angular/forms";
-import { CalendarEvent } from "src/app/core/models/CalendarEvent";
+import { CalendarEvent } from "@core/models/CalendarEvent";
 import { CalendarService } from "../../services/calendar.service";
 import { tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";

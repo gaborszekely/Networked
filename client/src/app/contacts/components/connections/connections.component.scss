@@ -1,8 +1,10 @@
+@import "globals";
+
 .connections-wrapper {
-  width: 70%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 40px;
+  margin-right: 50px;
 }
 
 .empty-contact-list {
@@ -11,4 +13,16 @@
   border: 1px solid #fdedba;
   padding: 3px;
   width: 50vw;
+}
+
+@media (max-width: $breakpoint-desktop) {
+  .connections-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .connections-wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

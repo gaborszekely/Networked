@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { ContactStoreService } from "src/app/core/services/contact-store.service";
+import { ContactStoreService } from "@core/services/contact-store.service";
 import { ActivatedRoute } from "@angular/router";
 
-import { Contact } from "src/app/core/models/Contact";
-import { ContactService } from "src/app/core/services/contact.service";
+import { Contact } from "@core/models/Contact";
+import { ContactService } from "@core/services/contact.service";
 import { Store } from "@ngrx/store";
-import { AppState } from "../../../core/store/app.state";
+import { AppState } from "@core/store/app.state";
 import { Observable } from "rxjs";
-import { Note } from "src/app/core/models/Note";
-import * as ContactsActions from "../../../core/store/actions/contacts.actions";
+import { Note } from "@core/models/Note";
+import * as ContactsActions from "@core/store/actions/contacts.actions";
 
 @Component({
   selector: "app-contact",
