@@ -1,0 +1,30 @@
+<div (click)="goToProfile()" class="card connection-wrapper">
+  <div class="card-img" class="user-image-wrapper">
+    <img src="{{ contact.imageUrl || defaultImageUrl }}" class="user-image" />
+  </div>
+  <div class="card-block">
+    <div class="card-title">
+      {{ contact.first_name }} {{ contact.last_name }}
+    </div>
+    <div class="card-text">
+      <div>{{ contact.job_title }}</div>
+      <span class="label label-light-blue">{{ contact.company }}</span>
+    </div>
+  </div>
+  <!-- <div class="card-footer">
+    <a
+      [routerLink]="['/contacts/list', contact._id]"
+      routerLinkActive="active"
+      class="btn btn-sm btn-primary"
+      >See More</a
+    >
+
+    <a
+      class="btn btn-sm btn-link"
+      style="color: red"
+      (click)="onDelete(contact)"
+    >
+      Delete
+    </a>
+  </div> -->
+</div>

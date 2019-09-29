@@ -1,0 +1,35 @@
+@import "globals";
+
+.connections-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 40px;
+  margin-right: 50px;
+  width: 75%;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+}
+
+.empty-contact-list {
+  margin-top: 60px;
+  background-color: #fef3cd;
+  border: 1px solid #fdedba;
+  padding: 3px;
+  width: 50vw;
+}
+
+.contacts-spinner {
+  margin-top: 30px;
+}
+
+.my-contacts {
+  margin-top: 0;
+}

@@ -19,3 +19,19 @@
 //   flex-grow:
 //   height: 100%;
 // }
+
+.progress-bar {
+  max-height: 2px;
+  overflow: hidden;
+  background-color: #002538;
+
+  clr-progress-bar ::ng-deep {
+    progress {
+      background-color: #002538;
+    }
+
+    progress::-webkit-progress-bar {
+      background-color: #002538;
+    }
+  }
+}
