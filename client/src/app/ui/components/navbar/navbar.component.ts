@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
-import * as ContactsActions from "@core/store/actions/contacts.actions";
+import * as ContactsActions from "@app/contacts/store/actions/contacts.actions";
 import * as UserActions from "@core/store/actions/user.actions";
 import { Observable } from "rxjs";
 import { getUser, getLoggedInStatus } from "@core/store/selectors";

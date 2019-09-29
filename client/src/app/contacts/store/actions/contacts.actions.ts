@@ -4,10 +4,13 @@ import { Contact } from "@core/models/Contact";
 import { Note } from "@core/models/Note";
 
 export enum ContactsActionsEnum {
-  ADD_CONTACT = "[Contacts] Add New Contact",
+  ADD_CONTACT_REQUESTED = "[Contacts] Add Contact Requested",
+  CONTACT_ADDED = "[Contacts] Add New Contact",
+  CONTACT_ADDED_ERROR = "[Contacts] Error Adding New Contact",
   DELETE_CONTACT = "[Contacts] Delete Contact",
   CONTACTS_REQUESTED = "[Contacts] Contacts Requested",
-  SET_CONTACTS = "[Contacts] Set Contacts",
+  CONTACTS_LOADED = "[Contacts] Set Contacts",
+  CONTACTS_LOAD_ERROR = "[Contacts] Contacts Load Error",
   CLEAR_CONTACTS = "[Contacts] Clear Contacts List",
   UPDATE_CONTACT = "[Contacts] Update Contact",
   ADD_NOTE = "[Contacts] Add Note For a Contact",
@@ -24,9 +27,18 @@ export interface IDeleteNote {
   noteId: string;
 }
 
-export class AddContact implements Action {
-  readonly type = ContactsActionsEnum.ADD_CONTACT;
+export class AddContactRequested implements Action {
+  readonly type = ContactsActionsEnum.ADD_CONTACT_REQUESTED;
+  constructor(public contact: Contact) {}
+}
+
+export class ContactAdded implements Action {
+  readonly type = ContactsActionsEnum.CONTACT_ADDED;
   constructor(public payload: Contact) {}
+}
+
+export class ContactAddedError implements Action {
+  readonly type = ContactsActionsEnum.CONTACT_ADDED_ERROR;
 }
 
 export class AddNote implements Action {
@@ -57,16 +69,23 @@ export class ContactsRequested implements Action {
   readonly type = ContactsActionsEnum.CONTACTS_REQUESTED;
 }
 
-export class SetContacts implements Action {
-  readonly type = ContactsActionsEnum.SET_CONTACTS;
+export class ContactsLoaded implements Action {
+  readonly type = ContactsActionsEnum.CONTACTS_LOADED;
   constructor(public payload: Contact[]) {}
 }
 
-export type Actions =
-  | AddContact
+export class ContactsLoadError implements Action {
+  readonly type = ContactsActionsEnum.CONTACTS_LOAD_ERROR;
+}
+
+export type ContactsActions =
+  | AddContactRequested
+  | ContactAdded
+  | ContactAddedError
   | DeleteContact
   | ContactsRequested
-  | SetContacts
+  | ContactsLoaded
+  | ContactsLoadError
   | ClearContacts
   | UpdateContact
   | AddNote

@@ -39,7 +39,7 @@ import { ContactsEffects } from "./store/effects";
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature("contacts", contactsReducer),
-    EffectsModule.forFeature([ContactsEffects]),
+    EffectsModule.forFeature(ContactsEffects),
     ContactsRoutingModule
   ]
   // providers: [

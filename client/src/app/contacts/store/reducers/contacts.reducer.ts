@@ -1,25 +1,70 @@
-import * as ContactActions from "../actions/contacts.actions";
 import { ContactsState } from "../contacts.state";
-import { Contact } from "@core/models/Contact";
-import { ContactsActionsEnum } from "../actions/contacts.actions";
+import {
+  ContactsActions,
+  ContactsActionsEnum
+} from "../actions/contacts.actions";
 
 export function contactsReducer(
   state = new ContactsState(),
-  action: ContactActions.Actions
+  action: ContactsActions
 ): ContactsState {
   switch (action.type) {
-    case ContactsActionsEnum.SET_CONTACTS: {
+    case ContactsActionsEnum.CONTACTS_REQUESTED: {
+      return {
+        ...state,
+        contactsLoading: true,
+        contactsLoaded: false,
+        contactsLoadError: false
+      };
+    }
+
+    case ContactsActionsEnum.CONTACTS_LOADED: {
       return {
         ...state,
         contactsLoaded: true,
+        contactsLoading: false,
+        contactsLoadError: false,
         contacts: action.payload
       };
     }
 
-    case ContactsActionsEnum.ADD_CONTACT: {
+    case ContactsActionsEnum.CONTACTS_LOAD_ERROR: {
       return {
         ...state,
-        contacts: [...state.contacts, action.payload]
+        contactsLoading: false,
+        contactsLoaded: false,
+        contactsLoadError: true
+      };
+    }
+
+    case ContactsActionsEnum.ADD_CONTACT_REQUESTED: {
+      return {
+        ...state,
+        contactAdded: false,
+        contactAddedError: false,
+        contactAddedLoading: true,
+        contactAddedLoaded: false
+      };
+    }
+
+    case ContactsActionsEnum.CONTACT_ADDED: {
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+        contactAdded: true,
+        contactAddedError: false,
+        contactAddedLoading: false,
+        contactAddedLoaded: true
+      };
+    }
+
+    case ContactsActionsEnum.CONTACT_ADDED_ERROR: {
+      return {
+        ...state,
+        contactAdded: false,
+        contactAddedError: true,
+        contactAddedLoading: false,
+        contactAddedLoaded: true
       };
     }
 

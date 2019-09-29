@@ -1,14 +1,39 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ContactsState } from "../contacts.state";
 
-const contactsState = createFeatureSelector<ContactsState>("contacts");
+const getContactsState = createFeatureSelector<ContactsState>("contacts");
 
 export const getContacts = createSelector(
-  contactsState,
+  getContactsState,
   state => state.contacts
 );
 
 export const getContactsLoaded = createSelector(
-  contactsState,
+  getContactsState,
   state => state.contactsLoaded
+);
+
+export const getContactsLoading = createSelector(
+  getContactsState,
+  state => state.contactsLoading
+);
+
+export const getContactsLoadError = createSelector(
+  getContactsState,
+  state => state.contactsLoadError
+);
+
+export const getAddContactSuccess = createSelector(
+  getContactsState,
+  state => state.contactAdded
+);
+
+export const getAddContactLoading = createSelector(
+  getContactsState,
+  state => state.contactAddedLoading
+);
+
+export const getAddContactError = createSelector(
+  getContactsState,
+  state => state.contactAddedError
 );

@@ -1,6 +1,6 @@
-<div class="card">
+<div (click)="goToProfile()" class="card connection-wrapper">
   <div class="card-img" class="user-image-wrapper">
-    <img src="{{ imageUrl }}" class="user-image" />
+    <img src="{{ contact.imageUrl || defaultImageUrl }}" class="user-image" />
   </div>
   <div class="card-block">
     <div class="card-title">
@@ -11,7 +11,7 @@
       <span class="label label-light-blue">{{ contact.company }}</span>
     </div>
   </div>
-  <div class="card-footer">
+  <!-- <div class="card-footer">
     <a
       [routerLink]="['/contacts/list', contact._id]"
       routerLinkActive="active"
@@ -26,5 +26,5 @@
     >
       Delete
     </a>
-  </div>
+  </div> -->
 </div>

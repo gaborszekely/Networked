@@ -51,4 +51,11 @@ export class ContactService {
       .get<any>(`https://api.github.com/users/${user}`, httpOptions)
       .toPromise();
   }
+
+  getGithub$(user: string): Observable<any> {
+    return this.http.get<any>(
+      `https://api.github.com/users/${user}`,
+      httpOptions
+    );
+  }
 }

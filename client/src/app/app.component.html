@@ -1,4 +1,7 @@
-<div *ngIf="(routerLoadState$ | async) === pageLoadEnum.LOADING">
-  <h1>LOADING...</h1>
+<div
+  *ngIf="(routerLoadState$ | async) === pageLoadEnum.LOADING"
+  class="progress-bar"
+>
+  <clr-progress-bar clrValue="40" clrMax="100" clrLoop></clr-progress-bar>
 </div>
 <app-layout></app-layout>

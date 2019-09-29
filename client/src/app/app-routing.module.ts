@@ -36,6 +36,7 @@ const routes: Routes = [
       routes /*, { enableTracing: true } // <-- for debugging, */
     )
   ],
+  providers: [AuthRouteGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

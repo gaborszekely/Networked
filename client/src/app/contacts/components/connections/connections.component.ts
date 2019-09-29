@@ -9,9 +9,16 @@ import {
 import { Contact } from "../../../core/models/Contact";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
-import { Observable } from "rxjs";
+import { Observable, from, forkJoin, of } from "rxjs";
 import * as ContactsActions from "../../store/actions/contacts.actions";
-import { getContacts, getContactsLoaded } from "@app/contacts/store/selectors";
+import {
+  getContacts,
+  getContactsLoaded,
+  getContactsLoadError,
+  getContactsLoading
+} from "@app/contacts/store/selectors";
+import { map } from "rxjs/operators";
+import { combineLatest } from "rxjs";
 
 @Component({
   selector: "app-connections",
@@ -31,15 +38,21 @@ import { getContacts, getContactsLoaded } from "@app/contacts/store/selectors";
 })
 export class ConnectionsComponent implements OnInit {
   successMessage: string;
-  success = false;
-  contacts$: Observable<Contact[]>;
+  success = true;
+  contacts$: Observable<any>;
   contactsLoaded$: Observable<boolean>;
-  contacts: number = 0;
-  length = 0;
+  contactsLoading$: Observable<boolean>;
+  contactsLoadError$: Observable<boolean>;
+  noContacts$: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {
     this.contacts$ = this.store.select(getContacts);
     this.contactsLoaded$ = this.store.select(getContactsLoaded);
+    this.contactsLoading$ = this.store.select(getContactsLoading);
+    this.contactsLoadError$ = this.store.select(getContactsLoadError);
+    this.noContacts$ = combineLatest(this.contacts$, this.contactsLoaded$).pipe(
+      map(([contacts, loaded]) => loaded && !contacts.length)
+    );
   }
 
   ngOnInit() {
@@ -57,9 +70,5 @@ export class ConnectionsComponent implements OnInit {
   toggleSuccess(message: string) {
     this.success = !this.success;
     this.successMessage = this.success ? message : "";
-  }
-
-  isEmpty() {
-    return this.length === 0;
   }
 }

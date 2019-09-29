@@ -16,9 +16,7 @@ import { LoginService } from "./services/login.service";
     EffectsModule.forRoot([])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthRouteGuard,
-    LoginService
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: []
 })

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-
 import { Contact } from "@core/models/Contact";
-import { ContactService } from "@core/services/contact.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-connection",
@@ -12,19 +11,18 @@ export class ConnectionComponent implements OnInit {
   @Input() contact: Contact;
   @Output() deleteContact: EventEmitter<Contact> = new EventEmitter();
 
-  imageUrl = "assets/avatar.jpg";
+  defaultImageUrl = "assets/avatar.jpg";
 
-  constructor(private contactService: ContactService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.contactService.getGithub(this.contact.github).then(user => {
-      if (user && user.avatar_url) {
-        this.imageUrl = user.avatar_url;
-      }
-    });
-  }
+  ngOnInit() {}
 
   onDelete(contact: Contact) {
     this.deleteContact.emit(contact);
+  }
+
+  goToProfile() {
+    // [routerLink]="['/contacts/list', contact._id]"
+    this.router.navigate(["/contacts/list", this.contact._id]);
   }
 }

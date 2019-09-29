@@ -12,6 +12,8 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import { getContacts } from "@app/contacts/store/selectors";
+import { ContactsRequested } from "@app/contacts/store/actions";
 
 @Component({
   selector: "app-notes",
@@ -37,18 +39,18 @@ export class NotesComponent implements OnInit {
     private contactService: ContactService,
     private store: Store<AppState>
   ) {
-    this.contacts$ = store.select("contacts");
+    this.contacts$ = this.store.select(getContacts);
   }
 
   ngOnInit() {
+    console.log("App on init");
+
+    this.store.dispatch(new ContactsRequested());
+
     this.contacts$.subscribe(contacts => {
       this.notesByUser = contacts.reduce((acc, contact) => {
-        contact.notes.forEach(async note => {
-          const githubInfo = await this.contactService.getGithub(
-            contact.github
-          );
-          const github_avatar = githubInfo.avatar_url;
-          acc.push({ user: contact, note, github_avatar });
+        contact.notes.forEach(note => {
+          acc.push({ user: contact, note });
         });
         return acc;
       }, []);

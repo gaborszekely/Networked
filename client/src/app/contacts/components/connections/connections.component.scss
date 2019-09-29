@@ -5,6 +5,17 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 40px;
   margin-right: 50px;
+  width: 75%;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
 }
 
 .empty-contact-list {
@@ -15,14 +26,10 @@
   width: 50vw;
 }
 
-@media (max-width: $breakpoint-desktop) {
-  .connections-wrapper {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.contacts-spinner {
+  margin-top: 30px;
 }
 
-@media (max-width: $breakpoint-tablet) {
-  .connections-wrapper {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.my-contacts {
+  margin-top: 0;
 }

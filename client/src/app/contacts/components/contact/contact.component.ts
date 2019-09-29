@@ -1,60 +1,63 @@
-import { Component, OnInit } from "@angular/core";
-import { ContactStoreService } from "@core/services/contact-store.service";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-
 import { Contact } from "@core/models/Contact";
 import { ContactService } from "@core/services/contact.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
-import { Observable } from "rxjs";
+import { Observable, combineLatest, of, Subject } from "rxjs";
 import { Note } from "@core/models/Note";
-import * as ContactsActions from "@core/store/actions/contacts.actions";
+import * as ContactsActions from "@app/contacts/store/actions/contacts.actions";
+import { getContacts } from "@app/contacts/store/selectors";
+import { map, switchMap, takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-contact",
   templateUrl: "./contact.component.html",
   styleUrls: ["./contact.component.scss"]
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   contact: Contact;
-  imageUrl = "assets/avatar.jpg";
+  defaultImageUrl = "assets/avatar.jpg";
   editFirst = false;
   noteModal = false;
   noteContent: string;
-  contacts$: Observable<Contact[]>;
+  contact$: Observable<Contact>;
+  userId$: Observable<string>;
+  destroy$ = new Subject<null>();
 
   constructor(
-    private contactStore: ContactStoreService,
     private contactService: ContactService,
     private route: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.contacts$ = store.select("contacts");
-  }
+    this.userId$ = this.route.paramMap.pipe(map(params => params.get("id")));
 
-  ngOnInit() {
-    const userId = this.route.snapshot.params.id;
-    this.contacts$.subscribe(
-      contacts => {
-        const contact = contacts.filter(i => i._id === userId)[0];
-        this.contact = contact;
+    this.contact$ = combineLatest(
+      this.store.select(getContacts),
+      this.userId$
+    ).pipe(
+      map(([contacts, id]) => contacts.find(contact => contact._id === id)),
+      switchMap(contact => {
         if (contact) {
-          this.contactService.getGithub(contact.github).then(
-            user => {
-              if (user) {
-                this.imageUrl = user.avatar_url;
-              }
-            },
-            () => {
-              console.error("Could not fetch Github image");
-            }
+          return this.contactService.getGithub$(contact.github).pipe(
+            map(githubInfo => {
+              return {
+                ...contact,
+                imageUrl: githubInfo.avatar_url
+              };
+            })
           );
         }
-      },
-      () => {
-        console.error("Could not fetch contacts from app state");
-      }
+        return of(contact);
+      })
     );
+  }
+
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleField(field: string) {
@@ -70,14 +73,15 @@ export class ContactComponent implements OnInit {
     this.noteModal = !this.noteModal;
   }
 
-  addNewNote() {
+  addNewNote(contact: Contact) {
     const note: Note = {
       date: new Date().toString(),
       note: this.noteContent
     };
 
     this.contactService
-      .updateContact(this.contact._id, { notes: [...this.contact.notes, note] })
+      .updateContact(contact._id, { notes: [...contact.notes, note] })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(newContact => {
         this.store.dispatch(new ContactsActions.UpdateContact(newContact));
         this.noteModal = false;
@@ -85,11 +89,12 @@ export class ContactComponent implements OnInit {
       });
   }
 
-  deleteNote(id: string) {
+  deleteNote(contact: Contact, id: string) {
     this.contactService
-      .updateContact(this.contact._id, {
-        notes: this.contact.notes.filter(i => i._id !== id)
+      .updateContact(contact._id, {
+        notes: contact.notes.filter(i => i._id !== id)
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(contact => {
         this.store.dispatch(new ContactsActions.UpdateContact(contact));
       });

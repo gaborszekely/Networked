@@ -16,4 +16,5 @@ export class Contact {
   notes?: Note[];
   created_at?: string;
   updated_at?: string;
+  imageUrl?: string;
 }
