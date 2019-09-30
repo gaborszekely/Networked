@@ -17,8 +17,9 @@ import {
   getContactsLoadError,
   getContactsLoading
 } from "@app/contacts/store/selectors";
-import { map } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 import { combineLatest } from "rxjs";
+import { ContactService } from "@core/services/contact.service";
 
 @Component({
   selector: "app-connections",
@@ -39,13 +40,16 @@ import { combineLatest } from "rxjs";
 export class ConnectionsComponent implements OnInit {
   successMessage: string;
   success = true;
-  contacts$: Observable<any>;
+  contacts$: Observable<Contact[]>;
   contactsLoaded$: Observable<boolean>;
   contactsLoading$: Observable<boolean>;
   contactsLoadError$: Observable<boolean>;
   noContacts$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private contactService: ContactService
+  ) {
     this.contacts$ = this.store.select(getContacts);
     this.contactsLoaded$ = this.store.select(getContactsLoaded);
     this.contactsLoading$ = this.store.select(getContactsLoading);

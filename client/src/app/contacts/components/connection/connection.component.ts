@@ -22,7 +22,6 @@ export class ConnectionComponent implements OnInit {
   }
 
   goToProfile() {
-    // [routerLink]="['/contacts/list', contact._id]"
-    this.router.navigate(["/contacts/list", this.contact._id]);
+    this.router.navigate(["/contacts/list", this.contact.github]);
   }
 }

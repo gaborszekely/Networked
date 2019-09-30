@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { UserNote } from "@core/models/UserNote";
-import { ContactService } from "@core/services/contact.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
 import { Observable } from "rxjs";
@@ -14,6 +13,7 @@ import {
 } from "@angular/animations";
 import { getContacts } from "@app/contacts/store/selectors";
 import { ContactsRequested } from "@app/contacts/store/actions";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-notes",
@@ -32,28 +32,25 @@ import { ContactsRequested } from "@app/contacts/store/actions";
   ]
 })
 export class NotesComponent implements OnInit {
-  notesByUser: UserNote[];
+  notesByUser$: Observable<UserNote[]>;
   contacts$: Observable<Contact[]>;
 
-  constructor(
-    private contactService: ContactService,
-    private store: Store<AppState>
-  ) {
+  constructor(private store: Store<AppState>) {
     this.contacts$ = this.store.select(getContacts);
+
+    this.notesByUser$ = this.contacts$.pipe(
+      map(contacts => {
+        return contacts.reduce((acc, contact) => {
+          return [
+            ...acc,
+            ...contact.notes.map(note => ({ user: contact, note }))
+          ];
+        }, []);
+      })
+    );
   }
 
   ngOnInit() {
-    console.log("App on init");
-
     this.store.dispatch(new ContactsRequested());
-
-    this.contacts$.subscribe(contacts => {
-      this.notesByUser = contacts.reduce((acc, contact) => {
-        contact.notes.forEach(note => {
-          acc.push({ user: contact, note });
-        });
-        return acc;
-      }, []);
-    });
   }
 }

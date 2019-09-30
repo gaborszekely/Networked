@@ -7,8 +7,9 @@ import { AppState } from "@core/store/app.state";
 import { Observable, combineLatest, of, Subject } from "rxjs";
 import { Note } from "@core/models/Note";
 import * as ContactsActions from "@app/contacts/store/actions/contacts.actions";
-import { getContacts } from "@app/contacts/store/selectors";
+import { getContacts, getContactsLoaded } from "@app/contacts/store/selectors";
 import { map, switchMap, takeUntil } from "rxjs/operators";
+import { ContactsRequested } from "@app/contacts/store/actions/contacts.actions";
 
 @Component({
   selector: "app-contact",
@@ -22,7 +23,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   noteModal = false;
   noteContent: string;
   contact$: Observable<Contact>;
-  userId$: Observable<string>;
+  userGithub$: Observable<string>;
   destroy$ = new Subject<null>();
 
   constructor(
@@ -30,30 +31,23 @@ export class ContactComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.userId$ = this.route.paramMap.pipe(map(params => params.get("id")));
+    this.userGithub$ = this.route.paramMap.pipe(
+      map(params => params.get("github"))
+    );
 
     this.contact$ = combineLatest(
       this.store.select(getContacts),
-      this.userId$
+      this.userGithub$
     ).pipe(
-      map(([contacts, id]) => contacts.find(contact => contact._id === id)),
-      switchMap(contact => {
-        if (contact) {
-          return this.contactService.getGithub$(contact.github).pipe(
-            map(githubInfo => {
-              return {
-                ...contact,
-                imageUrl: githubInfo.avatar_url
-              };
-            })
-          );
-        }
-        return of(contact);
-      })
+      map(([contacts, github]) =>
+        contacts.find(contact => contact.github === github)
+      )
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new ContactsRequested());
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -92,7 +86,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   deleteNote(contact: Contact, id: string) {
     this.contactService
       .updateContact(contact._id, {
-        notes: contact.notes.filter(i => i._id !== id)
+        notes: contact.notes.filter(note => note._id !== id)
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe(contact => {

@@ -10,6 +10,9 @@ export function contactsReducer(
 ): ContactsState {
   switch (action.type) {
     case ContactsActionsEnum.CONTACTS_REQUESTED: {
+      if (state.contactsLoaded) {
+        return state;
+      }
       return {
         ...state,
         contactsLoading: true,
@@ -82,7 +85,7 @@ export function contactsReducer(
         ...state,
         contacts: state.contacts.map(contact => {
           if (contact._id === action.payload._id) {
-            return action.payload;
+            return { ...contact, ...action.payload };
           }
           return contact;
         })
