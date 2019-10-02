@@ -1,15 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from "@angular/animations";
 import { Contact } from "../../../core/models/Contact";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
-import { Observable, from, forkJoin, of } from "rxjs";
+import { Observable } from "rxjs";
 import * as ContactsActions from "../../store/actions/contacts.actions";
 import {
   getContacts,
@@ -19,33 +12,28 @@ import {
 } from "@app/contacts/store/selectors";
 import { map } from "rxjs/operators";
 import { combineLatest } from "rxjs";
+import { ContactService } from "@core/services/contact.service";
+import { fadeInOut } from "@core/animations/fade-in-out";
 
 @Component({
   selector: "app-connections",
   templateUrl: "./connections.component.html",
   styleUrls: ["./connections.component.scss"],
-  animations: [
-    trigger("fadeInOut", [
-      state(
-        "void",
-        style({
-          opacity: 0
-        })
-      ),
-      transition("void <=> *", animate(200))
-    ])
-  ]
+  animations: [fadeInOut]
 })
 export class ConnectionsComponent implements OnInit {
   successMessage: string;
   success = true;
-  contacts$: Observable<any>;
+  contacts$: Observable<Contact[]>;
   contactsLoaded$: Observable<boolean>;
   contactsLoading$: Observable<boolean>;
   contactsLoadError$: Observable<boolean>;
   noContacts$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private contactService: ContactService
+  ) {
     this.contacts$ = this.store.select(getContacts);
     this.contactsLoaded$ = this.store.select(getContactsLoaded);
     this.contactsLoading$ = this.store.select(getContactsLoading);

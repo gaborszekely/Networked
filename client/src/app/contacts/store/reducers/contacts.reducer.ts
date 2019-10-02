@@ -10,6 +10,9 @@ export function contactsReducer(
 ): ContactsState {
   switch (action.type) {
     case ContactsActionsEnum.CONTACTS_REQUESTED: {
+      if (state.contactsLoaded) {
+        return state;
+      }
       return {
         ...state,
         contactsLoading: true,
@@ -82,7 +85,7 @@ export function contactsReducer(
         ...state,
         contacts: state.contacts.map(contact => {
           if (contact._id === action.payload._id) {
-            return action.payload;
+            return { ...contact, ...action.payload };
           }
           return contact;
         })
@@ -93,6 +96,13 @@ export function contactsReducer(
       return {
         ...state,
         contacts: []
+      };
+    }
+
+    case ContactsActionsEnum.ADD_NOTE_REQUESTED: {
+      return {
+        ...state,
+        addNoteError: false
       };
     }
 
@@ -107,13 +117,29 @@ export function contactsReducer(
             };
           }
           return contact;
-        })
+        }),
+        addNoteError: false
+      };
+    }
+
+    case ContactsActionsEnum.ADD_NOTE_ERROR: {
+      return {
+        ...state,
+        addNoteError: true
+      };
+    }
+
+    case ContactsActionsEnum.DELETE_NOTE_REQUESTED: {
+      return {
+        ...state,
+        deleteNoteError: false
       };
     }
 
     case ContactsActionsEnum.DELETE_NOTE: {
       return {
         ...state,
+        deleteNoteError: false,
         contacts: state.contacts.map(contact => {
           if (contact._id === action.payload.id) {
             return {
@@ -123,6 +149,13 @@ export function contactsReducer(
           }
           return contact;
         })
+      };
+    }
+
+    case ContactsActionsEnum.DELETE_NOTE_ERROR: {
+      return {
+        ...state,
+        deleteNoteError: true
       };
     }
 

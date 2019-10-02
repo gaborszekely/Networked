@@ -1,4 +1,3 @@
-import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Contact } from "@core/models/Contact";
 import { Note } from "@core/models/Note";
@@ -14,7 +13,11 @@ export enum ContactsActionsEnum {
   CLEAR_CONTACTS = "[Contacts] Clear Contacts List",
   UPDATE_CONTACT = "[Contacts] Update Contact",
   ADD_NOTE = "[Contacts] Add Note For a Contact",
-  DELETE_NOTE = "[Contacts] Delete Note For a Contact"
+  ADD_NOTE_REQUESTED = "[Contacts] Add Note Requested",
+  ADD_NOTE_ERROR = "[Contacts] Add Note Error",
+  DELETE_NOTE = "[Contacts] Delete Note For a Contact",
+  DELETE_NOTE_REQUESTED = "[Contacts] Delete Note Requested",
+  DELETE_NOTE_ERROR = "[Contacts] Delete Note Error"
 }
 
 export interface IAddNote {
@@ -39,6 +42,7 @@ export class ContactAdded implements Action {
 
 export class ContactAddedError implements Action {
   readonly type = ContactsActionsEnum.CONTACT_ADDED_ERROR;
+  constructor() {}
 }
 
 export class AddNote implements Action {
@@ -46,9 +50,29 @@ export class AddNote implements Action {
   constructor(public payload: IAddNote) {}
 }
 
+export class AddNoteRequested implements Action {
+  readonly type = ContactsActionsEnum.ADD_NOTE_REQUESTED;
+  constructor(public contact: Contact, public note: Note) {}
+}
+
+export class AddNoteError implements Action {
+  readonly type = ContactsActionsEnum.ADD_NOTE_ERROR;
+  constructor() {}
+}
+
+export class DeleteNoteRequested implements Action {
+  readonly type = ContactsActionsEnum.DELETE_NOTE_REQUESTED;
+  constructor(public contact: Contact, public noteId: string) {}
+}
+
 export class DeleteNote implements Action {
   readonly type = ContactsActionsEnum.DELETE_NOTE;
   constructor(public payload: IDeleteNote) {}
+}
+
+export class DeleteNoteError implements Action {
+  readonly type = ContactsActionsEnum.DELETE_NOTE_ERROR;
+  constructor() {}
 }
 
 export class UpdateContact implements Action {
@@ -63,10 +87,12 @@ export class DeleteContact implements Action {
 
 export class ClearContacts implements Action {
   readonly type = ContactsActionsEnum.CLEAR_CONTACTS;
+  constructor() {}
 }
 
 export class ContactsRequested implements Action {
   readonly type = ContactsActionsEnum.CONTACTS_REQUESTED;
+  constructor() {}
 }
 
 export class ContactsLoaded implements Action {
@@ -76,6 +102,7 @@ export class ContactsLoaded implements Action {
 
 export class ContactsLoadError implements Action {
   readonly type = ContactsActionsEnum.CONTACTS_LOAD_ERROR;
+  constructor() {}
 }
 
 export type ContactsActions =
@@ -88,5 +115,9 @@ export type ContactsActions =
   | ContactsLoadError
   | ClearContacts
   | UpdateContact
+  | AddNoteRequested
   | AddNote
-  | DeleteNote;
+  | AddNoteError
+  | DeleteNote
+  | DeleteNoteRequested
+  | DeleteNoteError;
