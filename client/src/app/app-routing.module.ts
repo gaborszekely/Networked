@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: () => import("./user/user.module").then(mod => mod.UserModule)
   },
   {
+    path: "jobs",
+    loadChildren: () => import("./jobs/jobs.module").then(mod => mod.JobsModule)
+  },
+  {
     path: "",
     loadChildren: () => import("./home/home.module").then(mod => mod.HomeModule)
   } // Handles 404 Page Not Found
