@@ -6,7 +6,8 @@ import {
   catchError,
   switchMap,
   withLatestFrom,
-  filter
+  filter,
+  exhaustMap
 } from "rxjs/operators";
 import { ContactService } from "@core/services/contact.service";
 import {
@@ -25,7 +26,7 @@ export class LoadContactsEffect {
     ofType(ContactsActionsEnum.CONTACTS_REQUESTED),
     withLatestFrom(this.store.select(getContactsLoaded)),
     filter(([, loaded]) => !loaded),
-    switchMap(() =>
+    exhaustMap(() =>
       this.contactService.getContacts().pipe(
         switchMap(contacts =>
           forkJoin(
@@ -37,10 +38,11 @@ export class LoadContactsEffect {
                 }))
               )
             )
-          ).pipe(map(contacts => new ContactsLoaded(contacts)))
-        ),
-
-        catchError(() => of(new ContactsLoadError()))
+          ).pipe(
+            map(contacts => new ContactsLoaded(contacts)),
+            catchError(() => of(new ContactsLoadError()))
+          )
+        )
       )
     )
   );

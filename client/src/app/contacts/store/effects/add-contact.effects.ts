@@ -17,10 +17,8 @@ export class AddContactEffect {
     switchMap(contact => {
       alert("ha");
       return this.contactService.addContact(contact).pipe(
-        map(contact => new ContactAdded(contact)),
-        catchError(() => {
-          return of(new ContactAddedError());
-        })
+        map(contact => new ContactAdded(contact))
+        // catchError(() => of(new ContactAddedError()))
       );
     })
   );

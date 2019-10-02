@@ -185,7 +185,7 @@
           <div class="card notes" *ngFor="let note of contact.notes">
             <div class="card-block">
               <div class="note-date">
-                {{ note.date.toString() }}
+                {{ note.date | date }}
                 <clr-icon
                   shape="trash"
                   size="14"

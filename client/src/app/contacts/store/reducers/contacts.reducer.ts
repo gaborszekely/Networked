@@ -99,6 +99,13 @@ export function contactsReducer(
       };
     }
 
+    case ContactsActionsEnum.ADD_NOTE_REQUESTED: {
+      return {
+        ...state,
+        addNoteError: false
+      };
+    }
+
     case ContactsActionsEnum.ADD_NOTE: {
       return {
         ...state,
@@ -110,13 +117,29 @@ export function contactsReducer(
             };
           }
           return contact;
-        })
+        }),
+        addNoteError: false
+      };
+    }
+
+    case ContactsActionsEnum.ADD_NOTE_ERROR: {
+      return {
+        ...state,
+        addNoteError: true
+      };
+    }
+
+    case ContactsActionsEnum.DELETE_NOTE_REQUESTED: {
+      return {
+        ...state,
+        deleteNoteError: false
       };
     }
 
     case ContactsActionsEnum.DELETE_NOTE: {
       return {
         ...state,
+        deleteNoteError: false,
         contacts: state.contacts.map(contact => {
           if (contact._id === action.payload.id) {
             return {
@@ -126,6 +149,13 @@ export function contactsReducer(
           }
           return contact;
         })
+      };
+    }
+
+    case ContactsActionsEnum.DELETE_NOTE_ERROR: {
+      return {
+        ...state,
+        deleteNoteError: true
       };
     }
 

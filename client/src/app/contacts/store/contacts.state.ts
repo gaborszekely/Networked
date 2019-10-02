@@ -11,4 +11,8 @@ export class ContactsState {
   readonly contactAddedError: boolean = false;
   readonly contactAddedLoading: boolean = false;
   readonly contactAddedLoaded: boolean = false;
+
+  readonly addNoteError: boolean = false;
+
+  readonly deleteNoteError: boolean = false;
 }

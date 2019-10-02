@@ -1,32 +1,37 @@
 import { Injectable } from "@angular/core";
-import { Actions, ofType } from "@ngrx/effects";
+import { Actions, ofType, Effect } from "@ngrx/effects";
 import { ContactService } from "@core/services/contact.service";
 import {
   ContactsActionsEnum,
   AddNoteRequested,
-  UpdateContact
+  UpdateContact,
+  ContactsActions,
+  AddNoteError
 } from "../../actions";
-import { map, catchError, concatMap } from "rxjs/operators";
-import { of } from "rxjs";
+import { of, EMPTY } from "rxjs";
+import { map, catchError, concatMap, tap } from "rxjs/operators";
 
 @Injectable()
 export class AddNoteEffect {
+  @Effect()
   addNote$ = this.actions$.pipe(
-    ofType<AddNoteRequested>(ContactsActionsEnum.ADD_NOTE_REQUESTED),
-    concatMap(action => {
+    ofType(ContactsActionsEnum.ADD_NOTE_REQUESTED),
+    concatMap((action: AddNoteRequested) => {
       return this.contactService
         .updateContact(action.contact._id, {
           notes: [...action.contact.notes, action.note]
         })
         .pipe(
           map(contact => new UpdateContact(contact)),
-          catchError(() => of(null))
+          catchError(() => of(new AddNoteError()))
         );
     })
   );
 
   constructor(
-    private actions$: Actions,
+    private actions$: Actions<ContactsActions>,
     private contactService: ContactService
-  ) {}
+  ) {
+    this.actions$.subscribe(x => console.log(x));
+  }
 }

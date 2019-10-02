@@ -6,12 +6,15 @@ import { AppState } from "@core/store/app.state";
 import { Observable, combineLatest, of, Subject } from "rxjs";
 import { Note } from "@core/models/Note";
 import { getContacts } from "@app/contacts/store/selectors";
-import { map } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 import {
   ContactsRequested,
   DeleteNoteRequested,
-  AddNoteRequested
+  AddNoteRequested,
+  UpdateContact
 } from "@app/contacts/store/actions/contacts.actions";
+import { ContactsState } from "@app/contacts/store/contacts.state";
+import { ContactService } from "@core/services/contact.service";
 
 @Component({
   selector: "app-contact",
@@ -28,7 +31,11 @@ export class ContactComponent implements OnInit, OnDestroy {
   userGithub$: Observable<string>;
   destroy$ = new Subject<null>();
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<ContactsState>,
+    private contactService: ContactService
+  ) {
     this.userGithub$ = this.route.paramMap.pipe(
       map(params => params.get("github"))
     );

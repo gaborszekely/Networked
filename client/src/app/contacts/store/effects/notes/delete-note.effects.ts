@@ -6,29 +6,30 @@ import { ContactService } from "@core/services/contact.service";
 import {
   ContactsActionsEnum,
   UpdateContact,
-  DeleteNoteRequested
+  ContactsActions,
+  DeleteNoteError
 } from "../../actions/contacts.actions";
 
 @Injectable()
 export class DeleteNoteEffect {
   @Effect()
   deleteNote$ = this.actions$.pipe(
-    ofType<DeleteNoteRequested>(ContactsActionsEnum.DELETE_NOTE_REQUESTED),
-    concatMap(action =>
-      this.contactService
+    ofType(ContactsActionsEnum.DELETE_NOTE_REQUESTED),
+    concatMap(action => {
+      return this.contactService
         .updateContact(action.contact._id, {
           notes: action.contact.notes.filter(note => note._id !== action.noteId)
         })
         .pipe(
           map(contact => new UpdateContact(contact)),
           // TODO - Add error handling
-          catchError(() => of(null))
-        )
-    )
+          catchError(() => of(new DeleteNoteError()))
+        );
+    })
   );
 
   constructor(
-    private actions$: Actions,
+    private actions$: Actions<ContactsActions>,
     private contactService: ContactService
   ) {}
 }

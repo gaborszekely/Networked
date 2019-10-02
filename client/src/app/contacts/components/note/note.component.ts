@@ -12,7 +12,7 @@ import { DeleteNoteRequested } from "@app/contacts/store/actions/contacts.action
 export class NoteComponent implements OnInit {
   @Input() userNote: UserNote;
 
-  constructor(private readonly store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {}
 
