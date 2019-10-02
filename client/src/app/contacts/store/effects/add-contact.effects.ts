@@ -1,5 +1,3 @@
-// AddContactRequested
-
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
@@ -17,9 +15,12 @@ export class AddContactEffect {
   addContact$ = this.actions$.pipe(
     ofType(ContactsActionsEnum.ADD_CONTACT_REQUESTED),
     switchMap(contact => {
+      alert("ha");
       return this.contactService.addContact(contact).pipe(
         map(contact => new ContactAdded(contact)),
-        catchError(() => of(new ContactAddedError()))
+        catchError(() => {
+          return of(new ContactAddedError());
+        })
       );
     })
   );

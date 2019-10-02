@@ -1,14 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { from, forkJoin, of } from "rxjs";
+import { forkJoin, of } from "rxjs";
 import {
   map,
   catchError,
   switchMap,
-  concatMap,
-  flatMap,
-  takeWhile,
-  toArray,
   withLatestFrom,
   filter
 } from "rxjs/operators";
@@ -31,32 +27,6 @@ export class LoadContactsEffect {
     filter(([, loaded]) => !loaded),
     switchMap(() =>
       this.contactService.getContacts().pipe(
-        // map(contacts => new ContactsLoaded(contacts)),
-        // flatMap(contacts => {
-        //   return of(contacts).pipe(
-        //     // emit each array value as observable
-        //     concatMap(contacts => from(contacts)),
-        //     // emit an array containing the contact and the corresponding githubInfo
-        //     concatMap(contact =>
-        //       forkJoin(
-        //         of(contact),
-        //         this.contactService.getGithub$(contact.github)
-        //       )
-        //     ),
-        //     // take the returned array and convert it to an Object
-        //     map(([contact, githubInfo]) => ({
-        //       ...contact,
-        //       imageUrl: githubInfo.avatar_url
-        //     })),
-        //     takeWhile((val, index) => index < contacts.length),
-        //     // concatenate everything into a final Array
-        //     toArray(),
-        //     map(contacts => {
-        //       return new ContactsLoaded(contacts);
-        //     })
-        //   );
-        // }),
-
         switchMap(contacts =>
           forkJoin(
             contacts.map(contact =>

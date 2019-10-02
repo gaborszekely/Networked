@@ -7,11 +7,6 @@ import { AddContactComponent } from "./components/add-contact/add-contact.compon
 import { ContactsHomeComponent } from "./components/contacts-home/contacts-home.component";
 
 const routes: Routes = [
-  // {
-  //   path: "",
-  //   redirectTo: "list",
-  //   pathMatch: "full"
-  // },
   {
     path: "",
     component: ContactsHomeComponent,

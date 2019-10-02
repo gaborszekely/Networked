@@ -1,15 +1,17 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Contact } from "@core/models/Contact";
-import { ContactService } from "@core/services/contact.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "@core/store/app.state";
 import { Observable, combineLatest, of, Subject } from "rxjs";
 import { Note } from "@core/models/Note";
-import * as ContactsActions from "@app/contacts/store/actions/contacts.actions";
-import { getContacts, getContactsLoaded } from "@app/contacts/store/selectors";
-import { map, switchMap, takeUntil } from "rxjs/operators";
-import { ContactsRequested } from "@app/contacts/store/actions/contacts.actions";
+import { getContacts } from "@app/contacts/store/selectors";
+import { map } from "rxjs/operators";
+import {
+  ContactsRequested,
+  DeleteNoteRequested,
+  AddNoteRequested
+} from "@app/contacts/store/actions/contacts.actions";
 
 @Component({
   selector: "app-contact",
@@ -26,11 +28,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   userGithub$: Observable<string>;
   destroy$ = new Subject<null>();
 
-  constructor(
-    private contactService: ContactService,
-    private route: ActivatedRoute,
-    private store: Store<AppState>
-  ) {
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
     this.userGithub$ = this.route.paramMap.pipe(
       map(params => params.get("github"))
     );
@@ -73,24 +71,22 @@ export class ContactComponent implements OnInit, OnDestroy {
       note: this.noteContent
     };
 
-    this.contactService
-      .updateContact(contact._id, { notes: [...contact.notes, note] })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(newContact => {
-        this.store.dispatch(new ContactsActions.UpdateContact(newContact));
-        this.noteModal = false;
-        this.noteContent = "";
-      });
+    this.store.dispatch(new AddNoteRequested(contact, note));
+
+    this.noteModal = false;
+    this.noteContent = "";
+
+    // this.contactService
+    //   .updateContact(contact._id, { notes: [...contact.notes, note] })
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(newContact => {
+    //     this.store.dispatch(new UpdateContact(newContact));
+    //     this.noteModal = false;
+    //     this.noteContent = "";
+    //   });
   }
 
   deleteNote(contact: Contact, id: string) {
-    this.contactService
-      .updateContact(contact._id, {
-        notes: contact.notes.filter(note => note._id !== id)
-      })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(contact => {
-        this.store.dispatch(new ContactsActions.UpdateContact(contact));
-      });
+    this.store.dispatch(new DeleteNoteRequested(contact, id));
   }
 }
