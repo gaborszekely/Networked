@@ -1,0 +1,115 @@
+<div>
+  <div
+    *ngIf="false"
+    class="alert alert-app-level"
+    style="display: flex; align-items: center; justify-content: center"
+  >
+    <clr-icon shape="info-circle" size="24"></clr-icon>
+    Please confirm your email address.
+    <button
+      class="btn btn-inverse btn-sm"
+      style="margin-left: 10px"
+      (click)="confirm()"
+    >
+      Confirm
+    </button>
+  </div>
+  <header class="header header-6">
+    <div class="branding">
+      <a routerLink="/" class="nav-link">
+        <clr-icon shape="users" class="is-inverse is-solid"></clr-icon>
+        <span class="title large">Networked</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a routerLink="/" class="nav-link">
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a routerLink="/contacts" class="nav-link" routerLinkActive="active">
+        <span class="nav-text">Contacts</span>
+      </a>
+      <a routerLink="/events" class="nav-link" routerLinkActive="active">
+        <span class="nav-text">Events</span>
+      </a>
+      <a routerLink="/reminders" class="nav-link" routerLinkActive="active">
+        <span class="nav-text">Reminders</span>
+      </a>
+      <a routerLink="/connections" class="nav-link" routerLinkActive="active">
+        <span class="nav-text">Explore Connections</span>
+      </a>
+    </div>
+    <form class="search">
+      <label for="search_input">
+        <input
+          id="search_input"
+          type="text"
+          placeholder="Search for keywords..."
+        />
+      </label>
+    </form>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="info-circle"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a routerLink="/about" clrDropdownItem>About</a>
+          <a routerLink="/preferences" clrDropdownItem>Preferences</a>
+          <a
+            *ngIf="(loggedIn$ | async) === false"
+            routerLink="/user/login"
+            clrDropdownItem
+            >Sign In</a
+          >
+          <a *ngIf="loggedIn$ | async" (click)="logout()" clrDropdownItem
+            >Sign Out</a
+          >
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <nav class="subnav">
+    <ul id="demoTabs" class="nav" role="tablist">
+      <li role="presentation" class="nav-item">
+        <a
+          id="tab1"
+          class="btn btn-link nav-link"
+          aria-controls="panel1"
+          aria-selected="true"
+          type="button"
+          routerLink="/contacts"
+          routerLinkActive="active"
+        >
+          Connections
+        </a>
+      </li>
+      <li role="presentation" class="nav-item">
+        <a
+          id="tab2"
+          class="btn btn-link nav-link"
+          aria-controls="panel2"
+          aria-selected="false"
+          type="button"
+          routerLink="/account"
+          routerLinkActive="active"
+        >
+          My Account
+        </a>
+      </li>
+      <li role="presentation" class="nav-item">
+        <a
+          id="tab3"
+          class="btn btn-link nav-link"
+          aria-controls="panel3"
+          aria-selected="false"
+          type="button"
+          routerLink="/faq"
+          routerLinkActive="active"
+        >
+          FAQ
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

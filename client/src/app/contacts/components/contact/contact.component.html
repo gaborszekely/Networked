@@ -1,0 +1,237 @@
+<div *ngIf="contact$ | async as contact">
+  <div class="clr-row">
+    <div class="clr-col-2">
+      <img
+        src="{{ contact.imageUrl || defaultImageUrl }}"
+        class="user-image"
+        alt="User profile"
+      />
+    </div>
+    <div class="clr-col">
+      <h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
+      <h3>{{ contact.job_title }} at {{ contact.company }}</h3>
+      <span class="label label-blue">Boulder, CO</span>
+    </div>
+  </div>
+  <div class="main-wrapper">
+    <div class="clr-row">
+      <div class="clr-col-5">
+        <div class="user-info">
+          <h3>Contact Information</h3>
+          <div class="card">
+            <div class="card-block">
+              <div class="card-section">
+                <h3 class="card-title">Personal</h3>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">First Name:</span>
+                  </div>
+                  <div class="clr-col">
+                    <div *ngIf="editFirst">
+                      <input
+                        placeholder="My input"
+                        name="input"
+                        style="margin-top: 0 !important; padding-top: 0 !important;"
+                        [value]="contact.first_name"
+                        (blur)="toggleField('first_name')"
+                      />
+                    </div>
+                    <div *ngIf="!editFirst">
+                      {{ contact.first_name }}
+                      <clr-icon
+                        class="edit-icon"
+                        shape="pencil"
+                        size="10"
+                        (click)="toggleField('first_name')"
+                      ></clr-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">Last Name:</span>
+                  </div>
+                  <div class="clr-col">
+                    {{ contact.last_name }}
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('last_name')"
+                    ></clr-icon>
+                  </div>
+                </div>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">Email:</span>
+                  </div>
+                  <div class="clr-col">
+                    {{ contact.email || "None" }}
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('email')"
+                    ></clr-icon>
+                  </div>
+                </div>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">Phone:</span>
+                  </div>
+                  <div class="clr-col">
+                    {{ contact.phone || "None" }}
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('phone')"
+                    ></clr-icon>
+                  </div>
+                </div>
+              </div>
+              <div class="card-section">
+                <h3 class="card-title">Social Media</h3>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">LinkedIn:</span>
+                  </div>
+                  <div class="clr-col">
+                    <a
+                      *ngIf="contact.linkedin"
+                      target="blank"
+                      href="http://linkedin.com/in/{{ contact.linkedin }}"
+                      class="link-icon"
+                    >
+                      <clr-icon shape="pop-out" size="12"></clr-icon>
+                      {{ contact.linkedin }}
+                    </a>
+                    <span *ngIf="!contact.linkedin">None</span>
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('linkedin')"
+                    ></clr-icon>
+                  </div>
+                </div>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">Facebook:</span>
+                  </div>
+                  <div class="clr-col">
+                    <a
+                      *ngIf="contact.facebook"
+                      target="blank"
+                      href="http://facebook.com/{{ contact.facebook }}"
+                      class="link-icon"
+                    >
+                      <clr-icon shape="pop-out" size="12"></clr-icon>
+                      {{ contact.facebook }}
+                    </a>
+                    <span *ngIf="!contact.facebook">None</span>
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('facebook')"
+                    ></clr-icon>
+                  </div>
+                </div>
+                <div class="clr-row">
+                  <div class="clr-col-4">
+                    <span class="user-info-label">Github:</span>
+                  </div>
+                  <div class="clr-col">
+                    <a
+                      *ngIf="contact.github"
+                      target="blank"
+                      href="http://github.com/{{ contact.github }}"
+                      class="link-icon"
+                    >
+                      <clr-icon shape="pop-out" size="12"></clr-icon>
+                      {{ contact.github }}
+                    </a>
+                    <span *ngIf="!contact.github">None</span>
+                    <clr-icon
+                      class="edit-icon"
+                      shape="pencil"
+                      size="10"
+                      (click)="toggleField('github')"
+                    ></clr-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-sm btn-link">Update Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr-col">
+        <div class="user-info">
+          <div class="user-info-title">
+            <h3>Notes</h3>
+            <div class="user-info-title-add-note">
+              <clr-icon
+                shape="plus"
+                class="add-note-icon"
+                size="24"
+                (click)="toggleNoteModal()"
+              ></clr-icon>
+            </div>
+          </div>
+          <div class="card notes" *ngFor="let note of contact.notes">
+            <div class="card-block">
+              <div class="note-date">
+                {{ note.date | date }}
+                <clr-icon
+                  shape="trash"
+                  size="14"
+                  class="is-error cursor trash-icon"
+                  (click)="deleteNote(contact, note._id)"
+                ></clr-icon>
+              </div>
+              <div>
+                {{ note.note }}
+                <clr-icon class="edit-icon" shape="pencil" size="10"></clr-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <clr-modal [(clrModalOpen)]="noteModal">
+    <h3 class="modal-title">Add New Note</h3>
+
+    <div class="modal-body">
+      <p>What did you want to add?</p>
+      <clr-textarea-container>
+        <textarea
+          clrTextarea
+          [(ngModel)]="noteContent"
+          name="noteContent"
+          id="noteContent"
+          required
+          class="input-textarea"
+          style="width: 470px"
+        ></textarea>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-textarea-container>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="toggleNoteModal()">
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addNewNote(contact)"
+      >
+        Add
+      </button>
+    </div>
+  </clr-modal>
+</div>

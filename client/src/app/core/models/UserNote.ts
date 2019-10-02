@@ -1,7 +1,7 @@
 import { Contact } from "./Contact";
 import { Note } from "./Note";
 
-export class UserNote {
+export interface UserNote {
   user: Contact;
   note: Note;
 }

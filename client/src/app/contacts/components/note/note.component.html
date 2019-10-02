@@ -1,0 +1,38 @@
+<div class="card user-note">
+  <div class="card-header">
+    Note for {{ userNote.user.first_name }} {{ userNote.user.last_name }}
+  </div>
+  <div class="card-block">
+    <div class="card-media-block">
+      <img src="{{ userNote.user.imageUrl }}" class="card-media-image" />
+      <div class="card-media-description">
+        <span class="card-media-title">
+          {{ userNote.user.job_title }}
+        </span>
+        <span class="card-media-text">
+          {{ userNote.user.company }}
+        </span>
+      </div>
+    </div>
+    <div class="card-text">
+      {{ userNote.note.note }}
+    </div>
+  </div>
+  <div class="card-footer">
+    <button
+      [routerLink]="['/contacts/list', userNote.user.github]"
+      class="btn btn-sm btn-outline"
+    >
+      View User
+    </button>
+    <button class="btn btn-sm btn-link">Edit Note</button>
+    <button class="btn btn-sm btn-link">Set Reminder</button>
+    <button
+      (click)="deleteNote()"
+      class="btn btn-sm btn-link"
+      style="color: red"
+    >
+      Delete Note
+    </button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div *ngIf="contacts$ | async as contacts">
+  <!-- <div
+    *ngIf="success"
+    class="alert alert-success"
+    style="width: 70vw"
+    role="alert"
+  >
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">{{ successMessage }}</span>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="toggleSuccess()"
+    >
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div> -->
+  <h1 class="my-contacts">My Contacts</h1>
+  <div class="connections-wrapper">
+    <app-connection
+      *ngFor="let contact of contacts"
+      [contact]="contact"
+      (deleteContact)="deleteContact($event)"
+      [@fadeInOut]
+    >
+    </app-connection>
+    <div class="contacts-spinner">
+      <clr-spinner *ngIf="contactsLoading$ | async">Loading data</clr-spinner>
+    </div>
+    <p *ngIf="noContacts$ | async">Please add some contacts</p>
+  </div>
+</div>

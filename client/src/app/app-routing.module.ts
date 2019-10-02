@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PageNotFoundComponent } from "./modules/home/components/page-not-found/page-not-found.component";
+import { AuthRouteGuard } from "@core/services/auth-route-guard.service";
 
 const routes: Routes = [
   {
@@ -10,27 +10,24 @@ const routes: Routes = [
   },
   {
     path: "contacts",
+    canActivate: [AuthRouteGuard],
     loadChildren: () =>
-      import("./modules/contacts/contacts.module").then(
-        mod => mod.ContactsModule
-      )
+      import("./contacts/contacts.module").then(mod => mod.ContactsModule)
   },
   {
     path: "events",
+    canActivate: [AuthRouteGuard],
     loadChildren: () =>
-      import("./modules/events/events.module").then(mod => mod.EventsModule)
+      import("./events/events.module").then(mod => mod.EventsModule)
   },
   {
     path: "user",
-    loadChildren: () =>
-      import("./modules/user/user.module").then(mod => mod.UserModule)
+    loadChildren: () => import("./user/user.module").then(mod => mod.UserModule)
   },
-  // { path: "**", component: PageNotFoundComponent }
   {
     path: "",
-    loadChildren: () =>
-      import("./modules/home/home.module").then(mod => mod.HomeModule)
-  }
+    loadChildren: () => import("./home/home.module").then(mod => mod.HomeModule)
+  } // Handles 404 Page Not Found
 ];
 
 @NgModule({
@@ -39,6 +36,7 @@ const routes: Routes = [
       routes /*, { enableTracing: true } // <-- for debugging, */
     )
   ],
+  providers: [AuthRouteGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

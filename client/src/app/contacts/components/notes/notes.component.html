@@ -1,0 +1,10 @@
+<div>
+  <h1>Notes</h1>
+  <ng-container *ngIf="notesByUser$ | async as notesByUser">
+    <app-note
+      *ngFor="let userNote of notesByUser"
+      [userNote]="userNote"
+      [@fadeInOut]
+    ></app-note>
+  </ng-container>
+</div>
