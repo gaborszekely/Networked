@@ -11,3 +11,20 @@ export class ApplicationBoardComponent implements OnInit {
 
   ngOnInit() {}
 }
+
+
+const Application = {
+  company: "Google",
+  title: "Software Engineer",
+  type: "full-time",
+  description: "Description",
+  link: "google.com/apply/1445325",
+  status: "applied",
+  connections: ["Rochelle"],
+  contact: {},
+  interviews: [{ date: "11-12-19-10am", location: "xxx", notes: "My notes" }],
+  offer: {
+    amount: 122000,
+    notes: "Good benefits"
+  }
+};
