@@ -38,9 +38,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     return new Date(this.currentYear, this.currentMonth, this.currentDate);
   }
 
-  ngOnInit() {
-    console.log("OLD");
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
     this.generateCalendar(this.events);

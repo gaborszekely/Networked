@@ -1,4 +1,18 @@
-<div *ngIf="events$ | async as events" class="events__wrapper">
+<div class="events-wrapper">
   <h1>My Events</h1>
-  <app-list-event *ngFor="let event of events" [event]="event"></app-list-event>
+  <div *ngIf="currentEvents$ | async as currentEvents" class="events__wrapper">
+    <app-list-event
+      *ngFor="let event of currentEvents"
+      [event]="event"
+    ></app-list-event>
+  </div>
+
+  <h2>Overdue</h2>
+  <div *ngIf="overdueEvents$ | async as overdueEvents" class="events__wrapper">
+    <app-list-event
+      *ngFor="let event of overdueEvents"
+      [event]="event"
+      [overdue]="true"
+    ></app-list-event>
+  </div>
 </div>

@@ -18,6 +18,13 @@ export class EventsService {
     return await this.eventModel.find();
   }
 
+  async getOrderedDates(): Promise<IEvent[]> {
+    return await this.eventModel
+      .find()
+      .sort({ date: -1 })
+      .exec();
+  }
+
   async create(event: CreateEventDto): Promise<IEvent> {
     const newEvent = new this.eventModel(event);
     return await newEvent.save();

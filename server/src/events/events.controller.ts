@@ -16,27 +16,27 @@ import { CreateEventDto } from './dto/create-event.dto';
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
   @Get()
-  getEvents() {
-    return this.eventsService.findAll();
+  async getEvents() {
+    return await this.eventsService.getOrderedDates();
   }
 
   @Get(':id')
-  getEvent(@Param('id') id: string) {
-    return this.eventsService.find(id);
+  async getEvent(@Param('id') id: string) {
+    return await this.eventsService.find(id);
   }
 
   @Post()
-  createEvent(@Body() event: CreateEventDto) {
-    return this.eventsService.create(event);
+  async createEvent(@Body() event: CreateEventDto) {
+    return await this.eventsService.create(event);
   }
 
   @Put(':id')
-  updateEvent(@Param('id') id: string, @Body() updatedBody: any) {
-    return this.eventsService.update(id, updatedBody);
+  async updateEvent(@Param('id') id: string, @Body() updatedBody: any) {
+    return await this.eventsService.update(id, updatedBody);
   }
 
   @Delete(':id')
-  deleteEvent(@Param('id') id: string) {
-    return this.eventsService.delete(id);
+  async deleteEvent(@Param('id') id: string) {
+    return await this.eventsService.delete(id);
   }
 }

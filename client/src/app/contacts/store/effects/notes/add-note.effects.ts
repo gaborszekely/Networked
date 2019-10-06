@@ -31,7 +31,5 @@ export class AddNoteEffect {
   constructor(
     private actions$: Actions<ContactsActions>,
     private contactService: ContactService
-  ) {
-    this.actions$.subscribe(x => console.log(x));
-  }
+  ) {}
 }
