@@ -5,7 +5,6 @@ import {
   Input
 } from "@angular/core";
 import { CalendarService } from "../../services/calendar.service";
-import { map } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 import {
   getCurrentEvents,
@@ -26,6 +25,8 @@ export class EventsListComponent implements OnInit {
   overdueEvents$: Observable<IEvent[]>;
   overdueEventsExist$: Observable<boolean>;
 
+  overdueHidden = false;
+
   constructor(
     private calendarService: CalendarService,
     private store: Store<any>
@@ -40,4 +41,8 @@ export class EventsListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  toggleOverdue(): void {
+    this.overdueHidden = !this.overdueHidden;
+  }
 }

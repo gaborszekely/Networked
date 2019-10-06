@@ -1,12 +1,5 @@
 <div class="events-box__wrapper" *ngIf="!overdue; else cardOverdue">
-  <h3>
-    <clr-icon
-      *ngIf="isOverdue(event.date)"
-      class="is-warning"
-      shape="exclamation-triangle"
-    ></clr-icon>
-    {{ event.title }}
-  </h3>
+  <h3>{{ event.title }}</h3>
   <span>{{ event.date | date }}</span>
   <p>{{ event.description }}</p>
   <button (click)="toggleEdit()" class="btn btn-primary btn-sm">Edit</button>
@@ -20,22 +13,8 @@
 
 <ng-template #cardOverdue>
   <div class="events-box__wrapper card-overdue">
-    <!-- <h3>
-      <clr-icon
-        *ngIf="isOverdue(event.date)"
-        class="is-warning"
-        shape="exclamation-triangle"
-      ></clr-icon>
-      {{ event.title }}
-      <span class="warning-overdue">(overdue)</span>
-    </h3>
-    <span>{{ event.date | date }}</span> -->
     <h3>
-      <clr-icon
-        *ngIf="isOverdue(event.date)"
-        class="is-warning"
-        shape="exclamation-triangle"
-      ></clr-icon>
+      <clr-icon class="is-warning" shape="exclamation-triangle"></clr-icon>
       {{ event.title }}
     </h3>
     <span>{{ event.date | date }} </span
