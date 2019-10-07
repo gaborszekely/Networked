@@ -11,12 +11,7 @@
     <h2>Overdue</h2>
     <button (click)="toggleOverdue()" class="btn btn-link">
       {{ overdueHidden ? "Show" : "Hide" }}
-      <clr-icon *ngIf="!overdueHidden" shape="caret"></clr-icon>
-      <clr-icon
-        *ngIf="overdueHidden"
-        shape="caret"
-        style="transform: rotate(180deg)"
-      ></clr-icon>
+      <clr-icon shape="caret" [dir]="overdueHidden ? 'down' : 'up'"></clr-icon>
     </button>
   </div>
 

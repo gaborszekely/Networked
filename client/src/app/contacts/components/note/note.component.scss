@@ -11,3 +11,11 @@
 .note-header {
   @include spaceBetween;
 }
+
+.context-menu-icon {
+  cursor: pointer;
+
+  &:hover {
+    fill: #0095d3;
+  }
+}
