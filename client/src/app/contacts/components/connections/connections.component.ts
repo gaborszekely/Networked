@@ -30,10 +30,7 @@ export class ConnectionsComponent implements OnInit {
   contactsLoadError$: Observable<boolean>;
   noContacts$: Observable<boolean>;
 
-  constructor(
-    private store: Store<AppState>,
-    private contactService: ContactService
-  ) {
+  constructor(private store: Store<AppState>) {
     this.contacts$ = this.store.select(getContacts);
     this.contactsLoaded$ = this.store.select(getContactsLoaded);
     this.contactsLoading$ = this.store.select(getContactsLoading);
@@ -44,11 +41,7 @@ export class ConnectionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactsLoaded$.subscribe(loaded => {
-      if (!loaded) {
-        this.store.dispatch(new ContactsActions.ContactsRequested());
-      }
-    });
+    this.store.dispatch(new ContactsActions.ContactsRequested());
   }
 
   deleteContact(contact: Contact) {

@@ -1,5 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input
+} from "@angular/core";
 import { CalendarService } from "../../services/calendar.service";
+import { Store } from "@ngrx/store";
+import {
+  getCurrentEvents,
+  getOverdueEvents,
+  getOverdueEventsExist
+} from "@app/events/store/selectors";
+import { IEvent } from "@app/events/store/reducers";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-events-list",
@@ -8,11 +21,28 @@ import { CalendarService } from "../../services/calendar.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventsListComponent implements OnInit {
-  constructor(private calendarService: CalendarService) {}
+  currentEvents$: Observable<IEvent[]>;
+  overdueEvents$: Observable<IEvent[]>;
+  overdueEventsExist$: Observable<boolean>;
 
-  ngOnInit() {}
+  overdueHidden = false;
+
+  constructor(
+    private calendarService: CalendarService,
+    private store: Store<any>
+  ) {
+    this.currentEvents$ = this.store.select(getCurrentEvents);
+    this.overdueEvents$ = this.store.select(getOverdueEvents);
+    this.overdueEventsExist$ = this.store.select(getOverdueEventsExist);
+  }
 
   get events$() {
     return this.calendarService.events$;
+  }
+
+  ngOnInit() {}
+
+  toggleOverdue(): void {
+    this.overdueHidden = !this.overdueHidden;
   }
 }

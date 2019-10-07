@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
             this.loginService.setJsonToken(res);
             this.success = true;
             this.store.dispatch(new UserActions.UserSet(res.payload));
-            this.router.navigateByUrl("contacts/list");
+            this.router.navigateByUrl("contacts");
           } else {
             this.error = "Could not log in user. Please try again!";
             this.success = false;

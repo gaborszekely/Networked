@@ -15,6 +15,7 @@ import * as EventsActions from "../store/actions/events.actions";
 import * as fromEvents from "../store/reducers/events.reducer";
 import { Store } from "@ngrx/store";
 import { IEvent } from "../store/reducers/events.reducer";
+import { getEvents } from "../store/selectors";
 
 const events: CalendarEvent[] = [
   {
@@ -43,18 +44,11 @@ export class CalendarService {
   events$: Observable<IEvent[]> = of([]);
 
   constructor(private store: Store<fromEvents.State>) {
-    this.events$ = store.select((state: any) => {
-      const events = state.events.ids.map(
-        (id: string) => state.events.entities[id]
-      );
-      return events.map(event => ({
-        ...event,
-        date: new Date(event.date)
-      }));
-    });
+    this.events$ = this.store.select(getEvents);
+
     store.dispatch(EventsActions.fetchEvents());
+
     this.generateCalendar();
-    // this.events$.subscribe(events => console.log("Our events: ", events));
   }
 
   generateCalendar() {

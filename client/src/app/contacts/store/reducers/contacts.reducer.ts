@@ -95,7 +95,9 @@ export function contactsReducer(
     case ContactsActionsEnum.CLEAR_CONTACTS: {
       return {
         ...state,
-        contacts: []
+        contacts: [],
+        contactsLoading: false,
+        contactsLoaded: false
       };
     }
 

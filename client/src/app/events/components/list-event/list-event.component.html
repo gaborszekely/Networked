@@ -1,4 +1,4 @@
-<div class="events-box__wrapper">
+<div class="events-box__wrapper" *ngIf="!overdue; else cardOverdue">
   <h3>{{ event.title }}</h3>
   <span>{{ event.date | date }}</span>
   <p>{{ event.description }}</p>
@@ -10,3 +10,22 @@
     Delete
   </button>
 </div>
+
+<ng-template #cardOverdue>
+  <div class="events-box__wrapper card-overdue">
+    <h3>
+      <clr-icon class="is-warning" shape="exclamation-triangle"></clr-icon>
+      {{ event.title }}
+    </h3>
+    <span>{{ event.date | date }} </span
+    ><span class="date-overdue">(overdue)</span>
+    <p>{{ event.description }}</p>
+    <button (click)="toggleEdit()" class="btn btn-primary btn-sm">Edit</button>
+    <button
+      (click)="deleteEvent(event)"
+      class="btn btn-primary btn-danger btn-sm"
+    >
+      Delete
+    </button>
+  </div>
+</ng-template>
