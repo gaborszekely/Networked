@@ -1,24 +1,15 @@
 <section class="sidenav-content">
-  <!-- <a routerLink="/contacts" routerLinkActive="active" class="nav-link active">
-    Recent Contacts
-  </a>
-  <a routerLink="/company" routerLinkActive="active" class="nav-link">
-    Search By Company
-  </a>
-  <section class="nav-group collapsible">
-    <input id="tabexample1" type="checkbox">
-    <label for="tabexample1">Collapsible Nav Element</label>
-    <ul class="nav-list">
-      <li><a class="nav-link">Link 1</a></li>
-      <li><a class="nav-link">Link 2</a></li>
-    </ul>
-  </section> -->
   <section class="nav-group">
     <input id="tabexample2" type="checkbox" />
     <label for="tabexample2">My Connections</label>
     <ul class="nav-list">
       <li>
-        <a routerLink="/contacts" routerLinkActive="active" class="nav-link">
+        <a
+          routerLink="/contacts"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link"
+        >
           View Contacts
         </a>
       </li>

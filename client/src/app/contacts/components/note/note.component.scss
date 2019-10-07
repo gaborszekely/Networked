@@ -1,7 +1,13 @@
+@import "mixins";
+
 .user-note {
   width: 40vw;
 }
 
 .clr-textarea-wrapper {
   width: 100%;
+}
+
+.note-header {
+  @include spaceBetween;
 }

@@ -1,5 +1,5 @@
 <div>
-  <h1>Notes</h1>
+  <h1 class="top-header">Notes</h1>
   <ng-container *ngIf="notesByUser$ | async as notesByUser">
     <app-note
       *ngFor="let userNote of notesByUser"

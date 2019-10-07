@@ -10,6 +10,10 @@ body {
 
 router-outlet ~ * {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: calc(100% - 1rem);
+  width: calc(100% - 1rem);
+}
+
+.top-header {
+  margin-top: 0;
 }

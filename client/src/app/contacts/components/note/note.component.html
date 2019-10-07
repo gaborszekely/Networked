@@ -1,6 +1,10 @@
 <div class="card user-note">
-  <div class="card-header">
-    Note for {{ userNote.user.first_name }} {{ userNote.user.last_name }}
+  <div class="card-header note-header">
+    <span
+      >Note for {{ userNote.user.first_name }}
+      {{ userNote.user.last_name }}</span
+    >
+    <clr-icon shape="ellipsis-horizontal"></clr-icon>
   </div>
   <div class="card-block">
     <div class="card-media-block">
@@ -21,17 +25,11 @@
   <div class="card-footer">
     <button
       [routerLink]="['/contacts/list', userNote.user.github]"
-      class="btn btn-sm btn-outline"
+      class="btn btn-sm btn-primary"
     >
       View User
     </button>
-    <button class="btn btn-sm btn-link">Edit Note</button>
-    <button class="btn btn-sm btn-link">Set Reminder</button>
-    <button
-      (click)="deleteNote()"
-      class="btn btn-sm btn-link"
-      style="color: red"
-    >
+    <button (click)="deleteNote()" class="btn btn-sm btn-danger">
       Delete Note
     </button>
   </div>
