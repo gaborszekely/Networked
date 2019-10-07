@@ -9,8 +9,8 @@ export const loadEvents = createAction(
   props<{ events: IEvent[] }>()
 );
 
-export const addEventAPI = createAction(
-  "[Event/API] Add Event API",
+export const addEventRequested = createAction(
+  "[Event/API] Add Event Requested",
   props<{ event: IEvent }>()
 );
 

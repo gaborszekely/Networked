@@ -1,24 +1,23 @@
 import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType, createEffect } from "@ngrx/effects";
-import { NEVER } from "rxjs";
-import { map, switchMap, catchError } from "rxjs/operators";
+import { Actions, ofType, createEffect } from "@ngrx/effects";
+import { EMPTY } from "rxjs";
+import { map, exhaustMap, catchError } from "rxjs/operators";
 import * as EventsActions from "../actions";
 import { EventsService } from "../../services";
 
 @Injectable()
 export class DeleteEventEffect {
-  @Effect()
-  deleteEvent$ = createEffect(() => {
-    return this.actions$.pipe(
+  deleteEvent$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(EventsActions.deleteEventAPI.type),
-      switchMap(({ _id }) => {
-        return this.eventsService.deleteEvent(_id).pipe(
+      exhaustMap(({ _id }) =>
+        this.eventsService.deleteEvent(_id).pipe(
           map(event => EventsActions.deleteEvent({ _id: event._id })),
-          catchError(() => NEVER)
-        );
-      })
-    );
-  });
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

@@ -22,11 +22,13 @@ import { EventsService } from "./services";
 import { MonthPipe } from "./pipes/month.pipe";
 
 /* Ngrx */
-import { EventsEffects, EVENTS_EFFECTS } from "./store/effects";
+import { EventsEffects } from "./store/effects";
 import { eventsReducer } from "./store/reducers";
+import { AddEventModalComponent } from "./components/add-event-modal/add-event-modal.component";
 
 @NgModule({
   declarations: [
+    AddEventModalComponent,
     CalendarComponent,
     CalendarWrapperComponent,
     CalendarDatePickerComponent,
@@ -40,7 +42,7 @@ import { eventsReducer } from "./store/reducers";
     ClarityModule,
     ReactiveFormsModule,
     StoreModule.forFeature("events", eventsReducer),
-    EffectsModule.forFeature(EVENTS_EFFECTS)
+    EffectsModule.forFeature(EventsEffects)
   ],
   providers: [CalendarService, EventsService]
 })

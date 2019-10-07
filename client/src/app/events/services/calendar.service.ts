@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { EventsModule } from "../events.module";
 import { CalendarDate } from "@core/models/CalendarDate";
 import {
   getMonthStart,
@@ -8,11 +7,10 @@ import {
   calculateDate,
   isSameDate
 } from "@helpers/calendarHelpers";
-import { Subject, Observable, BehaviorSubject, combineLatest, of } from "rxjs";
-import { switchMap, map, tap } from "rxjs/operators";
-import { CalendarEvent } from "@core/models/CalendarEvent";
-import * as EventsActions from "../store/actions/events.actions";
+import { Observable, BehaviorSubject, combineLatest, of } from "rxjs";
+import { switchMap, map } from "rxjs/operators";
 import * as fromEvents from "../store/reducers/events.reducer";
+import { CalendarEvent } from "@core/models/CalendarEvent";
 import { Store } from "@ngrx/store";
 import { IEvent } from "../store/reducers/events.reducer";
 import { getEvents } from "../store/selectors";
@@ -39,15 +37,11 @@ export class CalendarService {
   year$: Observable<number> = this.year.asObservable();
   month$: Observable<number> = this.month.asObservable();
   dates$: Observable<number[]> = combineLatest(this.year$, this.month$);
-  // events$: Observable<CalendarEvent[]> = this.events.asObservable();
   calendar$: Observable<any>;
   events$: Observable<IEvent[]> = of([]);
 
   constructor(private store: Store<fromEvents.State>) {
     this.events$ = this.store.select(getEvents);
-
-    store.dispatch(EventsActions.fetchEvents());
-
     this.generateCalendar();
   }
 
