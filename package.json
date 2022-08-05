@@ -21,7 +21,7 @@
     "@ngrx/store": "^7.4.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongoose": "^5.5.5",
+    "mongoose": "^5.7.5",
     "pg": "^7.10.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^5.19.1"
